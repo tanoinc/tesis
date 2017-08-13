@@ -1,0 +1,68 @@
+
+\subsection{Infraestructura del \eng{backend}}
+\label{marco_teorico}
+
+En la arquitectura del \eng{sofware} existen muchas capas entre el usuario y el procesador físico que ejecuta las instrucciones. Una de ellas, denominada \eng{backend}, es la capa que se encarga de manejar la lógica de negocios y el almacenamiento, y su código se ejecutará del lado del servidor.
+
+En las siguientes secciones analizaremos las características técnicas relacionadas con el \eng{backend}.
+
+\subsubsection{Sistemas distribuidos}
+\label{sistemas_distribuidos}
+
+Al comienzo de la era de las computadoras modernas, entre 1945 y 1985, estas eran muy costosas y de gran tamaño. Además operaban independientemente unas de otras.
+
+A mediados de los años 80, ocurrieron dos avances tecnológicos claves que resultaron en el comienzo de una nueva era para favorecer el desarrollo de los sistemas distribuidos\cite{artnoema}. 
+
+El primero es el avance en la potencia de los microprocesadores: se produjo un gran aumento del poder de cómputo y a su vez una considerable reducción en su precio. Esto fue tan vertiginoso que, como indica Tanembaum, \comillas{si los autos hubieran mejorado a este ritmo en el mismo período de tiempo, un \textit{Rolls Royce} hoy hubiera costado 1 dólar y obtendríamos un billón de millas por galón. Desafortunadamente, también sería probable que tuviera un manual de 200 páginas explicando cómo abrir la puerta}\cite{tanenbaum2007distributed}.
+
+El segundo avance se trata de la aparición de las redes de alta velocidad: desde las redes de área local, hasta las redes de área amplia, permitieron que miles de computadoras se conecten entre sí. Con velocidades variantes, han ido evolucionando desde unos pocos Kilobits hasta Gigabits por segundo.
+
+En conclusión, estos dos factores hacen que hoy sea posible desarrollar fácilmente sistemas que integren a múltiples computadoras que interactúan a través de redes de alta velocidad.
+Estos sistemas y su interacción definen un sistema distribuido.
+
+Tanembaum y Van Steen definen a los sistemas distribuidos como \comillas{una colección independiente de computadoras que se muestran a sus usuarios como un único sistema coherente}\cite[p.~2]{tanenbaum2007distributed}. De esta manera especifican que sus principales objetivos son:
+
+\begin{itemize}
+\item Hacer que los recursos remotos estén disponibles de manera controlada y eficiente.
+\item Ocultar que procesos y recursos están físicamente dispersos entre computadoras distintas.
+\item Ser abiertos. Esto significa que el acceso a sus servicios esté establecido por ciertas reglas estándar que definan su sintaxis y su semántica.
+\item Ser escalables. Esto es que tenga la posibilidad de crecer sin perder calidad en el servicio.
+\end{itemize}
+
+\paragraph{Servicios Web}
+\label{servicios_web}
+
+\paragraph{SOAP}
+\label{soap}
+
+Las fortalezas de SOAP\cite{pautasso2008restful} son:
+\begin{itemize}
+\item Transparencia e independencia respecto del protocolo de transporte.
+\item El uso de \gls{WSDL} para describir la interfaz del servicio ayuda a abstraer detalles del protocolo de comunicación y serialización, así como también cuestiones de la plataforma sobre el que está implementado (y el lenguaje utilizado).
+\end{itemize}
+Sus debilidades:
+\begin{itemize}
+\item Permite la existencia de problemas de interoperabilidad cuando se filtran tipos de datos nativos o construcciones del lenguaje en la interfaz, atravesando las capas de abstracción.
+\item Produce un \comillas{desajuste de impedancia} que resulta costoso al traducir los datos en formato \gls{XML} a datos utilizados en lenguajes orientados a objetos.
+\end{itemize}
+
+\paragraph{REST}
+\label{rest}
+
+Sus fortalezas son\cite{pautasso2008restful}:
+\begin{itemize}
+\item Su sencillez: utiliza estándares web (\gls{http}, \gls{uri}, \gls{mime}, \gls{json}, \gls{XML}) definidos por la \gls{w3c} e \gls{ietf} y la infraestructura necesaria para su implementación ya es de uso generalizado.
+\item Servidores y clientes \gls{http} están disponibles para la mayoría de los lenguajes de programación, sistemas operativos y plataformas. Además el puerto 80 generalmente se deja abierto en cualquier configuración de \eng{firewall}.
+\end{itemize}
+
+\paragraph{SOAP vs. REST}
+\label{soap_vs_rest}
+
+\subsubsection{Autorización y autenticación}
+\label{autorizacion_autenticacion}
+
+\paragraph{OAuth}
+\label{oauth}
+
+\paragraph{API Key y API Secret}
+\label{apikey}
