@@ -4,7 +4,14 @@
 
 En la arquitectura del \eng{sofware} existen muchas capas entre el usuario y el procesador físico que ejecuta las instrucciones. Una de ellas, denominada \eng{backend}, es la capa que se encarga de manejar la lógica de negocios y el almacenamiento, y su código se ejecutará del lado del servidor.
 
-En las siguientes secciones analizaremos las características técnicas relacionadas con el \eng{backend}.
+Para el proyecto propuesto en esta tesina, surge la necesidad de 
+\begin{itemize}
+\item Integrar información útil para el estudiante entre los distintos sistemas implementados en la \unlp{}.
+\item Proveer de nuevas operaciones, disponibles para el uso externo, de estos sistemas.
+\item Comunicar los dispositivos móviles con el backend.
+\end{itemize}
+
+En las siguientes secciones analizaremos las características técnicas requeridas por las necesidades anteriormente mencionadas, que justifiquen las decisiones para este desarrollo (en relación con el \eng{backend}).
 
 \subsubsection{Sistemas distribuidos}
 \label{sistemas_distribuidos}
@@ -29,11 +36,24 @@ Tanembaum y Van Steen definen a los sistemas distribuidos como \comillas{una col
 \item Ser escalables. Esto es que tenga la posibilidad de crecer sin perder calidad en el servicio.
 \end{itemize}
 
+Estos objetivos serán requerimientos primordiales para llevar a cabo la integración de los servicios de la Universidad con la aplicación móvil.
+
 \paragraph{Servicios Web}
 \label{servicios_web}
 
+Según la definición de la \gls{uddi}, los Servicios Web son \comillas{aplicaciones modulares, auto-contenidas que tienen interfaces abiertas, orientadas a Internet y basadas en estándares}\cite{uddi2001uddi}.
+
+En términos generales, son la manera de exponer información y funcionalidad de un sistema a través de tecnologías Web, respetando sus estándares. El uso de estos es clave, ya que reduce la heterogeneidad existente entre sistemas facilitando su integración\cite{alonso2004web}.
+
+Por estas razones se elige esta solución para los servicios que brindará la aplicación desarrollada para esta tesina.
+
+En las siguientes secciones analizaremos las características de las diferentes alternativas para la implementación de estos servicios.
+
 \paragraph{SOAP}
 \label{soap}
+
+\gls{soap} define un mecanismo de envío de información estructurada, tipada y de manera descentralizada utilizando como lenguaje \gls{XML}\cite{box2000simple}.
+
 
 Las fortalezas de SOAP\cite{pautasso2008restful} son:
 \begin{itemize}
@@ -49,14 +69,33 @@ Sus debilidades:
 \paragraph{REST}
 \label{rest}
 
+\gls{rest}\cite{fielding2000rest} es una arquitectura de servicios (cliente-servidor) que se basa en los estándares de la Web. En ella, los datos y las funciones son considerados recursos y estos son accedidos mediante \gls{uri}. Las acciones sobre estos recursos son las definidas por los verbos del protocolo \gls{http}: GET, POST, PUT, DELETE (entre otros).
+
+De esta forma, su diseño fomenta que lo servicios sean simples, livianos y performantes.
+
 Sus fortalezas son\cite{pautasso2008restful}:
 \begin{itemize}
-\item Su sencillez: utiliza estándares web (\gls{http}, \gls{uri}, \gls{mime}, \gls{json}, \gls{XML}) definidos por la \gls{w3c} e \gls{ietf} y la infraestructura necesaria para su implementación ya es de uso generalizado.
+\item Su sencillez: al utilizar estándares web (\gls{http}, \gls{uri}, \gls{mime}, \gls{json}, \gls{XML}) definidos por la \gls{w3c} e \gls{ietf}, la infraestructura necesaria para su implementación, es de uso generalizado.
 \item Servidores y clientes \gls{http} están disponibles para la mayoría de los lenguajes de programación, sistemas operativos y plataformas. Además el puerto 80 generalmente se deja abierto en cualquier configuración de \eng{firewall}.
+\item Infraestructura liviana y económica.
+\item Fácilmente escalable gracias a que soporta caché, balance de carga y \gls{clustering}.
+\item Permite formatos de mensajes livianos como \gls{json} o inclusive texto plano para tipo de datos simples.
 \end{itemize}
 
-\paragraph{SOAP vs. REST}
+Sus debilidades son:
+\begin{itemize}
+\item Su implementación, al ser abierta, a veces no se adapta al correcto uso de los verbos \gls{http}.
+\item Para solicitudes idempotentes (utilizando el verbo \eng{GET}), existe una limitación en el tamaño de la \gls{uri} de 4KB.
+\end{itemize}
+
+\paragraph{SOAP o REST: Conclusión}
 \label{soap_vs_rest}
+
+En base a las ventajas y desventajas de ambas tecnologías, se realizó un análisis\cite[p.~809]{pautasso2008restful} y se concluyó que es conveniente utilizar REST para integrar servicios a medida a través de la Web y preferir SOAP en la integración de aplicaciones de negocio y que posean como requisito la calidad de servicio.
+
+En base a lo analizado se concluye que la utilización de servicios REST es conveniente para este desarrollo puesto que: provee mayor flexibilidad, es más liviana, sus tecnologías son de uso generalizado y se adapta correctamente a las necesidades de conexión de los dispositivos móviles y de otros servicios externos que consuman la información provista. Además facilita la posibilidad de escalar horizontalmente y permite el uso de caché.
+
+Por otra parte, para la comunicación con aplicaciones móviles, REST supera ampliamente a SOAP por lo que se recomienda la utilización de servicios RESTful\cite{hamad2010performance} para la conexión entre el \eng{backend} y el dispositivo.
 
 \subsubsection{Autorización y autenticación}
 \label{autorizacion_autenticacion}
