@@ -34,26 +34,38 @@ Estos objetivos serán requerimientos primordiales para llevar a cabo la integra
 \paragraph{Servicios Web}
 \label{servicios_web}
 
-Según la definición de la \gls{uddi}, los Servicios Web son \comillas{aplicaciones modulares, auto-contenidas que tienen interfaces abiertas, orientadas a Internet y basadas en estándares}\cite{uddi2001uddi}.
+Según la definición de la \gls{uddi}, los Servicios Web son \comillas{aplicaciones modulares, auto-contenidas que tienen interfaces abiertas, orientadas a Internet y basadas en estándares}\cite{uddi2001uddi}. 
 
-En términos generales, son la manera de exponer información y funcionalidad de un sistema a través de tecnologías Web, respetando sus estándares. El uso de estos es clave, ya que reduce la heterogeneidad existente entre sistemas facilitando su integración\cite{alonso2004web}.
+En términos generales, son la manera de exponer información y funcionalidad de un sistema a través de tecnologías Web, respetando sus estándares. El uso de estos es clave, ya que reduce la heterogeneidad existente entre sistemas facilitando su integración\cite{alonso2004web}.Esto nos permite utilizar los estándares Web como medio para comunicar sistemas. 
 
-Por estas razones se elige esta solución para los servicios que brindará la aplicación desarrollada para esta tesina.
-
-En las siguientes secciones analizaremos las características de las diferentes alternativas para la implementación de estos servicios.
+Por estas razones se considera a los servicios Web como interfaz para realizar la comunicación de las aplicaciones de la Universidad.
+En las siguientes secciones se revisan los distintos tipos de servicios web, describiendo sus principales características.
 
 \paragraph{SOAP}
 \label{soap}
 
-\gls{soap} define un mecanismo de envío de información estructurada, tipada y de manera descentralizada utilizando como lenguaje \gls{XML}\cite{box2000simple}.
+\gls{soap} define un protocolo de envío de información estructurada, con un tipo asociado y de manera descentralizada utilizando como lenguaje \gls{XML}\cite{box2000simple}. Estos datos pueden viajar sobre protocolos de transporte existentes como \gls{http} o \gls{smtp}.
 
+Un mensaje en \gls{soap} consta de un elemento \comillas{sobre} (en inglés \eng{Envelope}) que dentro contiene otros dos elementos: un encabezado (\eng{header}) y un cuerpo(\eng{body}). Con esta estructura básica, ya es posible la comunicación.
 
-Las fortalezas de SOAP\cite{pautasso2008restful} son:
+\begingroup
+  \xmlfile{src/codigo/02-capitulo-2/soap.xml}
+  \captionof{listing}{Ejemplo de estructura básica de mensaje XML en \gls{soap}. \eng{Envelope} tiene dos hijos: \eng{header} y \eng{body}.\label{codigo_soap}}
+\endgroup
+
+Por otra parte, \gls{soap} define un modelo que le permite indicar a los receptores del mensaje cómo deben procesarlo. Modela el concepto de \textit{actor} que es quien sabe qué parte del mensaje le corresponde y cual descartar para enviar al siguiente.
+
+Sus servicios permiten especificar un documento WSDL (en formato \gls{XML}) utilizado para detallar la interfaz de conexión, brindando información al usuario sobre los parámetros y sus tipos de dato.
+
+Las fortalezas de \gls{soap}\cite{pautasso2008restful} son:
+
 \begin{itemize}
 \item Transparencia e independencia respecto del protocolo de transporte.
 \item El uso de \gls{WSDL} para describir la interfaz del servicio ayuda a abstraer detalles del protocolo de comunicación y serialización, así como también cuestiones de la plataforma sobre el que está implementado (y el lenguaje utilizado).
 \end{itemize}
+
 Sus debilidades:
+
 \begin{itemize}
 \item Permite la existencia de problemas de interoperabilidad cuando se filtran tipos de datos nativos o construcciones del lenguaje en la interfaz, atravesando las capas de abstracción.
 \item Produce un \comillas{desajuste de impedancia} que resulta costoso al traducir los datos en formato \gls{XML} a datos utilizados en lenguajes orientados a objetos.
