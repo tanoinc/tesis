@@ -55,7 +55,7 @@ Un mensaje en \gls{soap} consta de un elemento \comillas{sobre} (en inglés \eng
 
 Por otra parte, \gls{soap} define un modelo que le permite indicar a los receptores del mensaje cómo deben procesarlo. Modela el concepto de \textit{actor} que es quien sabe qué parte del mensaje le corresponde y cual descartar para enviar al siguiente.
 
-Sus servicios permiten especificar un documento WSDL (en formato \gls{XML}) utilizado para detallar la interfaz de conexión, brindando información al usuario sobre los parámetros y sus tipos de dato.
+Sus servicios permiten especificar un documento \gls{WSDL} (en formato \gls{XML}) utilizado para detallar la interfaz de conexión, brindando información al usuario sobre los parámetros y sus tipos de dato.
 
 Las fortalezas de \gls{soap}\cite{pautasso2008restful} son:
 
@@ -74,7 +74,7 @@ Sus debilidades:
 \paragraph{REST}
 \label{rest}
 
-\gls{rest}\cite{fielding2000rest} es una arquitectura de servicios (cliente-servidor) que se basa en los estándares de la Web. En ella, los datos y las funciones son considerados recursos y estos son accedidos mediante \gls{uri}. Las acciones sobre estos recursos son las definidas por los verbos del protocolo \gls{http}: GET, POST, PUT, DELETE (entre otros).
+\gls{rest}\cite{fielding2000rest} es una arquitectura de servicios (cliente-servidor) que se basa en los estándares de la Web. En ella, los datos y las funciones son considerados recursos y estos son accedidos mediante \gls{uri}. Las acciones sobre estos recursos son las definidas por los verbos del protocolo \gls{http}: GET, POST, PUT, DELETE (entre otros). A las \gls{api} que implementan la arquitectura \gls{rest}, se les dicen que son \gls{restful}.
 
 De esta forma, su diseño fomenta que lo servicios sean simples, livianos y performantes.
 
@@ -96,11 +96,13 @@ Sus debilidades son:
 \paragraph{SOAP o REST: Conclusión}
 \label{soap_vs_rest}
 
-En base a las ventajas y desventajas de ambas tecnologías, se realizó un análisis\cite[p.~809]{pautasso2008restful} y se concluyó que es conveniente utilizar REST para integrar servicios a medida a través de la Web y preferir SOAP en la integración de aplicaciones de negocio y que posean como requisito la calidad de servicio.
+En base a las ventajas y desventajas de ambas tecnologías, se realizó un análisis\cite[p.~809]{pautasso2008restful} y se concluyó que es conveniente utilizar \gls{rest} para integrar servicios a medida a través de la Web y preferir \gls{soap} en la integración de aplicaciones de negocio y que posean como requisito la calidad de servicio.
 
-En base a lo analizado se concluye que la utilización de servicios REST es conveniente para este desarrollo puesto que: provee mayor flexibilidad, es más liviana, sus tecnologías son de uso generalizado y se adapta correctamente a las necesidades de conexión de los dispositivos móviles y de otros servicios externos que consuman la información provista. Además facilita la posibilidad de escalar horizontalmente y permite el uso de caché.
+En base a lo analizado se concluye que la utilización de servicios \gls{rest} es conveniente para este desarrollo puesto que: provee mayor flexibilidad, es más liviana, sus tecnologías son de uso generalizado y se adapta correctamente a las necesidades de conexión de los dispositivos móviles y de otros servicios externos que consuman la información provista. Además facilita la posibilidad de escalar horizontalmente y permite el uso de caché.
 
-Por otra parte, para la comunicación con aplicaciones móviles, REST supera ampliamente a SOAP por lo que se recomienda la utilización de servicios RESTful\cite{hamad2010performance} para la conexión entre el \eng{backend} y el dispositivo.
+Por otra parte, para la comunicación con aplicaciones móviles, \gls{rest} supera ampliamente a \gls{soap}. Una evaluación hecha\cite{hamad2010performance} demostró que \gls{rest} tuvo una mejor \eng{performance} debido a mensajes de menor tamaño y tiempos de respuesta más cortos, además de su alta flexibilidad y bajo \eng{overhead}. 
+
+En conclusión, se recomienda la utilización de servicios RESTful\cite{hamad2010performance} para la conexión entre el \eng{backend} y el dispositivo.
 
 \subsubsection{Autorización y autenticación}
 \label{autorizacion_autenticacion}
