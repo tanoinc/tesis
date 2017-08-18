@@ -104,8 +104,24 @@ Por otra parte, para la comunicación con aplicaciones móviles, \gls{rest} supe
 
 En conclusión, se recomienda la utilización de servicios RESTful\cite{hamad2010performance} para la conexión entre el \eng{backend} y el dispositivo.
 
+\paragraph{Diseño de una API RESTful}
+\label{caracteristicas_api_restful}
+
+Para la comunicación con otras aplicaciones utilizando \gls{rest} es necesario definir una \gls{api} que cumpla con sus características\cite{fielding2000rest}. Estas son:
+\begin{itemize}
+\item \textbf{Comunicación sin estado}:
+\item \textbf{Orientada a recursos}:
+\item \textbf{Las acciones como \comillas{verbos \gls{http}}}:
+\item \textbf{Estado de respuesta utilizando códigos  \gls{http}}:
+\item \textbf{Versionable}:
+\end{itemize}
+
 \subsubsection{Autorización y autenticación}
 \label{autorizacion_autenticacion}
+
+Al definirse la utilización de servicios \gls{rest} para la comunicación, el siguiente paso es determinar qué mecanismos de seguridad existen para realizar la autorización y autenticación de los diferentes actores (usuarios de aplicación móvil y otros sistemas externos). 
+
+Se denomina autenticación al proceso de determinar que algo o alguien es quien dice ser.
 
 \paragraph{OAuth}
 \label{oauth}
