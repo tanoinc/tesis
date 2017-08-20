@@ -68,7 +68,7 @@ Sus debilidades:
 
 \begin{itemize}
 \item Permite la existencia de problemas de interoperabilidad cuando se filtran tipos de datos nativos o construcciones del lenguaje en la interfaz, atravesando las capas de abstracción.
-\item Produce un \comillas{desajuste de impedancia} que resulta costoso al traducir los datos en formato \gls{XML} a datos utilizados en lenguajes orientados a objetos.
+\item Produce un \textit{desajuste de impedancia} que resulta costoso al traducir los datos en formato \gls{XML} a datos utilizados en lenguajes orientados a objetos.
 \end{itemize}
 
 \paragraph{REST}
@@ -107,24 +107,69 @@ En conclusión, se recomienda la utilización de servicios RESTful\cite{hamad201
 \paragraph{Diseño de una API RESTful}
 \label{caracteristicas_api_restful}
 
-Para la comunicación con otras aplicaciones utilizando \gls{rest} es necesario definir una \gls{api} que cumpla con sus características\cite{fielding2000rest}. Estas son:
+Para la comunicación con otras aplicaciones utilizando \gls{rest} es necesario definir una \gls{api} \gls{restful} que cumpla con sus características\cite{fielding2000rest}. Estas son:
 \begin{itemize}
-\item \textbf{Comunicación sin estado}:
-\item \textbf{Orientada a recursos}:
-\item \textbf{Las acciones como \comillas{verbos \gls{http}}}:
-\item \textbf{Estado de respuesta utilizando códigos  \gls{http}}:
-\item \textbf{Versionable}:
+\item \textbf{Sin estado}: No debe almacenar información de contexto del cliente. Todos los datos que sean necesarios para la comunicación, se envían en cada pedido \gls{http}, inclusive los datos de autenticación (para el caso de acceso a recursos restringidos). Esto es así para favorecer la escalabilidad y por ende la \eng{performance} general de los servicios: la ausencia de estados en el servidor, elimina la necesidad de sincronizar los datos de sesión entre los distintos nodos\cite{rodriguez2008restful}.
+
+\item \textbf{Orientada a recursos}: La \textit{arquitectura orientada a recursos} se basa sobre el concepto del \textit{recurso}. Esto significa que cada uno de ellos es un componente distribuido que permite ser accedido directamente y es manejado a través de una interfaz común estándar\cite{lucchi2008resource}. Cómo acceder a ellos y qué acciones realizar, se tratarán en los dos siguientes puntos.
+
+\item \textbf{Acceso mediante \glspl{uri}}: En \gls{http} y en particular para los servicios web \gls{rest}, la \gls{uri} es la principal interfaz de manipulación de los datos. Por lo tanto, para ser correcta, debe ser auto-descriptiva: que de manera intuitiva se pueda predecir, o al menos saber dónde buscar, el acceso al recurso. Una manera para lograr esto es definiendo \glspl{uri} en base a una estructura jerárquica (de forma similar a la organización de los directorios). De esta forma, existe una rama principal y de ella heredan sub-ramas que van exponiendo cada uno de los servicios. Se utiliza como caracter de separación la \comillas{barra inclinada}.
+
+\item \textbf{Uso de métodos \gls{http}}: Las acciones que se realicen sobre los recursos deben ser representadas a través de los \comillas{verbos \gls{http}} (definidos en el estándar como \textit{métodos \gls{http}}). Existe una asociación directa entre \gls{crud} y las operaciones \gls{http}\cite{fielding2000rest}. Además, cada una de ellas tiene una semántica asociada que implica un comportamiento implícito en la \gls{api} (pero bien definido en el estándar \gls{http}). Por ejemplo el método \gls{metodo_get} es idempotente, lo que significa que no importa cuantas veces sea invocado, siempre retornará los mismos resultados y no producirá una modificación explícita (esperada por el usuario) en el sistema.
+\item \textbf{Representación de los recursos en \gls{XML} o \gls{json}}: la representación de un recurso refleja el estado de este y sus atributos al momento de su solicitud. La manera en que esta información es codificada es lo que llamamos formato. Comúnmente se utilizan dos formatos \gls{XML} y \gls{json}. Ninguno es superior al orto y su elección depende de las necesidades del sistema. 
+
+En particular, para la presente solución, que no requiere la existencia de datos complejos, se hace el foco en \gls{json}. Este es más simple (legible) y compacto (menos \eng{overhead}) y por ende su transferencia en la red es más rápida. Su uso en soluciones que utilizan \gls{javascript} y \gls{ajax} es más eficiente y flexible\cite{maeda2012performance}.
+
+\item \textbf{Estado de respuesta utilizando códigos  \gls{http}}: estos códigos son devueltos siempre en una solicitud \gls{http} y están definidos dentro del estándar\cite{fielding2014hypertext}. Si bien no indican demasiado en dentro del dominio de aplicación, se vuelven útiles cuando son utilizados por un destinatario o intermediario genérico (como cachés, proxies o librerías), que comprende el protocolo y sabe cómo actuar ante ciertas respuestas.
+
+\item \textbf{Versionable}: el versionado no está dentro de las recomendaciones o de la especificación, de hecho va en contra del \comillas{purismo de \gls{rest}} y es muy discutida la forma de llevarlo a cabo. Sin embargo, existe una realidad: como el \eng{software} cambia, también lo hacen sus \glspl{api}, por lo tanto es un aspecto importante a destacar en su diseño. 
+
+A medida que el software evoluciona surge la necesidad de incorporar estos cambios en los servicios. Si estos se hicieran y no se tomase ningún recaudo, se estarían generando incompatibilidades en sistemas que dependen de estos servicios. Para evitar estos problemas, surge la necesidad del versionado de \glspl{api}.
+
+Como indica Hunt en su artículo\cite{ApiVersion}, existen tres maneras \comillas{incorrectas} de versionar \glspl{api}:
+\begin{itemize}
+\item Por \gls{url}: Incorporando el número de versión en la \gls{uri}.
+\item Encabezado personalizado: Se crea un encabezado \gls{http} personalizado indicando la versión de la \gls{api} del \eng{request}.
+\item Encabezado \eng{Accept}: Similar al punto anterior, pero este está definido en el estándar sólo que se le incorpora el dato de la versión.
+\end{itemize}
+
 \end{itemize}
 
 \subsubsection{Autorización y autenticación}
 \label{autorizacion_autenticacion}
 
-Al definirse la utilización de servicios \gls{rest} para la comunicación, el siguiente paso es determinar qué mecanismos de seguridad existen para realizar la autorización y autenticación de los diferentes actores (usuarios de aplicación móvil y otros sistemas externos). 
+Al definirse la utilización de servicios \gls{rest} para la comunicación, el siguiente paso es determinar qué mecanismos de seguridad existen, que sean compatibles y utilizados por la industria, para restringir el acceso a los recursos.
 
-Se denomina autenticación al proceso de determinar que algo o alguien es quien dice ser.
+Se denomina \textit{autenticación} al proceso de determinar que algo o alguien es quien dice ser y \textit{autorización} a la verificación de los permisos necesarios para acceder a un recurso\cite{authAuth}.
 
-\paragraph{OAuth}
+El desarrollo propuesto requerirá que se verifique el acceso a la información de:
+\begin{itemize}
+\item los usuarios a través de la aplicación  móvil y 
+\item de las aplicaciones y servicios externos que quieran integrar su información.
+\end{itemize}
+Para ello se revisarán los mecanismos que más se adecuen para cada caso.
+
+En el siguiente apartado, se investigan las tecnologías para realizar la autorización y autenticación de las diferentes partes intervinientes. 
+
+Para la interacción entre aplicaciones externas y la \gls{api}: se adopta el mecanismo de clave de \gls{api} y clave secreta.
+
+Para la interacción entre la aplicación móvil y la\gls{api}: se utiliza el protocolo estándar denominado OAuth, en su segunda versión (OAuth 2.0).
+
+A continuación se detallan las características de cada una.
+
+\paragraph{OAuth2}
 \label{oauth}
+
+El protocolo OAuth2 permite verificar que las aplicaciones tengan los permisos necesarios para el acceso a los datos y operaciones en nombre del usuario, sin estas conocer sus credenciales (nombre de usuario y contraseña, por ejemplo)\cite{hardt2012oauth}.
+
+Este mecanismo además, posibilita la integración entre las aplicaciones sin compartir o guardar los datos de acceso. Para ello se vale del concepto de tokens de acceso de manera que el usuario no tenga que ingresar la clave en aplicaciones de terceros.
+
+Oauth2 es ideal para asegurar \glspl{api} ya que permite autenticar usuarios mediante tokens desde dispositivos sobre los cuales no se tiene confianza\cite{degges2015ApiSecurity}. 
+
+Para el caso de esta tesina, se utiliza OAuth2 para la interacción de la aplicación móvil con la \gls{api} \gls{restful}, manteniendo las restricciones que esta impone.
+
+
+
 
 \paragraph{API Key y API Secret}
 \label{apikey}
