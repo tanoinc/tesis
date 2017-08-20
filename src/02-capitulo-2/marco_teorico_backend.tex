@@ -151,10 +151,11 @@ Para ello se revisarán los mecanismos que más se adecuen para cada caso.
 
 En el siguiente apartado, se investigan las tecnologías para realizar la autorización y autenticación de las diferentes partes intervinientes. 
 
-Para la interacción entre aplicaciones externas y la \gls{api}: se adopta el mecanismo de clave de \gls{api} y clave secreta.
-
-Para la interacción entre la aplicación móvil y la\gls{api}: se utiliza el protocolo estándar denominado OAuth, en su segunda versión (OAuth 2.0).
-
+Para la interacción entre:
+\begin{itemize}
+\item la aplicación móvil y la\gls{api}: se utiliza el protocolo estándar denominado OAuth, en su segunda versión (OAuth 2.0).
+\item aplicaciones externas y la \gls{api}: se adopta el mecanismo de clave de \gls{api} y clave secreta.
+\end{itemize}
 A continuación se detallan las características de cada una.
 
 \paragraph{OAuth2}
@@ -162,14 +163,62 @@ A continuación se detallan las características de cada una.
 
 El protocolo OAuth2 permite verificar que las aplicaciones tengan los permisos necesarios para el acceso a los datos y operaciones en nombre del usuario, sin estas conocer sus credenciales (nombre de usuario y contraseña, por ejemplo)\cite{hardt2012oauth}.
 
-Este mecanismo además, posibilita la integración entre las aplicaciones sin compartir o guardar los datos de acceso. Para ello se vale del concepto de tokens de acceso de manera que el usuario no tenga que ingresar la clave en aplicaciones de terceros.
+Este mecanismo además, posibilita la integración entre las aplicaciones sin compartir o guardar los datos de acceso. Para ello se vale del concepto de \eng{tokens} de acceso de manera que el usuario no tenga que ingresar la clave en aplicaciones de terceros. Este método sirve para autenticar y autorizar, por un tiempo limitado, cada solicitud. Desde el punto de vista de la seguridad, esto es útil, ya que si un atacante se hace del \eng{token} de acceso, este expirará reduciendo el potencial de daño.
 
-Oauth2 es ideal para asegurar \glspl{api} ya que permite autenticar usuarios mediante tokens desde dispositivos sobre los cuales no se tiene confianza\cite{degges2015ApiSecurity}. 
+El tipo de acceso elegido para la interacción \comillas{aplicación móvil-\gls{api}} es el denominado \eng{Resource Owner Password Credentials Grant} ya que existe confianza entre la aplicación y el el \comillas{dueño del recurso}, que en este caso es la \gls{api}. Este tipo de otorgamiento es apropiado para clientes que son capaces de obtener las credenciales del dueño de los recursos\cite{hardt2012oauth}.
+En la figura \ref{fig:oauth2} se puede ver el flujo de los datos desde el cliente hasta la obtención del token para este tipo de acceso.
 
-Para el caso de esta tesina, se utiliza OAuth2 para la interacción de la aplicación móvil con la \gls{api} \gls{restful}, manteniendo las restricciones que esta impone.
+\figura{02-capitulo-2/oauth.png}{Flujo de información en el proceso de autenticación por \eng{Resource Owner Password Credentials Grant} de OAuth2}{oauth2}{0.7}
 
+Oauth2 es ideal para asegurar \glspl{api} ya que permite autenticar usuarios desde dispositivos sobre los cuales no se tiene confianza\cite{degges2015ApiSecurity}. 
 
-
+Para el caso de esta tesina, se utiliza OAuth2 para la interacción de la aplicación móvil con la \gls{api} \gls{restful}, manteniendo los requisitos que esta impone.
 
 \paragraph{API Key y API Secret}
 \label{apikey}
+Cuando no se requiere acceder en nombre del usuario, o realizar acciones no directamente relacionadas con él, OAuth no es necesario. Sin embargo se desea controlar la identidad del sistema que está intentando acceder a la información. 
+
+Una forma de realizar esto es a través de claves de \gls{api}. Este método consta de dos de ellas: una podría ser pública e identifica a la aplicación del tercero (\gls{api} \eng{key}). La otra es secreta y no debe exponerse (\gls{api} \eng{secret}). Ambas funcionan como una suerte de \comillas{usuario y clave} que son enviadas en cada solicitud \gls{http}. Sin embargo el valor secreto nunca es viaja en ninguna comunicación realizada.
+
+La forma de autenticación en cada pedido es la siguiente:
+\begin{itemize}
+\item La \gls{api} \eng{key} identifica a una aplicación y puede ser conocida por otras entidades.
+\item La clave secreta sólo es conocida por la entidad emisora y la aplicación externa.
+\item Se procesa la solicitud a enviar, y se adjunta en el encabezado la identificación de la aplicación (\gls{api} \eng{key}) y la firma. Esta se genera en base al resultado de procesar a través de una función de \eng{hash} (denominada \gls{hmac}) el contenido del pedido y la clave secreta. El resultado de esta función asegura que no se pueda manipular el mensaje, y permite determinar que este es originado por quien dice ser.
+\item La solicitud es procesada por el destinatario realizando el mismo proceso: aplicando la función de \eng{hash} sobre el contenido y la clave secreta... si el resultado (firma) es el mismo, significa que la solicitud fue originada por el remitente esperado y no fue modificada.
+\end{itemize}
+
+Este método (\gls{hmac}) permite identificar al remitente que origina la solicitud y su autenticidad\cite{krawczyk1997rfc} y por ende se pueden controlar (a nivel de aplicación) sus permisos asociados. Este método es utilizado por \eng{Amazon Web Sevices}\cite{amazonApi}, \eng{Facebook}, \eng{Telegram} entre otros.
+
+En particular se utiliza el encabezado \gls{http} \eng{Authorization} para transmitir ambos valores (API \eng{key} y firma).
+
+\subsubsection{Lenguaje y \gls{framework}}
+\label{backend_lenguaje_framework}
+
+Para el presente desarrollo, en lo que respecta al \eng{backend}, queda por definir el lenguaje sobre el cual se construyen los servicios. Además, para no \comillas{reinventar la rueda} se elige un \gls{framework} que cumpla con las necesidades de \gls{rest}.
+
+\paragraph{PHP}
+
+\gls{php} es un lenguaje de programación, \gls{open source}, que se ejecuta del lado del servidor y es utilizado generalmente para el desarrollo Web. 
+
+En su uso tradicional, al recibirse una solicitud \gls{http}a un recurso manejado por un \eng{script} \gls{php}, el servidor Web interpreta este código y genera una respuesta. Posee además una interfaz por línea de comandos que permite ejecutar \eng{scripts} desde la consola sin la necesidad de un servidor Web o un cliente \gls{http}. Este tipo de ejecución se utiliza habitualmente para la programación de tareas de rutina, procesamiento de texto y para ejecutar comandos en \glspl{framework}\cite{achour2017php}.
+
+Algunas de sus características destacables son: 
+\begin{itemize}
+\item Es multiparadigma ya que soporta programación imperativa, funcional, orientada a objetos y procedural. 
+\item Funciona en los principales sistemas operativos: Linux, variantes de Unix, Windows, Mac OS X, RISC OS, entre otros.
+\item Es compatible con un amplio espectro de bases de datos y soporta su abstracción mediante librerías nativas como PDO.
+\end{itemize}
+
+Es uno de los lenguajes para la Web, del lado del servidor, más utilizados\cite{w3techs2017languages}, con una gran comunidad de desarrolladores y es adoptado por grandes sitios como: Facebook, Wikipedia, Flickr, Yahoo, Tumblr y Wordpress.com, entre otros.
+
+\figura{02-capitulo-2/uso_lenguajes_ss.png}{Porcentaje de uso de lenguajes del lado del servidor. Fuente: w3techs.com \cite{w3techs2017languages} }{oauth2}{0.7}
+
+Por estas razones y su amplio uso en aplicaciones Web (manejando solicitudes \gls{http}) lo convierten en una alternativa útil para la implementación de una \gls{api} \gls{restful}. Además, se elige este lenguaje por mi experiencia en su uso.
+
+No obstante, hace falta el uso de un \gls{framework} \gls{php} que provea las herramientas adecuadas para implementar \gls{rest}. Analizaremos este aspecto en la siguiente sección.
+
+\paragraph{Lumen}
+
+Lumen es un \gls{microframework} ultra rápido que deriva de Laravel. Está orientado al desarrollo de \glspl{api} \gls{restful}.
+
