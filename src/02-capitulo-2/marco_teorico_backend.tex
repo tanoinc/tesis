@@ -214,11 +214,30 @@ Es uno de los lenguajes para la Web, del lado del servidor, más utilizados\cite
 
 \figura{02-capitulo-2/uso_lenguajes_ss.png}{Porcentaje de uso de lenguajes del lado del servidor. Fuente: w3techs.com \cite{w3techs2017languages} }{oauth2}{0.7}
 
-Por estas razones y su amplio uso en aplicaciones Web (manejando solicitudes \gls{http}) lo convierten en una alternativa útil para la implementación de una \gls{api} \gls{restful}. Además, se elige este lenguaje por mi experiencia en su uso.
+Por estas razones y su amplio uso en aplicaciones Web (manejando solicitudes \gls{http}) lo convierten en una alternativa útil para la implementación de una \gls{api} \gls{restful}. Además, se elige este lenguaje por mi experiencia en su uso. La versión requerida es 5.6 o superior.
 
 No obstante, hace falta el uso de un \gls{framework} \gls{php} que provea las herramientas adecuadas para implementar \gls{rest}. Analizaremos este aspecto en la siguiente sección.
 
 \paragraph{Lumen}
 
-Lumen es un \gls{microframework} ultra rápido que deriva de Laravel. Está orientado al desarrollo de \glspl{api} \gls{restful}.
+Lumen es un \gls{microframework} ultra rápido que deriva de \gls{laravel}. Está orientado al desarrollo de \glspl{api} \gls{restful}. 
 
+En sí es una versión de \gls{laravel} con funcionalidad removida para incrementar su \eng{performance} y velocidad. Se eliminan aspectos que no se utilizan (o no deberían) en \glspl{api}, como por ejemplo el manejo de sesiones o plantillas \gls{html}. Permite en cualquier momento incorporar funcionalidad y pasarse a un proyecto \gls{laravel}.
+
+La utilización de \gls{laravel} como \gls{framework} \gls{php} ha ido incrementando en los últimos años. Las tendencias de búsqueda en Google muestran el interés en la comunidad\cite{google2017tendenciaFramework} respecto de otros principales entornos (ver figura \ref{fig:tendencia_frameworks_php}).
+
+\figura{02-capitulo-2/tendencia_frameworks_php.png}{Tendencia en búsquedas sobre los principales \glspl{framework} \gls{php} en los últimos 5 años. Fuente: Google Trends\cite{google2017tendenciaFramework} }{tendencia_frameworks_php}{1}
+
+De acuerdo a un análisis realizado en ambientes productivos por el autor del artículo\cite{biler2015performance}, los tiempos de respuesta y el margen de escalabilidad del \gls{framework}, fueron muy satisfactorios. Las pruebas se realizaron sobre una cantidad aproximada de 50.000 solicitudes por minuto, y se logró tener respuestas de 6 milisegundos para configuraciones de \gls{php} con \gls{hhvm} y de 25 milisegundos utilizando \gls{phpfpm}.
+
+La infraestructura utilizada constó de 3 nodos con servidores web Nginx y \gls{phpfpm} (cada uno con seis núcleos de 2.6 GHz, 32GB de memoria RAM, y 2 discos de 128GB de estado sólido), balanceados con un HAproxy utilizando \eng{round-robin}. Los resultados indicados se pueden ver en la figura \ref{fig:lumen_analisis_performance}.
+
+\figura{02-capitulo-2/lumen_analisis_performance.png}{ Tiempo de respuesta de las transacciones web con Lumen para aproximadamente 50k solicitudes por minuto. Fuente: darwinbiler.com \cite{biler2015performance} }{lumen_analisis_performance}{0.8}
+
+Respecto a la escalabilidad, de acuerdo al gráfico de la figura \ref{fig:lumen_analisis_escalabilidad}, el autor concluyó que como \comillas{en un sistema no escalable, la línea tiende a curvarse hacia arriba}, entonces  \comillas{inclusive si se incrementcen las solicitudes, el tiempo de respuesta no crece exponencialmente, de esta manera no afecta la experiencia del usuario final}\cite{biler2015performance}.
+
+\figura{02-capitulo-2/lumen_analisis_escalabilidad.png}{Análisis de escalabilidad de Lumen: tiempo de respuesta vs solicitudes por minuto. Fuente: darwinbiler.com \cite{biler2015performance} }{lumen_analisis_escalabilidad}{0.8}
+
+Finalmente, es importante destacar que \textit{Lumen} soporta (a través de \gls{php}) múltiples motores de bases de datos y el desarrollo se abstrae de las características particulares de ellos. Esto significa que se puede implementar por cualquier motor soportado por Lumen\footnote{Actualmente soporta: MySQL, Postgres, SQLite y SQL Server. \url{https://lumen.laravel.com/docs/5.4/database}}, siendo el cambio, totalmente transparente.
+
+Por todas estas razones se elige a \textit{Lumen} como \gls{framework} de desarrollo para el proyecto \comillas{Mi Universidad}. La versión que se utiliza es la 5.4.
