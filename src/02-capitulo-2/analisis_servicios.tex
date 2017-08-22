@@ -1,8 +1,42 @@
 \subsection{Análisis de algunos servicios de la UNLP}
 \label{analisis_servicios_unlp}
 
+Las siguientes secciones examinan algunos de los servicios que actualmente se implementan en la \unlp{} y potencialmente permiten su integración con la aplicación desarrollada en le marco de esta tesina.
+
+En la actualidad existen muchos sistemas funcionando en la Universidad y sus dependencias, entre los cuales varios son implementados por el \gls{cespi}. El criterio para la elección de los sistemas que en esta primer instancia se integran con la aplicación móvil, es debido al alcance y marco de mi trabajo en esa dependencia.
+Esto no significa que se limite solo a ellos, por el contrario, el objetivo es establecer una interfaz común y mostrar la posible integración con otros servicios.
+
 \subsubsection{SIU Guaraní}
 \label{guarani}
+
+El \gls{siu} tiene sus orígenes en el año 1996 con un préstamo del Banco Mundial. Su objetivo fue la construcción de sistemas que mejoren la calidad y disponibilidad de los datos para mejorar el estado de las instituciones\cite{siu}. En 2003 finalizó el financiamiento, y a través del Consejo Interuniversitario Nacional y la Secretaría de Políticas Universitarias se analizaron medidas para mantener y financiar su funcionamiento.
+
+En el año 2007 se conforma un consorcio de Universidades Nacionales al que adhieren casi todas ellas, conformando un grupo colaborativo y favoreciendo con sus aportes al desarrollo grupal.
+
+En 2013 pasa a formar parte del Consejo Interuniversitario Nacional.
+
+El \gls{siu} desarrolla el sistema \textit{SIU Guaraní} para todas las Universidades Nacionales que integren el consorcio. Este sistema se encarga de gestionar la actividad académica de los alumnos desde que ingresan a la Universidad hasta que egresan de alguna de sus carreras. Es implementado por 62 instituciones educativas\footnote{De acuerdo a los datos relevados en Agosto 2017. \url{http://www.siu.edu.ar/listado-de-implementaciones/}} (entre Universidades Nacionales y otras dependencias) y tiene mas de 460 instalaciones.
+
+Actualmente el sistema consta de dos partes (denominadas por el \gls{siu} como \textit{interfaces}):
+\begin{itemize}
+\item Una interfaz de gestión (a la que referiremos como \textit{gestión}) que es una aplicación de escritorio, utilizada por el personal de la dirección de enseñanza. Esta es capaz de definir Carreras, planes, calendario, mesas de examen, comisiones, cursadas, etc. Está desarrollada con \eng{Power Builder} y funciona para \eng{Windows}\footnote{Algunas Universidades la utilizan en Linux con Wine.}.
+\item Una Interfaz Web (a la que llamaremos \textit{el Web}): es utilizada por Alumnos, Docentes y Directivos (además de un perfil administrador). Está desarrollada en \gls{php}. 
+\end{itemize}
+
+Otro componente importante (en sus versiones 2.x) es su base de datos ya que hace de nexo entre \textit{gestión} y \textit{el Web}. Utiliza Informix y gran parte del funcionamiento (común a ambas interfaces) está implementado a través de \eng{Stored Procedures}.
+
+Su amplia utilización en Universidades de Argentina hace que exista la necesidad de diseñar el sistema considerando cuestiones de funcionamiento específico de cada institución educativa. Por ello a partir del año 2014, en su versión 2.8, se reimplementa su interfaz Web y se incorpora el \gls{framework} \textit{SIU Chulupí}.
+
+Esta herramienta es desarrollada por el \gls{siu} y sus principales objetivos son mejorar la \eng{performance}, flexibilidad y la capacidad de crear personalizaciones que soporten los cambios de versión. Además se tuvieron en cuenta otros aspectos para mejorar la herramienta y la usabilidad para alumnos y docentes.
+
+Chulupí está desarrollado en \gls{php}, es basado en el paradigma \gls{mvc} y utiliza un conjunto de librerías de código abierto, algunas provenientes de \gls{symfony}. Este brinda la posibilidad de realizar personalizaciones (similares a \eng{plugins}), sin la necesidad de modificar código del núcleo, y soporta un esquema de versionado que facilita el mantenimiento del código al publicar nuevas actualizaciones\cite{siu2017chulupi}.
+
+Actualmente conviven dos versiones de Guaraní: la 2.9.x y la 3.x. En esta última hay un cambio radical respecto de \textit{gestión} y la base de datos. Por un lado se deja de utilizar la aplicación de escritorio para implementarse su funcionalidad desde la Web con el \gls{framework} SIU Toba. Por otro, se cambia el motor de base de datos a PostgreSQL. Además se replantea el modelo para incorporar nuevas funcionalidades y que el sistema sea más genérico.
+
+Para la interfaz de Alumnos, Docentes y Directivos, se sigue utilizando Chulupí, solo cambiando cuestiones del modelo, manteniendo la vista y el controlador (en \gls{mvc}).
+
+Para esta tesis, se utiliza el esquema de personalizaciones para realizar las modificaciones necesarias e integrar aspectos útiles del sistema de alumnos en la aplicación móvil. A su vez, esta personalización se deja disponible a la comunidad de Universidades Nacionales para que también puedan implementar \nombreApp.
+
 
 \subsubsection{Moodle}
 \label{moodle}

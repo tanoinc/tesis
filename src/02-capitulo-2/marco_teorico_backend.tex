@@ -224,7 +224,17 @@ Lumen es un \gls{microframework} ultra rápido que deriva de \gls{laravel}. Est�
 
 En sí es una versión de \gls{laravel} con funcionalidad removida para incrementar su \eng{performance} y velocidad. Se eliminan aspectos que no se utilizan (o no deberían) en \glspl{api}, como por ejemplo el manejo de sesiones o plantillas \gls{html}. Permite en cualquier momento incorporar funcionalidad y pasarse a un proyecto \gls{laravel}.
 
-La utilización de \gls{laravel} como \gls{framework} \gls{php} ha ido incrementando en los últimos años. Las tendencias de búsqueda en Google muestran el interés en la comunidad\cite{google2017tendenciaFramework} respecto de otros principales entornos (ver figura \ref{fig:tendencia_frameworks_php}).
+Entre sus principales características se destacan:
+\begin{itemize}
+\item Es de código abierto.
+\item Su sintaxis es intuitiva.
+\item Posee una extensa comunidad de desarrolladores dispuestos a resolver los problemas que surjan.
+\item Bien documentado\footnote{Uno de sus principales sitios es \url{https://laracasts.com/}}.
+\item Completo en recursos: tiene una amplia variedad de extensiones.
+\item Los validadores.
+\end{itemize}
+
+Cabe destacar que la utilización de \gls{laravel} como \gls{framework} \gls{php} ha ido incrementando en los últimos años. Las tendencias de búsqueda en Google muestran el interés en la comunidad\cite{google2017tendenciaFramework} respecto de otros principales entornos (ver figura \ref{fig:tendencia_frameworks_php}).
 
 \figura{02-capitulo-2/tendencia_frameworks_php.png}{Tendencia en búsquedas sobre los principales \glspl{framework} \gls{php} en los últimos 5 años. Fuente: Google Trends\cite{google2017tendenciaFramework} }{tendencia_frameworks_php}{1}
 
@@ -240,4 +250,4 @@ Respecto a la escalabilidad, de acuerdo al gráfico de la figura \ref{fig:lumen_
 
 Finalmente, es importante destacar que \textit{Lumen} soporta (a través de \gls{php}) múltiples motores de bases de datos y el desarrollo se abstrae de las características particulares de ellos. Esto significa que se puede implementar por cualquier motor soportado por Lumen\footnote{Actualmente soporta: MySQL, Postgres, SQLite y SQL Server. \url{https://lumen.laravel.com/docs/5.4/database}}, siendo el cambio, totalmente transparente.
 
-Por todas estas razones se elige a \textit{Lumen} como \gls{framework} de desarrollo para el proyecto \comillas{Mi Universidad}. La versión que se utiliza es la 5.4.
+Por todas estas razones se elige a \textit{Lumen} como \gls{framework} de desarrollo para el proyecto \nombreApp. La versión que se utiliza es la 5.4.
