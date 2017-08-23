@@ -15,7 +15,7 @@ En el año 2007 se conforma un consorcio de Universidades Nacionales al que adhi
 
 En 2013 pasa a formar parte del Consejo Interuniversitario Nacional.
 
-El \gls{siu} desarrolla el sistema \textit{SIU Guaraní} para todas las Universidades Nacionales que integren el consorcio. Este sistema se encarga de gestionar la actividad académica de los alumnos desde que ingresan a la Universidad hasta que egresan de alguna de sus carreras. Es implementado por 62 instituciones educativas\footnote{De acuerdo a los datos relevados en Agosto 2017. \url{http://www.siu.edu.ar/listado-de-implementaciones/}} (entre Universidades Nacionales y otras dependencias) y tiene mas de 460 instalaciones.
+El \gls{siu} desarrolla el sistema \textit{SIU \gls{guarani}} para todas las Universidades Nacionales que integren el consorcio. Este sistema se encarga de gestionar la actividad académica de los alumnos desde que ingresan a la Universidad hasta que egresan de alguna de sus carreras. Es implementado por 62 instituciones educativas\footnote{De acuerdo a los datos relevados en Agosto 2017. \url{http://www.siu.edu.ar/listado-de-implementaciones/}} (entre Universidades Nacionales y otras dependencias) y tiene mas de 460 instalaciones.
 
 Actualmente el sistema consta de dos partes (denominadas por el \gls{siu} como \textit{interfaces}):
 \begin{itemize}
@@ -25,21 +25,43 @@ Actualmente el sistema consta de dos partes (denominadas por el \gls{siu} como \
 
 Otro componente importante (en sus versiones 2.x) es su base de datos ya que hace de nexo entre \textit{gestión} y \textit{el Web}. Utiliza Informix y gran parte del funcionamiento (común a ambas interfaces) está implementado a través de \eng{Stored Procedures}.
 
-Su amplia utilización en Universidades de Argentina hace que exista la necesidad de diseñar el sistema considerando cuestiones de funcionamiento específico de cada institución educativa. Por ello a partir del año 2014, en su versión 2.8, se reimplementa su interfaz Web y se incorpora el \gls{framework} \textit{SIU Chulupí}.
+Su amplia utilización en Universidades de Argentina hace que exista la necesidad de diseñar el sistema considerando cuestiones de funcionamiento específico de cada institución educativa. Por ello a partir del año 2014, en su versión 2.8, se reimplementa su interfaz Web y se incorpora el \gls{framework} \textit{SIU \gls{chulupi}}.
 
-Esta herramienta es desarrollada por el \gls{siu} y sus principales objetivos son mejorar la \eng{performance}, flexibilidad y la capacidad de crear personalizaciones que soporten los cambios de versión. Además se tuvieron en cuenta otros aspectos para mejorar la herramienta y la usabilidad para alumnos y docentes.
+Esta herramienta es desarrollada por el \gls{siu} y sus principales objetivos son mejorar la \eng{performance}, flexibilidad y la capacidad de crear personalizaciones que soporten los cambios de versión. Además se tuvieron en cuenta otros aspectos para mejorar la herramienta y la Usabilidad para alumnos y docentes.
 
-Chulupí está desarrollado en \gls{php}, es basado en el paradigma \gls{mvc} y utiliza un conjunto de librerías de código abierto, algunas provenientes de \gls{symfony}. Este brinda la posibilidad de realizar personalizaciones (similares a \eng{plugins}), sin la necesidad de modificar código del núcleo, y soporta un esquema de versionado que facilita el mantenimiento del código al publicar nuevas actualizaciones\cite{siu2017chulupi}.
+\gls{chulupi} está desarrollado en \gls{php}, es basado en el paradigma \gls{mvc} y utiliza un conjunto de librerías de código abierto, algunas provenientes de \gls{symfony}. Este brinda la posibilidad de realizar personalizaciones (similares a \eng{plugins}), sin la necesidad de modificar código del núcleo, y soporta un esquema de versionado que facilita el mantenimiento del código al publicar nuevas actualizaciones\cite{siu2017chulupi}.
 
-Actualmente conviven dos versiones de Guaraní: la 2.9.x y la 3.x. En esta última hay un cambio radical respecto de \textit{gestión} y la base de datos. Por un lado se deja de utilizar la aplicación de escritorio para implementarse su funcionalidad desde la Web con el \gls{framework} SIU Toba. Por otro, se cambia el motor de base de datos a PostgreSQL. Además se replantea el modelo para incorporar nuevas funcionalidades y que el sistema sea más genérico.
+Actualmente conviven dos versiones de \gls{guarani}: la 2.9.x y la 3.x. En esta última hay un cambio radical respecto de \textit{gestión} y la base de datos. Por un lado se deja de utilizar la aplicación de escritorio para implementarse su funcionalidad desde la Web con el \gls{framework} SIU Toba. Por otro, se cambia el motor de base de datos a PostgreSQL. Además se replantea el modelo para incorporar nuevas funcionalidades y que el sistema sea más genérico.
 
-Para la interfaz de Alumnos, Docentes y Directivos, se sigue utilizando Chulupí, solo cambiando cuestiones del modelo, manteniendo la vista y el controlador (en \gls{mvc}).
+Para la interfaz de Alumnos, Docentes y Directivos, se sigue utilizando \gls{chulupi}, y solo cambian cuestiones del modelo, manteniendo la vista y el controlador (en \gls{mvc}).
 
-Para esta tesis, se utiliza el esquema de personalizaciones para realizar las modificaciones necesarias e integrar aspectos útiles del sistema de alumnos en la aplicación móvil. A su vez, esta personalización se deja disponible a la comunidad de Universidades Nacionales para que también puedan implementar \nombreApp.
+En la \unlp, \gls{guarani} se implementa por primera vez en el año 2003 para la Facultad de Ciencias Económicas, llegando al día de hoy, a 23 instalaciones, incluyendo todas las Facultades (para carreras de grado), algunos postgrados y otras dependencias de la Universidad\cite{cespi2017guarani}. También existen implementaciones de \gls{guarani} en su versión 3.x.
 
+Para esta tesis, se utiliza el esquema de personalizaciones de \gls{chulupi} para realizar las modificaciones necesarias e integrar aspectos útiles del sistema de alumnos en la aplicación móvil. A su vez, esta personalización se deja disponible a la comunidad de Universidades Nacionales para que también puedan implementar \nombreApp.
 
 \subsubsection{Moodle}
 \label{moodle}
+
+\textit{Moodle} es una plataforma de aulas virtuales implementada en \gls{php} que permite a los docentes y estudiantes crear un ambiente de aprendizaje personalizado a sus necesidades. Este sistema es de código abierto, con una gran comunidad de colaboradores que aportan código a la plataforma y creando nuevas extensiones. Su desarrollo es motivado en base a una filosofía que hace hincapié en la \comillas{pedagogía construccionista social}\footnote{Para más información sobre su filosofía visitar \url{https://docs.moodle.org/all/es/Filosof\%C3\%ADa}}.
+
+Moodle es utilizado por mas de 100 millones de usuarios en aproximadamente 79 mil instalaciones\footnote{Según \url{https://moodle.net/stats/} en Julio de 2017} en múltiples idiomas. Particularmente en Argentina hay alrededor de 1680 sitios registrados de los cuales 9 están relacionados con la \unlp\footnote{Sitios registrados y públicos en Argentina, disponibles \url{https://moodle.net/sites/index.php?country=AR}}. Estos son:
+\begin{itemize}
+\item \comillas{Asignaturas de la Facultad Virtual Informática - Ingeniería} en \url{https://asignaturas.linti.unlp.edu.ar/}
+\item \comillas{AU24 Campus Virtual FCE UNLP} en \url{http://www.au24.econo.unlp.edu.ar}.
+\item \comillas{AULA VIRTUAL - FCV} de la Facultad de Ciencias Veterinarias en  \url{http://ead.fcv.unlp.edu.ar}
+\item \comillas{Campus virtual de la Facultad de Humanidades y Ciencias de la Educación - Fahce} en \url{http://campus.fahce.unlp.edu.ar}
+\item \comillas{Campus Virtual Escuela Media 26} en \url{http://campusem26.fahce.unlp.edu.ar}
+\item \comillas{Cátedras de la Facultad de Informática - UNLP} en \url{https://catedras.info.unlp.edu.ar}
+\item \comillas{Cursos - LINTI - UNLP} en \url{https://cursos.linti.unlp.edu.ar}
+\item \comillas{Docentes en línea} de la Facultad de Humanidades y Ciencias de la Educación en \url{http://intercambioenlinea.fahce.unlp.edu.ar}
+\item \comillas{Entorno virtual de aprendizaje basado en software libre - UNLP} en \url{https://postgrado.linti.unlp.edu.ar}
+\item \comillas{Facultad de Odontología - Entorno de Enseñanza Virtual} en \url{http://cursos.folp.unlp.edu.ar/moodle}.
+\end{itemize}
+
+Este sistema permite el desarrollo de extensiones de diferentes tipos de acuerdo a sus funcionalidad (bloques, autenticación, mensajería, etc). Brinda la posibilidad de asociar funciones a eventos definidos, permitiendo de manera flexible extender el comportamiento de su núcleo.
+
+
+
 
 \subsubsection{Meran}
 \label{merans}
