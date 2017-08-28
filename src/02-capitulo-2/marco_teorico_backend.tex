@@ -100,7 +100,9 @@ En base a las ventajas y desventajas de ambas tecnologías, se realizó un anál
 
 En base a lo analizado se concluye que la utilización de servicios \gls{rest} es conveniente para este desarrollo puesto que: provee mayor flexibilidad, es más liviana, sus tecnologías son de uso generalizado y se adapta correctamente a las necesidades de conexión de los dispositivos móviles y de otros servicios externos que consuman la información provista. Además facilita la posibilidad de escalar horizontalmente y permite el uso de caché.
 
-Por otra parte, para la comunicación con aplicaciones móviles, \gls{rest} supera ampliamente a \gls{soap}. Una evaluación hecha\cite{hamad2010performance} demostró que \gls{rest} tuvo una mejor \eng{performance} debido a mensajes de menor tamaño y tiempos de respuesta más cortos, además de su alta flexibilidad y bajo \eng{overhead}. 
+Por otra parte, para la comunicación con aplicaciones móviles, \gls{rest} supera ampliamente a \gls{soap}. Una evaluación hecha\cite{hamad2010performance} demostró que \gls{rest} tuvo una mejor \eng{performance} debido a mensajes de menor tamaño y tiempos de respuesta más cortos, además de su alta flexibilidad y bajo \eng{overhead}. La latencia es importante en el ámbito de las aplicaciones móviles ya que existe una pérdida de \eng{performance} y mayor consumo de red al sobrecargar los mensajes con datos extra.
+
+
 
 En conclusión, se recomienda la utilización de servicios RESTful\cite{hamad2010performance} para la conexión entre el \eng{backend} y el dispositivo.
 
@@ -253,3 +255,5 @@ Respecto a la escalabilidad, de acuerdo al gráfico de la figura \ref{fig:lumen_
 Finalmente, es importante destacar que \textit{Lumen} soporta (a través de \gls{php}) múltiples motores de bases de datos y el desarrollo se abstrae de las características particulares de ellos. Esto significa que se puede implementar por cualquier motor soportado por Lumen\footnote{Actualmente soporta: MySQL, Postgres, SQLite y SQL Server. \url{https://lumen.laravel.com/docs/5.4/database}}, siendo el cambio, totalmente transparente.
 
 Por todas estas razones se elige a \textit{Lumen} como \gls{framework} de desarrollo para el proyecto \nombreApp. La versión que se utiliza es la 5.4.
+
+

@@ -60,8 +60,15 @@ Moodle es utilizado por mas de 100 millones de usuarios en aproximadamente 79 mi
 
 Este sistema permite el desarrollo de extensiones de diferentes tipos de acuerdo a sus funcionalidad (bloques, autenticación, mensajería, etc). Brinda la posibilidad de asociar funciones a eventos definidos, permitiendo de manera flexible extender el comportamiento de su núcleo.
 
+Se utiliza este mecanismo de extensiones para desarrollar la integración ente \textit{Moodle} y \nombreApp. En el capítulo \ref{cap3} se detallan las características técnicas específicas de su implementación así como también su funcionalidad.
 
+\subsubsection{Otros servicios}
+\label{otros_servicios}
 
+Existen otros servicios en la \unlp que se pueden integrar y compartir alguno de sus aspectos en \nombreApp. 
+Por ejemplo, el sistema de bibliotecas \textit{Meran}. 
 
-\subsubsection{Meran}
-\label{merans}
+Desarrollado por el \gls{cespi}, \textit{Meran} es un \comillas{Sistema Integrado de Gestión de Bibliotecas (SIGB) que permite administrar los procesos bibliotecarios y gestionar servicios a los usuarios en forma integrada}\cite{meran2017queEs}. Es de código abierto (licencia \gls{gnugpl} v3) y está implementado en varias Facultades, colegios y dependencias de la \unlp\footnote{Listado de quienes usan \textit{Meran} disponible en \url{http://www.cespi.unlp.edu.ar/articulo/2013/6/14/quienes_usan_meran}}. Este realiza notificaciones a sus usuarios sobre la disponibilidad en las reservas de libros, o emite avisos que un ejemplar está listo para retirar. Este tipo de información podría integrarse a la aplicación haciendo uso de las notificaciones y novedades personales. También maneja fechas de vencimiento para regresar los libros prestados, pudiendo este dato ser agregado al calendario del dispositivo móvil.
+
+Dando a conocer en la Universidad, la existencia del servicio \nombreApp y su documentación, otros servicios internos a dependencias podrían integrarse y así mejorar la experiencia de los alumnos de la \unlp.
+

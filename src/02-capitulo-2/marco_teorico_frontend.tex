@@ -6,13 +6,172 @@ Habiendo visto las características requeridas por el \eng{backend}, en la sigui
 \subsubsection{Interfaz de usuario}
 \label{interfaz_usuario}
 
+Los patrones de diseño para interfaces móviles han ido evolucionando a través del tiempo. La autora Theresa Neil destaca este aspecto comparando los cambios en las ediciones de sus libros \cite{neil2014mobile}: si bien no han habido nuevos patrones de diseño, estos han evolucionado para estar más centrados en dispositivos móviles. Esto significa que dejan de utilizar metáforas relacionadas con aplicaciones Web o de escritorio, para elaborar soluciones centradas en \textit{móviles}.
 
+En las siguiente secciones se estudian los patrones de diseño para interfaces móviles en base a las necesidades de la aplicación móvil (\eng{frontend}).
 
-\subsubsection{Aplicaciones móviles nativas}
+\paragraph{Patrones de navegación primaria}
+\label{navegacion_primaria}
+
+La navegación organiza el contenido de manera que sea lo mas simple posible encontrar un dato buscado. En particular se llama navegación primaria a la orientada a moverse entre las categorías más importantes de información (similar a los menús principales en las aplicaciones de escritorio).
+
+La navegación primaria se divide en dos tipos\cite{neil2014mobile}:
+\begin{itemize}
+\item \textbf{Persistente}: las opciones de navegación están siempre presentes: son inmediatamente visibles y claras al abrir la aplicación. Forman una estructura simple como un menú con listado o pestañas.
+\item \textbf{Transitoria}: las opciones de navegación están disponibles durante un breve período de tiempo y deben ser explícitamente mostradas con un \textit{toque} o \textit{gesto}. Surgen de las restricciones en el tamaño de las pantallas de los dispositivos, y la necesidad de mostrar información que no cabe en ellas.
+\end{itemize}
+
+\paragraph{Navegación persistente}
+\label{navegacion_persistente}
+
+Los patrones actuales de navegación persistente\cite{neil2014mobile} son:
+\begin{itemize}
+
+\item \textbf{\eng{Springboard}}: Este patrón consiste en un pantalla dividida por una grilla invisible en donde cada celda posee una opción que actúa como punto de partida para las operaciones principales. 
+Este patrón fue popular en el año 2011 debido a las limitaciones existentes (en \gls{ios} y \gls{android}) para la visualización de pestañas: solamente se permitían de 3 a 5 elementos. Es por ello que este patrón encontraba la forma de ampliar esta restricción, añadiendo inclusive paginado para incluir más opciones.
+
+\figura{02-capitulo-2/springboard.png}{Ejemplo de patrón de navegación \eng{springboard} a nivel de Sistema Operativo en iOS}{springboard}{0.3}
+
+Su desventaja es que aplana a las opciones, igualándolas en nivel de importancia y no pudiendo reflejar  información de herencia entre ellas. Aunque \eng{springboard} no es muy utilizado actualmente en aplicaciones, siguen existiendo implementaciones con algunas variantes que mejoran la interfaz y agregan herencia, como por ejemplo las aplicaciones: EasyJet, Kurogo (ver figura \ref{fig:kurogo_app}), Informática UNLP, entre otras.
+
+\item \textbf{Tarjetas}: Este patrón es una metáfora de una pila de tarjetas. Permite mostrar la información como si fuera una tarjeta y sus operaciones relacionadas: apilar, mezclar, descartar y ver reverso.
+Existen variantes como las utilizadas por Instagram y Facebook, en donde algunas de sus operaciones con gestos son removidas en pos de mejorar el estilo.
+
+\item \textbf{Menú lista}: Similar a \eng{springboard} pero los ítems son ubicados en forma de lista, uno debajo del otro y para cambiar de módulo, es necesario volver a la lista principal. 
+\figura{02-capitulo-2/lista_menu.png}{Ejemplo de patrón de navegación de \comillas{Menú lista} en iTerminal}{lista_menu}{0.35}
+
+\item \textbf{Tablero}: Similar y combinable con los anteriores, pero brindando (en un vistazo) la información más relevante para el usuario, antes de navegar a la opción deseada. 
+\figura{02-capitulo-2/dashboard.png}{Ejemplo de patrón de navegación \eng{dashboard} en Google Analytics}{dashboard}{0.3}
+
+\item \textbf{Galería}: Muestra el contenido\footnote{Notar que esta vez se habla de contenido y no de opciones del menú u operaciones} dentro de una grilla, carrusel o diapositivas.
+
+\item \textbf{Pestañas}: Recomendadas para una aplicación con una estructura plana, el esquema de pestañas, al estar siempre visible en la pantalla principal, permite navegar entre categorías con tan solo un toque o gesto. Android recomienda\cite{android2017appStructure} el uso de pestañas si: 
+\begin{itemize}
+\item Se espera que el usuario cambie de vistas frecuentemente.
+\item Se tiene un número limitado de vistas principales (hasta tres).
+\item Se desea que el usuario sea consciente de las vistas alternativas.
+\end{itemize}
+
+\item \textbf{Skeumórfica}: Este patrón se caracteriza por ser una interfaz que emula a un objeto real y su uso. Aunque no es muy común, algunas aplicaciones se valen de este recurso para mejorar la usabilidad cuando tienen que representar objetos reales. Es muy utilizada en videojuegos, pero no tanto en aplicaciones. Actualmente está en desuso\cite{gottling2017skeuomo}.
+
+\figura{02-capitulo-2/skeu.jpg}{Ejemplo de interfaz con patrón skeumórfico en aplicación de grabadora para iOS}{skeu}{0.3}
+
+\end{itemize}
+
+\paragraph{Navegación transitoria}
+\label{navegacion_transitoria}
+
+Los patrones de navegación transitoria\cite{neil2014mobile} son tres:
+\begin{itemize}
+\item \textbf{\eng{Side drawer}} (en español \comillas{cajón lateral}): Se trata del componente contenedor del menú que es desplegado desde el lateral de la pantalla hacia el centro. De ahí provine su nombre, ya que es similar al comportamiento de un cajón: oculto, se despliega, utiliza su contenido y es cerrado. Existen dos variantes: el que se muestra superpuesto sobre la pantalla principal y el que desplaza a esta.
+\figura{02-capitulo-2/side_drawer.png}{\eng{Side Drawer} con menú en aplicación de Netflix (desplaza pantalla principal)}{side_drawer}{0.3}
+
+\item \textbf{\eng{Toggle Menu} (en español menú desplegable o desplegado)}: Es similar al anterior, solo que se despliega desde el borde superior de la pantalla. Una característica clave es que se debe permitir que la misma acción que lo activó, lo pueda desactivar. El menú no debe cubrir toda la pantalla, dejando visible una porción de la vista principal, permitiendo desactivarlo al hacer un toque en esta sección.
+
+\figura{02-capitulo-2/toggle_menu.png}{\eng{Toggle menu} con menú en aplicación de IMDB}{toggle_menu}{0.3}
+
+\item \textbf{\eng{Pie Menu}} (en español \comillas{menú de torta}, también conocido como \comillas{rueda} o \comillas{menú radial}): se trata de un menú contextual circular en donde la selección de las opciones depende de la dirección hacia donde se mueve el puntero (o el toque con el dedo). Está dividido en \comillas{porciones} (alrededor de un centro) que representan las distintas opciones. Su ventaja se basa en el uso de la memoria muscular para agilizar la interacción\cite{hopkins1991design}. 
+
+\figura{02-capitulo-2/pie_menu.png}{\eng{Pie menu} en \eng{assistive touch} de iPhone}{pie_menu}{0.3}
+
+No obstante, el uso de técnicas de interacción que no son basadas en un puntero (como por ejemplo toques o gestos con el dedo) son problemáticas\cite{leithinger2007improving}.
+\end{itemize}
+
+\paragraph{Patrones de navegación secundaria}
+\label{navegacion_secundaria}
+
+La navegación secundaria se centra en el movimiento dentro del módulo seleccionado (por la navegación primaria). Todos los patrones primarios también se pueden utilizar como secundarios, inclusive combinarse, por ejemplo, \textit{pestañas} con textit{galería}. 
+
+Además existen otros tres patrones secundarios más\cite{neil2014mobile}:
+
+\begin{itemize}
+\item \textbf{\eng{Page swiping}} (en español, \comillas{páginas deslizables}): se utiliza para navegar el contenido (agrupado en una página) deslizándolo hacia los costados. Para indicar este mecanismo, se recomienda mostrar un indicador visual de las páginas disponibles, por ejemplo una barra con puntos, en donde cada uno representa una página con contenido.
+\item \textbf{\eng{Scrolling tabs}} (en español, \comillas{pestañas desplazables}): Es útil para mostrar múltiples categorías o vistas del contenido dentro de un mismo módulo. Pueden ser activadas con un toque o deslizadas en el sentido de la pestaña que se desea acceder.
+\item \textbf{\eng{Accordion}} (en español, \comillas{acordeón}): Consiste en mostrar un resumen o título de cierta información, y al seleccionarlo, se abre, desplazando el resto del contenido contiguo y mostrando el detalle. Le permite al usuario ver más información, manteniéndose dentro de la misma pantalla. Es eficiente en el sentido que, para ver un contenido, evita que el usuario tenga que navegar a otra pantalla siendo probable que luego regrese a ella.
+\end{itemize}
+
+\paragraph{Elección de patrones de navegación}
+\label{navegacion_secundaria}
+
+En base a lo expuesto anteriormente, se utiliza el patrón de \textit{Pestañas} (persistente) en la navegación primaria para agrupar contenido con las mismas características. Se considera adecuado ya que en la aplicación no hay mas de 3 grupos de contenidos y el usuario se espera que frecuentemente visite todas las vistas.
+También se utiliza \eng{Side drawer} (transitorio) para mostrar el acceso a otras operaciones de la aplicación y a contenidos específicos de cada servicio asociado. Debido a que estos ítems no son de consulta constante, se considera apropiado este patrón, ya que no es necesario que el menú esté visible todo el tiempo y además le permite a este crecer verticalmente a medida que se suma el contenido de nuevos servicios.
+
+Para la navegación secundaria, dependiendo de la vista, se utilizan los patrones \textit{tarjeta} y \textit{menú lista}. 
+
+Debido a que todavía no se han visto los aspectos de funcionalidad de la aplicación, estas elecciones se detallan puntualmente en el capítulo \ref{cap3}.
+
+\subsubsection{Aplicación móvil}
+\label{aplicacion_movil}
+
+Al momento de comenzar el desarrollo hay que decidir qué tecnología utilizar para poder crear una aplicación móvil. En la actualidad existen varias, y su diferencia radica en base a las necesidades del desarrollo.
+En general, ninguna es mejor que la otra, pero en particular, de acuerdo a los requerimientos y necesidades, quizás sea más conveniente una por sobre la otra. 
+
+En las siguientes secciones se estudian los distintos métodos, tecnologías y lenguajes para desarrollar aplicaciones móviles y se analiza cuales son los más convenientes para \nombreApp.
+Este análisis se basa en cumplir con los siguientes requerimientos:
+\begin{itemize}
+\item Que permita la utilización de características del dispositivo como conexión a internet, \gls{gps}, notificaciones, calendario, cámara, etc.
+\item Que sea capaz de brindar una experiencia de usuario de calidad y posibilite la implementación de los patrones de navegación anteriormente vistos.
+\item Que la aplicación sea potencialmente ejecutada en la mayor cantidad de dispositivos móviles, independientemente de su Sistema Operativo\footnote{ Para el alcance de esta tesis y por cuestiones de costos de licencia, se utiliza Android como principal plataforma, pero igualmente debe existir la posibilidad que la aplicación funcione para otros Sistemas Operativos.}.
+\item Que el costo de desarrollo sea bajo: para favorecer el mantenimiento, implementación y adopción de la aplicación por la UNLP y otras Universidades.
+\end{itemize}
+
+Existen dos tipos de técnicas y tecnologías de desarrollo para aplicaciones móviles: nativas e híbridas. Estas se discuten en las siguientes secciones.
+
+\paragraph{Aplicaciones nativas}
 \label{apps_nativas}
 
-\subsubsection{Aplicaciones móviles híbridas}
+Las aplicaciones nativas son aquellas que para su programación se utiliza el lenguaje específico del sistema operativo del dispositivo y su desarrollo está optimizado para este. Esto significa que la aplicación creada será dependiente de la plataforma, no pudiendo ser directamente portada a otras\cite{charland2011mobile}.
+
+Las ventajas de utilizar aplicaciones nativas son:
+\begin{itemize}
+\item Logran un mejor rendimiento: al eliminar una capa de abstracción, su código se compilado y utilizar llamadas nativas, permiten una mayor optimización.
+\item Mejor \eng{look and feel}: ya que se utilizan los controles desarrollados para la plataforma específica, lo que conlleva a una visualización e interacción pulida.
+\item Mayor capacidad de procesamiento gráfico y acceso a capacidades del dispositivo: si se desean crear nuevas interfaces, saliendo de lo preestablecido, o implementar juegos, en donde el apartado gráfico es más importante. También tienen una mayor flexibilidad en la utilización de las capacidades del dispositivo.
+\end{itemize}
+
+Como desventajas:
+\begin{itemize}
+\item Dependencia a una plataforma debido a diferencias en los lenguajes, \gls{sdk}, herramientas y \glspl{api} de cada una de ellas.
+\item Mayor costo: debido al hecho que portar la \gls{app} a otro sistema operativo significa una reimplementación desde cero. Además se multiplican (por cada plataforma) los costos de mantenimiento, al corregir y agregar nuevas funcionalidades. Por ejemplo para las interfaces de usuario, no hay ninguna plataforma implemente los mismos paradigmas.
+\item Mayor curva de aprendizaje: ya que requiere el conocimiento de todas las características de cada plataforma (lenguaje, \glspl{api}, arquitectura, ver cuadro \ref{languajes_plataforma}.
+\end{itemize}
+
+\begin{table}[]
+\centering
+\caption{Conocimientos de lenguajes necesarios por plataforma\cite{charland2011mobile}}
+\label{languajes_plataforma}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Plataforma} & \textbf{Lenguajes}                 \\ \hline
+Apple iOS           & C, Objective C                     \\ \hline
+Google Android      & Java (Harmony flavored, Dalvik VM) \\ \hline
+RIM BlackBerry      & Java ( J2ME flavored)              \\ \hline
+Symbian             & C, C++, Python, HTML/CSS/JS        \\ \hline
+Windows Mobile      & .NET                               \\ \hline
+Window 7 Phone      & .NET                               \\ \hline
+HP Palm webOS       & HTML/CSS/JS                        \\ \hline
+MeeGo               & C, C++, HTML/CSS/JS                \\ \hline
+Samsung bada        & C++                                \\ \hline
+\end{tabular}
+\end{table}
+
+\paragraph{Aplicaciones híbridas}
 \label{apps_hibirdas}
+
+Se trata de aquellas aplicaciones que son desarrolladas utilizando las tecnologías Web (\gls{html}, \gls{javascript}, \gls{css}). Esto implica que corran dentro de una contenedor nativo (Apache Cordova/PhoneGap) brindando una capa de abstracción y un acceso homogéneo a las diferentes capacidades del dispositivo (neutralizando las diferencias entre los sistemas operativos).
+
+Las ventajas que tienen las aplicaciones híbridas son:
+\begin{itemize}
+\item Multiplataforma: una misma aplicación permite ser compilada para múltiples sistemas operativos móviles, lo que permite reutilizar el código.
+\item Menor costo: al realizarse un solo desarrollo y mantenimiento multiplataforma de una sola versión de la aplicación, los costos se reducen.
+\item Menor curva de aprendizaje: ya que al tratarse de lenguajes y tecnologías Web, se utiliza el mismo paradigma y solo resta conocer cuestiones del \gls{framework} de desarrollo. Además estas tecnologías son  son ampliamente conocidas, por lo que existe una mayor cantidad de recursos humanos.
+\end{itemize}
+
+Como desventajas podemos destacar:
+\begin{itemize}
+\item Menor diseño: ya que a veces no logra simular completamente el \eng{look and feel} de los componentes nativos, además de unificar comportamientos y estilos de interfaz que son diferentes para cada plataforma.
+\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de parseo, interpretación y ejecución de los scripts en \gls{javascript}.
+\end{itemize}
 
 \paragraph{Apache Cordova}
 \label{cordova}
