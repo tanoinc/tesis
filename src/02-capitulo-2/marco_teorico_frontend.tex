@@ -170,11 +170,38 @@ Las ventajas que tienen las aplicaciones híbridas son:
 Como desventajas podemos destacar:
 \begin{itemize}
 \item Menor diseño: ya que a veces no logra simular completamente el \eng{look and feel} de los componentes nativos, además de unificar comportamientos y estilos de interfaz que son diferentes para cada plataforma.
-\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de parseo, interpretación y ejecución de los scripts en \gls{javascript}.
+\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de parseo, interpretación y ejecución de scripts en \gls{javascript}.
 \end{itemize}
+
+De acuerdo a los requerimientos establecidos al inicio de esta sección (apartado \ref{aplicacion_movil}), se determina que la aplicación a desarrollar sea híbrida. Las razones de esta elección son: 
+\begin{itemize}
+\item La aplicación desarrollada permite ser ejecutada en las principales plataformas móviles (multiplataforma).
+\item Un menor costo que favorece al futuro mantenimiento. En relación con el punto anterior, como el código desarrollado es uno sólo, se simplifica la tarea de corrección de errores e incorporación de nuevas funcionalidades. Por otro lado es más sencillo conseguir recursos humanos capacitados en tecnologías Web que en soluciones nativas móviles. Estas ventajas son clave ya que se ajustan a la realidad la \unlp (y otras universidades).
+\item En la actualidad, existen \gls{framework}s que posibilitan el uso de todas las capacidades del dispositivo (detallados en la siguiente sección).
+\end{itemize} 
+
+Como característica adversa, aunque las soluciones híbridas no sean tan performantes y sus componentes visuales no estén tan pulidos como en las versiones nativas, la funcionalidad a implementar no requiere de una alta \eng{performance}. Por otro lado el \gls{framework} elegido simula los componentes muy satisfactoriamente. A continuación, se ven las características de este.
 
 \paragraph{Apache Cordova}
 \label{cordova}
+
+En el año 2009, Nitobi crea \gls{phonegap}, un \gls{framework} que intenta cerrar la brecha entre las plataformas móviles para el desarrollo de aplicaciones. Puesto que cada Sistema Operativo implementa sus \glspl{api} y su \gls{sdk} de manera distinta y en lenguajes distintos, no existe una compatibilidad directa entre ellos. La solución que encuentra Nitobi para cerrar estas diferencias, es el uso de estándares. En particular los que mejor se adaptan para esta solución, son los estándares Web (como \gls{html}5, \gls{javascript} y \gls{css}3). De esta forma, Nitobi desarrolla un contenedor que dota de una capa \gls{javascript} capaz de utilizar funcionalidades nativas en los dispositivos móviles.
+
+La empresa decide que para que el proyecto funcione mejor se necesita una mayor participación de colaboradores. Además esto también produciría un incremento en su uso. Es por ello que en 2011 dona el código fuente del \gls{framework} a la fundación Apache, pasando a ser un producto \gls{open source}.
+
+Más tarde ese mismo año, Adobe adquiere Nitobi, adueñándose de la marca \gls{phonegap}. No obstante, esta empresa está de acuerdo con la donación, por lo que el proyecto \gls{open source} sigue adelante.
+
+A principios de 2012, Apache decide renombrar el proyecto para diferenciarlo de \gls{phonegap} y así evitar inconvenientes legales (debido a que se trata de una marca registrada). El nuevo nombre es \textit{Apache Callback} y luego \textit{Cordova}. Este es elegido debido a que las oficinas de Nitobi estaban sobre la calle \textit{Cordova} en Vancouver, Canadá.
+
+En la actualidad, Cordova se define como un \gls{framework} móvil \gls{open source} que permite utilizar las tecnologías estándar de la Web como \gls{html}5, \gls{javascript} y \gls{css}3 para el desarrollo multiplataforma, evitando el lenguaje nativo de cada plataforma móvil. La aplicaciones se ejecutan dentro de contenedores especiales orientados a cada plataforma y dependen de \glspl{api} estándares para acceder a las capacidades de cada dispositivo como sensores, datos, estado de la red, etcétera.\cite{apache2017cordovaOverview}
+
+Como se indica en la figura \ref{cordova_arquitectura}, la arquitectura de Cordova, consta de tres componentes:
+\begin{itemize}
+\item 
+\item 
+\item 
+\end{itemize}
+\figura{02-capitulo-2/cordova_arquitectura.png}{Arquitectura de Cordova. Fuente: Apache Cordova\cite{apache2017cordovaOverview}}{cordova_arquitectura}{0.7}
 
 \paragraph{Ionic}
 \label{ionic}
