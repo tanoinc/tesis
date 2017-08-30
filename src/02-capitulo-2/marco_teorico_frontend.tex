@@ -191,17 +191,41 @@ La empresa decide que para que el proyecto funcione mejor se necesita una mayor 
 
 Más tarde ese mismo año, Adobe adquiere Nitobi, adueñándose de la marca \gls{phonegap}. No obstante, esta empresa está de acuerdo con la donación, por lo que el proyecto \gls{open source} sigue adelante.
 
-A principios de 2012, Apache decide renombrar el proyecto para diferenciarlo de \gls{phonegap} y así evitar inconvenientes legales (debido a que se trata de una marca registrada). El nuevo nombre es \textit{Apache Callback} y luego \textit{Cordova}. Este es elegido debido a que las oficinas de Nitobi estaban sobre la calle \textit{Cordova} en Vancouver, Canadá.
+A principios de 2012, Apache decide renombrar el proyecto para diferenciarlo de \gls{phonegap}. El nuevo nombre es \textit{Apache Callback} y luego \textit{Cordova}. Este es elegido debido a que las oficinas de Nitobi estaban sobre la calle \textit{Cordova} en Vancouver, Canadá.
 
 En la actualidad, Cordova se define como un \gls{framework} móvil \gls{open source} que permite utilizar las tecnologías estándar de la Web como \gls{html}5, \gls{javascript} y \gls{css}3 para el desarrollo multiplataforma, evitando el lenguaje nativo de cada plataforma móvil. La aplicaciones se ejecutan dentro de contenedores especiales orientados a cada plataforma y dependen de \glspl{api} estándares para acceder a las capacidades de cada dispositivo como sensores, datos, estado de la red, etcétera.\cite{apache2017cordovaOverview}
 
 Como se indica en la figura \ref{cordova_arquitectura}, la arquitectura de Cordova, consta de tres componentes:
-\begin{itemize}
-\item 
-\item 
-\item 
-\end{itemize}
 \figura{02-capitulo-2/cordova_arquitectura.png}{Arquitectura de Cordova. Fuente: Apache Cordova\cite{apache2017cordovaOverview}}{cordova_arquitectura}{0.7}
+\begin{itemize}
+\item \textbf{\eng{Web App}}: Es el lugar donde reside la aplicación desarrollada. Esta es implementada como una página \gls{html}, por lo que permite utilizar todos los recursos Web (imágenes, estilos, código \gls{javascript}). Esta página es renderizada y ejecutada dentro un contenedor, por un componente denominado \textit{WebView}.
+\item \textbf{\eng{WebView}}: Su tarea es la de proveer de interfaz a la aplicación (ejecutando el código de la \textit{WebApp}). También se encarga de ser la capa intermedia que conecta el código creado con el resto de los componentes (Sistema Operativo y esxtensiones de Cordova para el acceso a las capacidades del dispositivo).
+\item \textbf{Extensiones Cordova}: Proveen una interfaz entre los componentes de Cordova, los nativos del dispositivo, sus \glspl{api}. Esto permite hacer llamados nativos desde código \gls{javascript}. Estas extensiones se dividen en dos: las del núcleo (disponibles para todos los dispositivos) y las creadas por terceros (agregan funcionalidades que no necesariamente están para todos).
+
+Existe un repositorio de \eng{plugins}\footnote{Disponible en \url{https://cordova.apache.org/plugins/}. Para npm:  \url{https://www.npmjs.com/search?q=ecosystem\%3Acordova}} donde se pueden buscar y descargar las extensiones.
+\end{itemize}
+
 
 \paragraph{Ionic}
 \label{ionic}
+
+\textit{Ionic} es creado por \textit{Drifty Co.} en 2012. Esta empresa se dedicaba a desarrollar herramientas para la creación de interfaces móviles con \gls{jquery} Mobile y \gls{bootstrap}. Decidieron crear su propio \gls{framework} de aplicaciones híbridas basado en las últimas tecnologías Web y centrado en la \eng{performance}.
+
+\textit{Ionic} es un \gls{framework} \gls{open source} que permite a los desarrolladores crear aplicaciones híbridas, con buena \eng{performance}, utilizando Apache Cordova y las principales tecnologías Web (\gls{javascript}, \gls{html}5, \gls{css}3, sass). En particular a partir de su versión 2, incorpora Angular (versión 2.0 y superiores) con \gls{typescript}. Una de sus fortalezas es el \eng{look and feel} de sus interfaces ya que se adaptan al diseño de las principales plataformas\cite{ionic2017concepts}. Su rapidez se debe a la utilización de animaciones y transiciones de \gls{css}3, así como también el uso de Angular, lo que hacen que se utilice la aceleración por hardware del dispositivo\cite{hartington2017animationsIonic}.
+
+Como segundo aspecto, posee una interfaz de línea de comandos para generar componentes, compilar la aplicación en distintas plataformas, probar el desarrollo en un navegador (con un servidor web integrado). Además permite programáticamente interactuar con los servicios de la nube que ofrece \textit{Ionic}, entre ellos la publicación de aplicaciones en las distintas tiendas de manera centralizada.
+
+El proyecto posee una amplia comunidad de desarrolladores, con más de 31.000 estrellas en \gls{github}\footnote{\url{https://github.com/ionic-team/ionic}} y 26.000 preguntas en \gls{stackoverflow}\footnote{\url{https://stackoverflow.com/questions/tagged/ionic-framework}}. En 2015 se crearon mas de 1,3 millones de aplicaciones con \textit{Ionic}\cite{ionic2017concepts}. Además tiene una gran variedad de \eng{plugins} para acceder a funcionalidades nativas del teléfono, entre otras cuestiones.
+
+Por último, \textit{Ionic} tiene una estructura que favorece al desarrollo de \gls{pwa}. Desde hace un año, los desarrolladores están realizando actualizaciones para que además de funcionar en múltiples plataformas móviles, las aplicaciones realizadas con este \gls{framework}, también sean \gls{pwa}\cite{lynch2016pwa}.
+
+Debido a las característica anteriormente mencionadas, se considera a \textit{Ionic} como marco de desarrollo para la aplicación híbrida.
+
+\paragraph{Otros \eng{frameworks} híbridos}
+\label{otros_frameworks_hibridos}
+
+Vale la pena mencionar que existen otros \glspl{framework} para el desarrollo de aplicaciones híbridas que han sido revisados para el presente desarrollo pero que no fueron utilizados. A continuación se listan y mencionan algunas de sus principales características:
+\begin{itemize}
+\item \textbf{React Native}: Creado por Facebook, este \gls{framework} se basa en React (\gls{javascript}) y se caracteriza por definir una interfaces con \gls{XML} que traducen a componentes nativos. También permite utilizar código nativo cuando se necesita optimizar algún aspecto de la aplicación. Sólo funciona con Androir e \gls{ios}.
+\item \textbf{NativeScript}: Es \gls{open source} y en la actualidad permite desarrollar solo para \gls{android} e \gls{ios}. Se caracteriza por utilizar lenguajes independientes a la plataforma que ejecuta, como \gls{javascript} y \gls{typescript} (con Angular). A diferencia de otras soluciones, no utiliza un \textit{WebView} y \glspl{api} simuladas, sino que a través de \gls{XML}, implementa una abstracción entre plataformas que es capaz de traducir las características comunes a llamados nativos\cite{nativescript2017basics}. Además sus interfaces utilizan componentes nativos de la plataforma.
+\end{itemize}
