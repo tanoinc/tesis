@@ -25,10 +25,10 @@ Cabe destacar que hay una relación directa entre estos puntos y la definición 
 
 Por otro lado, se le llama \textit{servicios externos} (o servicios) a aquellos sistemas independientes (ajenos al proyecto) que tienen la capacidad de integrarse (o ya están integrados) a \nombreApp{}. Su comunicación se establece a través de la \gls{api} haciendo referencia a los \textit{puntos de integración}. Además, los usuarios tienen la posibilidad de añadir a sus cuentas personales, los servicios a los cuales estén interesados. 
 
-Con respecto a los usuarios, se indica como \textit{identificador externo} (o \textit{id externo}) al valor clave que identifica unívocamente al usuario dentro del servicio externo. \nombreApp provee de mecanismos para relacionar el usuario de la aplicación con el proveniente del servicio (en caso que se requiera).
+Con respecto a los usuarios, se indica como \textit{identificador externo} (o \textit{id externo}) al valor clave que identifica unívocamente al usuario dentro del servicio externo. \nombreApp{} provee de mecanismos para relacionar el usuario de la aplicación con el proveniente del servicio (en caso que se requiera).
 
 Por último, se denomina \textit{contextos} a las temáticas definidas por los \textit{servicios externos}. Estas permiten ser suscritas por los usuarios independientemente de si han añadido el servicio, definiendo un nivel más fino de granularidad. La suscripción a \textit{contextos} es la manera que tiene un usuario de indicar su interés por una temática y recibir toda la información relacionada a ella.
-Los \textit{contextos} existen en el marco de un \textit{servicio} y su semántica es dada de acuerdo a la lógica de cada sistema. Dentro de la aplicación se los denomina \comillas{tema} o \comillas{temática}
+Los \textit{contextos} existen en el marco de un \textit{servicio} y su semántica es dada de acuerdo a la lógica de cada sistema. Dentro de la aplicación se los denomina \comillas{tema} o \comillas{temática}.
 
 A continuación, el informe comienza por definir los \textit{puntos de integración}.
 
@@ -58,7 +58,8 @@ El alcance es representado por íconos dentro de la noticia:
 \paragraph{API}
 \label{funcionalidad_noticias_api}
 
-Los métodos definidos para las novedades son:
+Los servicios externos pueden crear novedades utilizando los métodos por la \gls{api} \gls{rest}. 
+Además de los atributos antes mencionados, la \gls{api} permite indicar si se desea enviar una notificación \eng{push} al celular de los destinatarios al momento de publicar la noticia.
 
 \begin{itemize}
 \item \textbf{POST /newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}: Agrega una nueva \textit{novedad} a los \eng{newsfeed} de los usuarios interesados (a nivel de: destinatario, contexto y/o servicio externo).
@@ -77,10 +78,14 @@ Los métodos definidos para las novedades son:
 \end{itemize}
 \end{itemize}
 
-
-
 \subsubsection{Calendario}
 \label{funcionalidad_calendario}
+
+El siguiente \textit{punto de integración} son el calendario y los eventos. Al igual que las novedades, tienen una principal importancia es por ello que ocupan un lugar inmediato en la pantalla principal de la aplicación. 
+
+\paragraph{Aplicación móvil}
+\label{funcionalidad_calendario_app}
+
 
 
 \subsubsection{Contenidos}
