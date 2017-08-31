@@ -4,6 +4,8 @@
 Este repositorio contiene los fuentes de LaTeX del informe final para la tesina de grado de Luciano Coggiola en Licenciatura en Informática 
 (Facultad de Informática, Universidad Nacional de La Plata).
 
+* [Descargar informe final (PDF)](https://github.com/tanoinc/tesis/raw/master/pdf/tesis.pdf)
+
 ## Desarrollo
 
 * [Código fuente del cliente (aplicación móvil, Ionic)](https://github.com/tanoinc/mi-universidad-app)
