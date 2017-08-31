@@ -1,9 +1,96 @@
+\subsection{Licencia}
+\label{licencia}
+
+Como se indica al comienzo del capítulo \ref{cap2}, una de las necesidades es la posibilidad de indicar que el software desarrollado sea libre para ser usado, copiado o modificado. Es por ello que se elige la licencia \gls{gnugpl} versión 3 para que aplique a este proyecto. Para llevar a cabo esto, se eligió como plataforma de distribución del código fuente a \gls{github} (utilizando \textit{git} como sistema de control de versiones).
+
+Dentro de esta plataforma, el código de \nombreApp{} está dividido en dos:
+\begin{itemize}
+\item El \eng{backend}, con el desarrollo de la \gls{api} \gls{restful} en \textit{Lumen} (\gls{php}) ubicado en \url{https://github.com/tanoinc/mi-universidad-api}.
+\item El \eng{frontend} con el código de la aplicación móvil para \textit{Ionic} en \url{https://github.com/tanoinc/mi-universidad-app}. Cabe destacar que el proyecto general está en la rama \textit{master}, mientras que el personalizado con la estética de la \unlp{} extiende a este y se encuentra en la rama \textit{unlp}.
+\end{itemize}
+
+Por otra parte, bajo esta licencia también es público el \eng{plugin} de \textit{Moodle} en \url{https://github.com/tanoinc/moodle-message_miuniversidad}\footnote{El nombre del repositorio es distitno respetando la nomenclatura de \eng{plugins} de \textit{Moodle}}.
+Respecto a la personalización para \gls{siu} Guaraní (en \gls{chulupi}), quedará disponible para la comunidad de Universidades Nacionales, no pudiendo ser totalmente pública, debido a limitaciones en la licencia de \textit{Guaraní}.
+
+Por último, este informe documental realizado con \textit{LaTeX} es público y está disponible en \url{https://github.com/tanoinc/tesis}. Queda libre como referencia para otras personas interesadas en el proyecto, o simplemente como modelo para la escritura del informe final en \textit{LaTeX}\footnote{El proyecto de \textit{LaTeX} creado por Cuesta Luengo y Carbone para su tesis, me ha servido como base para este informe. Disponible en \url{https://github.com/ncuesta/tesis}}.
+
 \subsection{Funcionalidad}
 \label{funcionalidad}
 
+En este apartado se describe el funcionamiento del sistema: se revisan las distintas características que posee y la interacción entre sus distintos componentes.
+Antes de continuar, se deben definir algunos conceptos que serán mencionados en varias ocasiones. 
 
-\subsubsection{Noticias}
+En primer lugar, a cada una de las características que tendrá \nombreApp{} se las refiere como \textit{puntos de integración} y a estos, se los definen como: una funcionalidad clave, genérica y transversal a cualquier servicio, que tiene el potencial de ser integrada en la aplicación.
+Cabe destacar que hay una relación directa entre estos puntos y la definición de la \gls{api}, ya que estos serán expuestos a través de ella. 
+
+Por otro lado, se le llama \textit{servicios externos} (o servicios) a aquellos sistemas independientes (ajenos al proyecto) que tienen la capacidad de integrarse (o ya están integrados) a \nombreApp{}. Su comunicación se establece a través de la \gls{api} haciendo referencia a los \textit{puntos de integración}. Además, los usuarios tienen la posibilidad de añadir a sus cuentas personales, los servicios a los cuales estén interesados. 
+
+Con respecto a los usuarios, se indica como \textit{identificador externo} (o \textit{id externo}) al valor clave que identifica unívocamente al usuario dentro del servicio externo. \nombreApp provee de mecanismos para relacionar el usuario de la aplicación con el proveniente del servicio (en caso que se requiera).
+
+Por último, se denomina \textit{contextos} a las temáticas definidas por los \textit{servicios externos}. Estas permiten ser suscritas por los usuarios independientemente de si han añadido el servicio, definiendo un nivel más fino de granularidad. La suscripción a \textit{contextos} es la manera que tiene un usuario de indicar su interés por una temática y recibir toda la información relacionada a ella.
+Los \textit{contextos} existen en el marco de un \textit{servicio} y su semántica es dada de acuerdo a la lógica de cada sistema. Dentro de la aplicación se los denomina \comillas{tema} o \comillas{temática}
+
+A continuación, el informe comienza por definir los \textit{puntos de integración}.
+
+\subsubsection{Novedades}
 \label{funcionalidad_noticias}
+
+Una de las características a implementar (referidas en la sección \ref{aplicaciones_utiles_existentes_novedades}) es la publicación y notificación de \textit{Novedades} (también referidas como noticias). Se detecta como factor común, que los sistemas y aplicaciones móviles analizadas, tienen algún componente de \textit{novedades} y sus atributos se pueden modelar de forma genérica. Se trata de uno de los principales \textit{puntos de integración}.
+
+\paragraph{Aplicación móvil}
+\label{funcionalidad_noticias_app}
+
+Se destaca a las noticias como el ítem con mayor relevancia, siendo la primer pantalla en aparecer al abrir la aplicación (estando el usuario \textit{logueado}), ubicada en la pestaña \comillas{Inicio}.
+Su modalidad de navegación secundaria es de \textit{lista} y \textit{tarjeta} (similar a aplicaciones como \textit{Facebook}, \textit{Instagram} y \textit{YouTube}).
+
+\figura{03-capitulo-3/app_newsfeed.png}{Pantalla de inicio de \nombreApp{} (\eng{newsfeed}) }{app_newsfeed}{0.4}
+
+El área donde se muestran las novedades se denomina \textit{newsfeed}. Cada una de ellas indica el título, fecha y contenido de la novedad, el servicio que la emite, el contexto (si existiera) y el alcance (global, de contexto y/o personal). Las noticias se muestran intercaladas una a continuación de la otra, de cualquier servicio y en orden por fecha descendente, siendo las más recientes, las que primero aparecen.
+
+El alcance es representado por íconos dentro de la noticia:
+\begin{itemize}
+\item Un \comillas{mundo} representa que la novedad es global y puede ser vista por todos los que hayan añadido el servicio que la emite. Este tipo de noticias pueden ser útiles cuando desde el servicio externo se quiera notificar a todos sus usuarios. Por ejemplo, desde \textit{Guaraní} una facultad podría notificar a todos sus alumnos que cierto día hay asueto.
+\item Una \comillas{etiqueta} indica que la noticia es enviada en el marco de un contexto. Esta novedad le aparecerá a los usuarios que estén suscritos a este. Por ejemplo, desde un sistema de aulas virtuales, en donde para su lógica, un contexto puede ser una materia, se podría enviar a todos los interesados en esa materia, el aviso de la publicación de una práctica. 
+\item Si no aparece ningún ícono, indica que el mensaje es personal: sólo lo verá el usuario al que esté dirigido.
+\end{itemize}
+
+
+\paragraph{API}
+\label{funcionalidad_noticias_api}
+
+Los métodos definidos para las novedades son:
+
+\begin{itemize}
+\item \textbf{POST /newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}: Agrega una nueva \textit{novedad} a los \eng{newsfeed} de los usuarios interesados (a nivel de: destinatario, contexto y/o servicio externo).
+\begin{itemize}
+\item Ejemplo del cuerpo de una solicitud \gls{http} para enviar una noticia con notificación a los usuarios con identificación id\_externo 1, 2 y 3:
+\begingroup
+  \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_solicitud.json}
+  \captionof{listing}{Ejemplo de cuerpo JSON en solicitud de POST /newsfeed}.\label{codigo_post_newsfeed_solicitud}
+\endgroup
+
+\item Ejemplo de respuesta:
+\begingroup
+  \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_respuesta.json}
+  \captionof{listing}{Ejemplo de respuesta JSON de POST /newsfeed}.\label{codigo_post_newsfeed_respuesta}
+\endgroup
+\end{itemize}
+\end{itemize}
+
+
+
+\subsubsection{Calendario}
+\label{funcionalidad_calendario}
+
+
+\subsubsection{Contenidos}
+\label{funcionalidad_contenidos}
+
+
+\subsubsection{Notificaciones}
+\label{funcionalidad_notificaciones}
+
+Si bien se destaca a las notificaciones como una funcionalidad importante, estas no son consideradas \textit{punto de integración}.
 
 \begin{itemize}
 \item Globales
@@ -19,3 +106,9 @@
 \item Con contexto asociado: Notifica a todos los usuarios interesados en el contexto.
 \end{itemize}
 \end{itemize}
+
+\subsection{Autenticación de servicios externos}
+\label{autenticacion_servicios_externos}
+
+\subsubsection{Permisos}
+\label{autenticacion_permisos}

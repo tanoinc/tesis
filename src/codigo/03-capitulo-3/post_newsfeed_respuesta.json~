@@ -1,0 +1,12 @@
+{
+  "newsfeed" : {
+    "updated_at" : "2017-08-25 00:10:11",
+    "created_at" : "2017-08-25 00:10:11",
+    "global" : 0,
+    "id" : 1134,
+    "title" : "Título de la novedad",
+    "send_notification" : 1,
+    "content" : "Contenido del texto de la novedad"
+  },
+  "notification_push_data_uuid" : "e10adc-asda34-asdasdas-bbc"
+}
