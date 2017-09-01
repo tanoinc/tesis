@@ -151,11 +151,34 @@ El proceso de agregar un nuevo servicio depende de los requisitos del mismo. Act
 \item Requiere autenticación: Solo usuarios que puedan autenticarse ante el servicio pueden añadirlo. Al añadirlo se abrirá una pantalla de \eng{login} con el sistema externo. Luego de ingresar (si sus credenciales son correctas) este sistema debería mostrar una pantalla con los permisos que utiliza y, si estos son aceptados, enviar a la \gls{api} de \nombreApp{} los datos del \textit{id externo}. De esta forma quedará asociada la cuenta del sistema externo con \nombreApp{}. 
 \end{itemize}
 
-Además de lo anteriormente mencionado, sin añadir el servicio, el usuario puede acceder al listado de contextos y realizar la suscripción a los que sean de su interés. Desde esta pantalla también puede cancelarlas.
+Al requerir autenticación se produce un intercambio de identificadores de usuario entre \nombreApp{} y el servicio externo. Cuando se inicia la solicitud, la aplicación genera un \eng{hash} único y se lo envía al servicio externo. Al identificarse el usuario, el servicio envía este dato a \nombreApp{} junto con el identificador de su usuario. De esta manera, \nombreApp enlaza sus datos con el \textit{id externo}, ocultando la identificación interna.
+
+Siempre que se necesite hacer una referencia a un usuario (por ejemplo para enviar una novedad personal) se utilizará el \textit{identificador externo}.
+
+Otro aspecto a destacar es que el usuario puede acceder al listado de contextos de cada servicio y realizar la suscripción a los que sean de su interés (sin necesidad de añadir el servicio). Desde esta pantalla también puede cancelarlas.
 
 \subsubsection{Otras}
 \label{funcionalidad_otras}
 
-Existen otras funcionalidades que no tienen tanta entidad como las anteriormente mencionadas, pero que resulta conveniente describir.
+Existen otras funcionalidades que no tienen tanta entidad como las anteriormente mencionadas, pero que resulta interesante describir.
 
-Para cada vista que posea un listado dinámico de elementos, estos se pueden refrescar con el gesto \eng{pull to refresh} (\comillas{deslizar para recargar}). Este consiste en deslizar la pantalla hacia abajo para actualizar los contenidos. Esta es una característica común en las aplicación actuales (mencionadas en la sección \ref{aplicaciones_utiles_existentes_novedades})
+\begin{itemize}
+\item \textbf{\eng{Pull to refresh}}: Para cada vista que posea un listado dinámico de elementos, estos se pueden refrescar con el gesto \eng{pull to refresh} (\comillas{deslizar para recargar}). Este consiste en deslizar la pantalla hacia abajo para actualizar los contenidos. Esta es una característica común en las aplicación actuales (mencionadas en la sección \ref{aplicaciones_utiles_existentes_novedades})
+
+\item \textbf{\eng{Login}}:Respecto al ingreso del usuario a la aplicación, el sistema permite hacerlo de dos maneras:
+\begin{itemize}
+\item Con el login de \nombreApp, mediante un usuario registrado desde un formulario en la aplicación.
+\item Con la cuenta de Facebook, enlazando su perfil con \nombreApp.
+\end{itemize}
+
+\item \textbf{\gls{i18n}}: La aplicación soporta múltiples lenguajes que toma de la configuración del dispositivo. Para el alcance de esta tesis, solo hay definidos dos: Español e Inglés\footnote{Algunos términos todavía no están traducidos}. 
+
+\item \textbf{Estilos personalizables}: Mediante Sass (soportado por Ionic) se permiten personalizar los estilos y sus variables en archivos separados. Esto facilita la edición del diseño para otras Universidades. Por otro lado, si se necesitan realizar modificaciones, se puede aprovechar del mecanismo de versionado de GitHub para hacer un \eng{fork} del proyecto y realizar los cambios necesarios. Por ejemplo, en el repositorio existen dos ramas, la \textit{master} con el código genérico, y una rama \textit{unlp} con estilos personalizados para la \unlp{}.
+
+\item \textbf{Introducción configurable}: La primera vez que se abre la aplicación aparecen una serie de diapositivas (\eng{slides}) que hacen de tutorial para mostrar las funcionalidades del sistema. Estas son configurables.
+
+\end{itemize}
+
+
+
+
