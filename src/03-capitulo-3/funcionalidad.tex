@@ -134,12 +134,28 @@ De acuerdo a su alcance y a sus destinatarios, estas se comportan:
 \end{itemize}
 \end{itemize}
 
-Puesto que el objetivo de enviar una notificación es el de destacar un cierto contenido, se considera importante que el usuario pueda llevar un seguimiento de lectura de los elementos notificados y resaltarlos por sobre otros de menor relevancia. Es por ello que en la pantalla principal de la aplicación, se muestra una pestaña específica con el listado de notificaciones referenciando a los \textit{puntos} \comillas{notificables}.
+Puesto que el objetivo de enviar una notificación es el de destacar un cierto contenido, se considera importante que el usuario pueda llevar un seguimiento de lectura de los elementos notificados y resaltarlos por sobre otros de menor relevancia. Es por ello que en la pantalla principal de la aplicación, se muestra una pestaña específica con el listado de notificaciones. La metáfora utilizada para esta pestaña es una \comillas{campana} con una insignia (\eng{badge}) que indica el número de notificaciones recientes.
 
 \figura{03-capitulo-3/app_notificaciones.png}{Notificaciones: Pantalla de notificaciones del usuario }{app_notificaciones}{0.4}
 
-La pantalla de notificaciones, tiene una navegación secundaria de tipo \textit{lista}. Al hacer un toque sobre un ítem, este se marca como leído (tornándose gris) y se accede al detalle del mismo.
-El ícono indica el tipo de notificación, siendo un \textit{símbolo de información} para novedades y un dibujo de un calendario para eventos.
+La pantalla de notificaciones (figura \ref{app_notificaciones}), tiene una navegación secundaria de tipo \textit{lista} con información de cada notificación. También posee un ícono que indica su tipo, como metáfora para novedades y calendario de eventos. Al tocar sobre un ítem de la lista, este se marca como leído (tornándose gris) y se accede al detalle del mismo.
+
+\subsubsection{Suscripciones}
+\label{funcionalidad_suscripciones}
+
+Existe una sección de suscripciones que le permite al usuario añadir nuevos servicios de la universidad y revisar qué \textit{contextos} poseen estos.
+
+El proceso de agregar un nuevo servicio depende de los requisitos del mismo. Actualmente se definen dos modalidades de añadido:
+\begin{itemize}
+\item Libre: Cualquier usuario de la aplicación puede añadir el servicio. Este proceso es directo: al hacer un toque sobre el botón \comillas{Añadir}, el servicio queda automáticamente asociado a la cuenta del usuario.
+\item Requiere autenticación: Solo usuarios que puedan autenticarse ante el servicio pueden añadirlo. Al añadirlo se abrirá una pantalla de \eng{login} con el sistema externo. Luego de ingresar (si sus credenciales son correctas) este sistema debería mostrar una pantalla con los permisos que utiliza y, si estos son aceptados, enviar a la \gls{api} de \nombreApp{} los datos del \textit{id externo}. De esta forma quedará asociada la cuenta del sistema externo con \nombreApp{}. 
+\end{itemize}
+
+Además de lo anteriormente mencionado, sin añadir el servicio, el usuario puede acceder al listado de contextos y realizar la suscripción a los que sean de su interés. Desde esta pantalla también puede cancelarlas.
 
 \subsubsection{Otras}
 \label{funcionalidad_otras}
+
+Existen otras funcionalidades que no tienen tanta entidad como las anteriormente mencionadas, pero que resulta conveniente describir.
+
+Para cada vista que posea un listado dinámico de elementos, estos se pueden refrescar con el gesto \eng{pull to refresh} (\comillas{deslizar para recargar}). Este consiste en deslizar la pantalla hacia abajo para actualizar los contenidos. Esta es una característica común en las aplicación actuales (mencionadas en la sección \ref{aplicaciones_utiles_existentes_novedades})
