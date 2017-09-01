@@ -1,0 +1,31 @@
+\subsection{API}
+\label{funcionalidad_noticias_api}
+
+Los servicios externos pueden crear novedades utilizando los métodos por la \gls{api} \gls{rest}. 
+Además de los atributos antes mencionados, la \gls{api} permite indicar si se desea enviar una notificación \eng{push} al celular de los destinatarios al momento de publicar la noticia.
+
+En base a lo establecido para \gls{rest} en el marco teórico (sección \ref{caracteristicas_api_restful}) el llamado a la \gls{api} está orientado al recurso \eng{newsfeed}, sobre el cual se realiza la creación  a través de método \gls{http} \eng{POST}. También se indica que esta este llamado corresponde a la primer versión indicado en la \gls{uri}.
+
+\begin{itemize}
+\item \textbf{POST /api/v1/newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}: Agrega una nueva \textit{novedad} a los \eng{newsfeed} de los usuarios interesados (a nivel de: destinatario, contexto y/o servicio externo).
+\begin{itemize}
+\item Ejemplo del cuerpo de una solicitud \gls{http} para enviar una noticia con notificación a los usuarios con identificación id\_externo 1, 2 y 3:
+\begingroup
+  \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_solicitud.json}
+  \captionof{listing}{Ejemplo de cuerpo JSON en solicitud de POST /newsfeed}.\label{codigo_post_newsfeed_solicitud}
+\endgroup
+
+\item Ejemplo de respuesta:
+\begingroup
+  \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_respuesta.json}
+  \captionof{listing}{Ejemplo de respuesta JSON de POST /newsfeed}.\label{codigo_post_newsfeed_respuesta}
+\endgroup
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Autenticación de servicios externos}
+\label{autenticacion_servicios_externos}
+
+\subsubsection{Permisos}
+\label{autenticacion_permisos}

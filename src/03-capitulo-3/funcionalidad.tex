@@ -37,11 +37,8 @@ A continuación, el informe comienza por definir los \textit{puntos de integraci
 
 Una de las características a implementar (referidas en la sección \ref{aplicaciones_utiles_existentes_novedades}) es la publicación y notificación de \textit{Novedades} (también referidas como noticias). Se detecta como factor común, que los sistemas y aplicaciones móviles analizadas, tienen algún componente de \textit{novedades} y sus atributos se pueden modelar de forma genérica. Se trata de uno de los principales \textit{puntos de integración}.
 
-\paragraph{Aplicación móvil}
-\label{funcionalidad_noticias_app}
-
-Se destaca a las noticias como el ítem con mayor relevancia, siendo la primer pantalla en aparecer al abrir la aplicación (estando el usuario \textit{logueado}), ubicada en la pestaña \comillas{Inicio}.
-Su modalidad de navegación secundaria es de \textit{lista} y \textit{tarjeta} (similar a aplicaciones como \textit{Facebook}, \textit{Instagram} y \textit{YouTube}).
+Dentro de la Aplicación móvil, se destaca a las noticias como el ítem con mayor relevancia. Es la primer pantalla en aparecer al abrir la aplicación (estando el usuario \textit{logueado}), ubicada en la pestaña \comillas{Inicio}.
+Su modalidad de navegación secundaria es de \textit{lista} y \textit{tarjeta} (similar a aplicaciones como \textit{Facebook}, \textit{Instagram} y \textit{YouTube}). 
 
 \figura{03-capitulo-3/app_newsfeed.png}{Pantalla de inicio de \nombreApp{} (\eng{newsfeed}) }{app_newsfeed}{0.4}
 
@@ -54,66 +51,95 @@ El alcance es representado por íconos dentro de la noticia:
 \item Si no aparece ningún ícono, indica que el mensaje es personal: sólo lo verá el usuario al que esté dirigido.
 \end{itemize}
 
-
-\paragraph{API}
-\label{funcionalidad_noticias_api}
-
-Los servicios externos pueden crear novedades utilizando los métodos por la \gls{api} \gls{rest}. 
-Además de los atributos antes mencionados, la \gls{api} permite indicar si se desea enviar una notificación \eng{push} al celular de los destinatarios al momento de publicar la noticia.
-
-\begin{itemize}
-\item \textbf{POST /newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}: Agrega una nueva \textit{novedad} a los \eng{newsfeed} de los usuarios interesados (a nivel de: destinatario, contexto y/o servicio externo).
-\begin{itemize}
-\item Ejemplo del cuerpo de una solicitud \gls{http} para enviar una noticia con notificación a los usuarios con identificación id\_externo 1, 2 y 3:
-\begingroup
-  \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_solicitud.json}
-  \captionof{listing}{Ejemplo de cuerpo JSON en solicitud de POST /newsfeed}.\label{codigo_post_newsfeed_solicitud}
-\endgroup
-
-\item Ejemplo de respuesta:
-\begingroup
-  \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_respuesta.json}
-  \captionof{listing}{Ejemplo de respuesta JSON de POST /newsfeed}.\label{codigo_post_newsfeed_respuesta}
-\endgroup
-\end{itemize}
-\end{itemize}
-
 \subsubsection{Calendario}
 \label{funcionalidad_calendario}
 
-El siguiente \textit{punto de integración} son el calendario y los eventos. Al igual que las novedades, tienen una principal importancia es por ello que ocupan un lugar inmediato en la pantalla principal de la aplicación. 
+El siguiente \textit{punto de integración} aborda la planificación estudiantil por lo que implementa el calendario y los eventos. Al igual que las novedades, se destaca su importancia, es por ello que ocupan un lugar relevante dentro de la aplicación. 
 
-\paragraph{Aplicación móvil}
-\label{funcionalidad_calendario_app}
+\nombreApp{} permite a los \textit{servicios externos} comunicar eventos a sus usuarios.
 
+Dentro de la aplicación móvil, en la pantalla principal, una de las tres pestañas que se muestran es la de \textit{calendario}. Al acceder a ella, su vista ofrece tres modalidades de visualización: por mes, por semana y por día (navegación primaria y secundaria con \textit{pestañas}). 
 
+\figura{03-capitulo-3/app_calendario.png}{Calendario: en la primera se ve la vista por mes y en la segunda por día, luego de haber hecho un toque sobre el evento que figura en pantalla.}{app_calendario}{0.8}
+
+De esta manera se permiten recorrer las fechas cercanas a la actual, dando saltos por distintos criterios de acuerdo a la amplitud temporal considerada. 
+
+En la parte inferior de la pantalla figura el listado de eventos del día seleccionado (en el caso de la vista por mes), o sobre el calendario (para las vistas por semana y día). Al hacer un toque sobre el evento, la aplicación ofrece la opción de guardarlo en el dispositivo. Esto permite la integración con otras herramientas, como por ejemplo el calendario de Google, ayudando a la planificación del usuario.
+
+Sus propiedades son: nombre, descripción, fecha, duración y ubicación. Además, al igual que las novedades, los \textit{servicios externos} pueden optar por enviar una notificación a los usuarios en la creación de un evento. Estos también pueden estar asociados a un contexto, ser globales o personales, regulando de esta manera su visibilidad y alcance.
 
 \subsubsection{Contenidos}
 \label{funcionalidad_contenidos}
 
+El último \textit{punto de integración} remite a los contenidos. Estos son globales a todo el servicio y figurarán solamente cuando este sea añadido por el usuario a la aplicación. En dichas condiciones, los contenidos aparecerán en el menú lateral izquierdo (ver \eng{Side drawer} en la sección \ref{navegacion_transitoria}).
+
+Los contenidos son recursos genéricos ofrecidos por la aplicación que representan cierto tipo de información para el usuario. Se caracterizan por:
+\begin{itemize}
+\item Ser generales a un servicio: ya que pertenecen a estos, son públicos (dentro del servicio) y están siempre disponibles.
+\item Ser pasivos, al no iniciar la interacción con el usuario sino que este debe acceder a ellos para consultarlos.
+\item Tener un rol secundario frente a los otros \textit{punto de integración}, es por ello que se separan en un menú aparte. Los contenidos no deberían tener la importancia como para figurar entre las pestañas principales\footnote{Podría ser que de acuerdo con el comportamiento de los usuarios, la importancia varíe, llevando a tener que cambiar la representación del contenido, por ejemplo, moviéndolo a una pestaña.}.
+\end{itemize}
+
+\figura{03-capitulo-3/app_contenidos_suscripciones.png}{Contenidos y suscripciones: Se ve la opción de suscripción y debajo contenidos (de prueba) asociados al servicio de la UNLP. Este contiene dos mapas y un texto.}{app_contenidos_suscripciones}{0.4}
+
+Los \textit{servicios externos} tienen la posibilidad de crear los contenidos que deseen. Para el alcance de esta tesis se definen dos tipos de contenidos: mapas (de Google) y texto. A continuación se describen.
+
+\paragraph{Mapa de Google}
+\label{funcionalidad_contenidos_mapa} 
+
+Este contenido muestra un mapa (de \textit{Google Maps}) sobre el cual dibujar información. Al abrirse el mapa, este realiza una solicitud \gls{http} a una \gls{url} externa para obtener datos de:
+\begin{itemize}
+\item Marcadores: Representan puntos en el mapa asociados con un ícono y un texto.
+\item Centro: Indica las coordenadas geográficas en donde centrar la vista del mapa.
+\item Polígonos y líneas: para ser trazados sobre el mapa, pudiendo indicar caminos o áreas.
+\end{itemize}
+
+Este mecanismo permite de generar mapas dinámicos en base a una solicitud externa\footnote{El formato de estos datos se especifica en la documentación}. Opcionalmente (actualmente no implementado) se proveerán mecanismos para cachear la información de los mapas.
+
+\figura{03-capitulo-3/app_mapa.png}{Contenidos Mapa de Google: Ejemplo de dibujo del recorrido del colectivo Universitario. Se utilizan polígonos y marcadores.}{app_mapa}{0.4}
+
+Una funcionalidad interesante es que permite enviar información del usuario que accede al mapa: Cuando este lo abre, se envían los datos de \textins{id externo} y posición geográfica a la \gls{url} especificada por el servicio. Este la procesa y genera los datos de marcadores, centro y polígonos. De esta manera se pueden realizar operaciones en base a la posición de la persona que consulta el mapa.
+
+Por otra parte, la \gls{api} provee métodos para consultar las posiciones geográficas de otros usuarios. Todo ello se puede integrar para generar un mapa dinámico y personalizado al usuario.
+
+\paragraph{Texto}
+\label{funcionalidad_contenidos_texto} 
+
+Se tratan de contenidos simples, muestran un texto con formato (encabezados, párrafos, listas, tablas, etcétera) con información estática similar a la de un documento. 
+La \gls{api} permite recibir el contenido del texto en formato \gls{markdown} (texto plano). Este es mostrado y renderizado cuando el usuario consulta por esta opción en el menú.
+
+Es útil para mostrar contenidos informativos, relativamente estáticos, que contienen texto.
 
 \subsubsection{Notificaciones}
 \label{funcionalidad_notificaciones}
 
-Si bien se destaca a las notificaciones como una funcionalidad importante, estas no son consideradas \textit{punto de integración}.
+Las notificaciones refieren a la acciones que realiza el dispositivo móvil para llamar la atención del usuario ante la ocurrencia de un nuevo evento. En particular para la aplicación móvil \nombreApp{}, se utilizan notificaciones \eng{push} y estas se dan con nuevas noticias o elementos en el calendario.
 
+Si bien se destaca a esta característica como una funcionalidad importante, no se considera un \textit{punto de integración} ya que no tiene entidad por sí sola y siempre depende de otros \textit{puntos}, como las novedades o el calendario.
+
+El comportamiento de las notificaciones se define común a todos los \textit{punto de integración} \comillas{notificables}.
+De acuerdo a su alcance y a sus destinatarios, estas se comportan:
 \begin{itemize}
 \item Globales
 \begin{itemize}
-\item Con usuarios asociados: Notifica a todos los usuarios que utilizan la aplicación de API (se ignora listado de usuarios específicos ya que la noticia es global).
-\item Sin usuarios asociados: Notifica a todos los usuarios que utilizan la aplicación de API.
-\item Con contexto asociado: Notifica a todos los usuarios que utilizan la aplicación de API y a los interesados en el contexto.
+\item Con usuarios asociados: Notifican a todos los usuarios que utilizan los \textit{servicios externos} (se ignora listado de usuarios específicos ya que la noticia es global).
+\item Sin usuarios asociados: Notifican a todos los usuarios que utilizan los \textit{servicios externos}.
+\item Con contexto asociado: Notifican a todos los usuarios que utilizan los \textit{servicios externos} y a los interesados en el contexto.
 \end{itemize}
 \item No globales
 \begin{itemize}
-\item Con usuarios asociados: Notifica solamente a los usuarios del listado asociado.
-\item Sin usuarios asociados: No notifica a nadie en particular (no debería existir)
-\item Con contexto asociado: Notifica a todos los usuarios interesados en el contexto.
+\item Con destinatarios: Notifican solamente a los usuarios del listado asociado.
+\item Sin destinatarios: No notifican a nadie en particular. Este caso no debería existir, puesto que no tiene sentido que un ítem no tenga destinatarios, no sea global y no tenga asociado un contexto. No podría ser visto por nadie.
+\item Con contexto asociado: Notifican a todos los usuarios interesados en el contexto. Además puede tener o no destinatarios particulares.
 \end{itemize}
 \end{itemize}
 
-\subsection{Autenticación de servicios externos}
-\label{autenticacion_servicios_externos}
+Puesto que el objetivo de enviar una notificación es el de destacar un cierto contenido, se considera importante que el usuario pueda llevar un seguimiento de lectura de los elementos notificados y resaltarlos por sobre otros de menor relevancia. Es por ello que en la pantalla principal de la aplicación, se muestra una pestaña específica con el listado de notificaciones referenciando a los \textit{puntos} \comillas{notificables}.
 
-\subsubsection{Permisos}
-\label{autenticacion_permisos}
+\figura{03-capitulo-3/app_notificaciones.png}{Notificaciones: Pantalla de notificaciones del usuario }{app_notificaciones}{0.4}
+
+La pantalla de notificaciones, tiene una navegación secundaria de tipo \textit{lista}. Al hacer un toque sobre un ítem, este se marca como leído (tornándose gris) y se accede al detalle del mismo.
+El ícono indica el tipo de notificación, siendo un \textit{símbolo de información} para novedades y un dibujo de un calendario para eventos.
+
+\subsubsection{Otras}
+\label{funcionalidad_otras}
