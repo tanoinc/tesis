@@ -182,19 +182,22 @@ Para el caso de esta tesina, se utiliza OAuth2 para la interacción de la aplica
 \label{apikey}
 Cuando no se requiere acceder en nombre del usuario, o realizar acciones no directamente relacionadas con él, OAuth no es necesario. Sin embargo se desea controlar la identidad del sistema que está intentando acceder a la información. 
 
-Una forma de realizar esto es a través de claves de \gls{api}. Este método consta de dos de ellas: una podría ser pública e identifica a la aplicación del tercero (\gls{api} \eng{key}). La otra es secreta y no debe exponerse (\gls{api} \eng{secret}). Ambas funcionan como una suerte de \comillas{usuario y clave} que son enviadas en cada solicitud \gls{http}. Sin embargo el valor secreto nunca es viaja en ninguna comunicación realizada.
+Una forma de realizar esto es a través de claves de \gls{api}. Este método consta de dos de ellas: una podría ser pública e identifica a la aplicación del tercero (\gls{api} \eng{key}). La otra es secreta y no debe exponerse (\gls{api} \eng{secret}). Ambas funcionan como una suerte de \comillas{usuario y clave} que son enviadas en cada solicitud \gls{http}. Sin embargo el valor secreto nunca viaja en ninguna comunicación realizada.
 
 La forma de autenticación en cada pedido es la siguiente:
 \begin{itemize}
 \item La \gls{api} \eng{key} identifica a una aplicación y puede ser conocida por otras entidades.
 \item La clave secreta sólo es conocida por la entidad emisora y la aplicación externa.
-\item Se procesa la solicitud a enviar, y se adjunta en el encabezado la identificación de la aplicación (\gls{api} \eng{key}) y la firma. Esta se genera en base al resultado de procesar a través de una función de \eng{hash} (denominada \gls{hmac}) el contenido del pedido y la clave secreta. El resultado de esta función asegura que no se pueda manipular el mensaje, y permite determinar que este es originado por quien dice ser.
+\item Se procesa la solicitud a enviar, y se adjunta en el encabezado la identificación de la aplicación (\gls{api} \eng{key}) y la firma. Esta se genera en base al resultado de procesar a través de una función de \eng{hash} (denominada \gls{hmac}), el contenido del pedido y la clave secreta. Al resultado de esta función se lo denomina \textit{firma}. Esta asegura que no se pueda manipular el mensaje y que sea originado por quien dice ser.
 \item La solicitud es procesada por el destinatario realizando el mismo proceso: aplicando la función de \eng{hash} sobre el contenido y la clave secreta... si el resultado (firma) es el mismo, significa que la solicitud fue originada por el remitente esperado y no fue modificada.
 \end{itemize}
 
 Este método (\gls{hmac}) permite identificar al remitente que origina la solicitud y su autenticidad\cite{krawczyk1997rfc} y por ende se pueden controlar (a nivel de aplicación) sus permisos asociados. Este método es utilizado por \eng{Amazon Web Sevices}\cite{amazonApi}, \eng{Facebook}, \eng{Telegram} entre otros.
 
 En particular se utiliza el encabezado \gls{http} \eng{Authorization} para transmitir ambos valores (API \eng{key} y firma).
+
+Para finalizar, hay que destacar que las comunicaciones realizadas por este proceso, deben hacerse a través del protocolo \gls{https} (que es \gls{http} sobre una capa segura en donde la información viaja encriptada).
+Esto nos asegura que ningún intermediario pueda leer el mensaje y además evita el \gls{replay attack}.
 
 \subsubsection{Lenguaje y \gls{framework}}
 \label{backend_lenguaje_framework}

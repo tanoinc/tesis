@@ -1,0 +1,8 @@
+POST /api/v1/newsfeed HTTP/1.1
+HOST: localhost:8800
+authorization: APIKEY 0b0eedd9e23e3...:a42e995848c48f51...
+content-length: 94
+content-type: application/x-www-form-urlencoded
+
+title=Titulo de prueba&content=Texto contenido
+&send_notification=1&clobal=0&context=matematica

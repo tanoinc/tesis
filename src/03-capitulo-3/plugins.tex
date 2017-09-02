@@ -1,8 +1,29 @@
 \subsection{Plugins}
 \label{desarrollo_plugins}
 
+Como parte de este proyecto, además del desarrollo de la aplicación móvil (y su \eng{backend}), los objetivos son desarrollar extensiones para sistemas utilizados en la \unlp{}. En particular se utilizan servicios en los que tengo acceso debido a mi trabajo en el \gls{cespi}.
+
+A continuación, se pasan a detallar cuestiones relacionadas con la integración de: SIU Guaraní y Moodle.
+
 \subsubsection{Personalización SIU Guaraní}
 \label{desarrollo_plugins_guarani}
 
+En Guaraní se utiliza el esquema de personalizaciones de \gls{chulupi} para desarrollar la integración con \nombreApp{}. 
+
+El significado de los contextos está dado por las materias. Esto significa que un usuario de la aplicación móvil podría suscribirse a la materia que está interesado.
+
+La personalización se denomina \comillas{mi\_universidad} e implementa (en principio) tres funcionalidades:
+\begin{itemize}
+\item Interconexión entre usuarios. Esta operación es utilizada cuando un usuario añade un servicio de Guaraní. Esta envía a \nombreApp{} el identificador externo del usuario \textit{logueado}.
+\item Envío de mensajes. Al enviar mensajes en Guaraní, se enviarán novedades a \nombreApp{}. El alcance de las mismas estará determinado por los destinatarios del mensaje. Si este es a toda una comisión o mesa de examen, se enviará a todos los inscriptos y además tendrá la materia como contexto asociado. Esto significa que todos los interesados (más allá de los inscriptos) podrán ver en sus noticias el mensaje.
+\item Fechas de parciales. Guaraní permite, desde su módulo \textit{Docente}, definir los parciales en cada comisión. La personalización envía a \nombreApp{} la fecha de los mismos, asociados al contexto de la materia y a todos sus inscriptos. 
+\end{itemize}
+
+Se planifica incorporar más novedades y eventos del calendario, como por ejemplo, fechas de inscripción a cursadas, mesas de examen, horarios y aulas de materias y notificación de carga de notas, entre otras.
+
+Esta personalización estará disponible para otras Universidades que deseen implementar \nombreApp{}.
+
 \subsubsection{Plugin Moodle}
 \label{desarrollo_plugins_moodle}
+
+

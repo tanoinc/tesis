@@ -1,0 +1,11 @@
+{  
+   "full_url":"http:\/\/localhost:8800\/api\/v1\/newsfeed",
+   "method":"POST",
+   "input":{  
+      "title":"Titulo de prueba",
+      "content":"Texto contenido",
+      "send_notification":"1",
+      "clobal":"0",
+      "context":"matematica"
+   }
+}

@@ -1,13 +1,37 @@
 \subsection{API}
 \label{funcionalidad_noticias_api}
 
-Los servicios externos pueden crear novedades utilizando los métodos por la \gls{api} \gls{rest}. 
-Además de los atributos antes mencionados, la \gls{api} permite indicar si se desea enviar una notificación \eng{push} al celular de los destinatarios al momento de publicar la noticia.
+En la siguiente sección se describen brevemente algunos aspectos de la \gls{api} \gls{restful}. La intención no es realizar una especificación completa de toda la interfaz, sino revisar el mecanismo general de su utilización. Para la especificación completa se utiliza \textit{Swagger} y está disponible en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}.
 
-En base a lo establecido para \gls{rest} en el marco teórico (sección \ref{caracteristicas_api_restful}) el llamado a la \gls{api} está orientado al recurso \eng{newsfeed}, sobre el cual se realiza la creación  a través de método \gls{http} \eng{POST}. También se indica que esta este llamado corresponde a la primer versión indicado en la \gls{uri}.
+En base a lo establecido con \gls{rest} en el marco teórico (sección \ref{caracteristicas_api_restful}), el llamado a la \gls{api} está orientado a recursos. En el caso de \nombreApp{} son los \textit{puntos de integración} y otra información. Los \comillas{verbos} que representan a las acciones sobre estos, son los métodos \gls{http}. También se indica que las solicitudes corresponden a la versión 1 de la \gls{api}, por lo que esta información va en la \gls{uri}. En base esto se determina la siguiente interfaz:
 
 \begin{itemize}
-\item \textbf{POST /api/v1/newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}: Agrega una nueva \textit{novedad} a los \eng{newsfeed} de los usuarios interesados (a nivel de: destinatario, contexto y/o servicio externo).
+\item Para novedades:
+\begin{itemize}
+\item POST /api/v1/newsfeed: Crea una novedad
+\end{itemize}
+\item Para eventos del calendario:
+\begin{itemize}
+\item POST /api/v1/calendar\_event: Crea un evento de calendario
+\end{itemize}
+\item Para contenidos:
+\begin{itemize}
+\item POST /api/v1/content/google\_map: Crea un mapa de Google
+\item POST /api/v1/content/text: Crea un contenido de texto
+\item DELETE /api/v1/content/{id}: Elimina un contenido
+\end{itemize}
+\item Para geolocalización:
+\begin{itemize}
+\item GET /api/v1/geolocation/user/\{id\_usuario\}: Obtiene la ubicación geográfica de un usuario
+\item POST /api/v1/geolocation/users: Obtiene la ubicación geográfica de una lista de usuarios. Se utiliza el método post para poder pasar una lista de valores que puede ser extensa. Por ello requiere que la solicitud tenga un cuerpo, no pudiéndose realizar esto con el método GET.
+\end{itemize}
+\end{itemize}
+
+Las solicitudes no mantienen ningún estado entre sucesivas peticiones y la autenticación (explicada en la siguiente sección) se realiza en cada \eng{request}. La respuesta es devuelta con su código en formato \gls{json} debido a sus ventajas (sección \ref{rest}).
+
+En el siguiente ejemplo se ve el \eng{request} \gls{http} para la creación de una novedad:
+\begin{itemize}
+\item \textbf{POST /api/v1/newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}.
 \begin{itemize}
 \item Ejemplo del cuerpo de una solicitud \gls{http} para enviar una noticia con notificación a los usuarios con identificación id\_externo 1, 2 y 3:
 \begingroup
@@ -15,7 +39,7 @@ En base a lo establecido para \gls{rest} en el marco teórico (sección \ref{car
   \captionof{listing}{Ejemplo de cuerpo JSON en solicitud de POST /newsfeed}.\label{codigo_post_newsfeed_solicitud}
 \endgroup
 
-\item Ejemplo de respuesta:
+\item Ejemplo de respuesta (con código \gls{http} 200):
 \begingroup
   \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_respuesta.json}
   \captionof{listing}{Ejemplo de respuesta JSON de POST /newsfeed}.\label{codigo_post_newsfeed_respuesta}
@@ -23,9 +47,70 @@ En base a lo establecido para \gls{rest} en el marco teórico (sección \ref{car
 \end{itemize}
 \end{itemize}
 
+Otros posibles códigos que puede devolver son:
+\begin{itemize}
+\item 200:
+Procesado correctamente
+\item 401:
+No autorizado
+\item 403:
+Acceso prohibido
+\item 422:
+Error de validación
+\item 500:
+Errores en el servidor. Ver detalle en respuesta
+\end{itemize}
+
+En la siguiente sección se detalla la autenticación necesaria para el llamado a estos servicios.
 
 \subsubsection{Autenticación de servicios externos}
 \label{autenticacion_servicios_externos}
 
+Para poder integrar a los servicios externos en la aplicación, es necesario identificarlos, asegurarse que son quienes dicen ser y que su mensaje es el que han querido enviar. Para ello se utiliza el mecanismo visto en la sección \ref{apikey}. Se verá su implementación aplicada a este proyecto.
+
+En primera instancia, la \gls{api} de \nombreApp{} correrá sobre \gls{https}. Esto evita que el mensaje pueda ser visto por terceros, y el ataque \gls{replay attack}.
+
+En segundo lugar, el \eng{backend} conoce la identificación y clave secreta de todos sus servicios. Excede al alcance de esta tesis el mecanismo de envío de claves secretas a los administradores de los servicios externos. Estos deberán mantenerla guardada y asegurarse que no se revele. De todas formas, si alguna vez se ve comprometida, existe la posibilidad de que sea cambiada.
+
+El servicio que envíe una solicitud a \nombreApp{} deberá firmar el pedido con su clave secreta (utilizando HMAC con sha256) y adjuntar el encabezado \gls{http} \lstinline{Authorizarion} con el valor \lstinline{APIKEY}, su identificación de servicio y la firma (separados por \comillas{dos puntos}). Por ejemplo, para enviar una nueva noticia, si:
+\begin{itemize}
+\item La API key es: \lstinline{0b0eedd9e23e30840fed24b8d1ab11c03913beca}
+
+\item La clave secreta de API es: \lstinline{402082e593fee526fa64e13b47841fdbcc7a786d}
+
+\item La \gls{url} es: \lstinline{https://localhost:8800/api/v1/newsfeed}
+
+\item El método es: \lstinline{POST}
+
+\item El contenido es (tipo application/x-www-form-urlencoded): \lstinline{title=Titulo de prueba&content=Texto contenido&send_notification=1&clobal=0&context=matematica}
+
+\end{itemize}
+
+La firma con HMAC (sha256) se deberá generar con la clave secreta (\lstinline{402082e593fee526fa64e13b47841fdbcc7a786d}) y el siguiente contenido\footnote{Para favorecer la visualización en este documento, el JSON se muestra formateado con saltos de línea y \textit{tabs}, pero en la implementación estos no existen. Esto es importante ya que una diferencia en un caracter, cambia la firma.}:
+
+\begingroup
+  \jsonfile{src/codigo/03-capitulo-3/nuevo_newsfeed.json}
+  \captionof{listing}{JSON generado en base a una solicitud utilizando los atributos del \eng{request} HTTP.}
+\endgroup
+
+El resultado es la siguiente firma:
+
+\lstinline{a42e995848c48f51a226b5089196d225e0635d3536be126c0331a9cde700d398}
+
+
+Notar que todos los datos de la solicitud se utilizan en para generar el \eng{hash} con la firma, por lo que si alguno cambia, esta firma ya no tendría sentido.
+
+La solicitud \gls{http} enviada quedaría de la siguiente manera\footnote{La API key y la firma se recortan para que puedan entrar en el ancho de la página}:
+\begingroup
+  \httpfile{src/codigo/03-capitulo-3/nuevo_newsfeed.http}
+  \captionof{listing}{JSON generado en base a una solicitud utilizando los atributos del \eng{request} HTTP.}
+\endgroup
+
+De esta manera el servidor realiza el proceso inverso y si las firmas son iguales, entonces la solicitud es válida: es de quien dice ser y no fue alterada.
+
 \subsubsection{Permisos}
 \label{autenticacion_permisos}
+
+Los permisos indican qué operaciones pueden ser utilizadas por cada servicio. Existe un permiso por cada entrada de la \gls{api} (\gls{url} y método \gls{http}).
+
+La aplicación \nombreApp{} maneja un sistema que controla qué operaciones están habilitadas para cada servicio. Esta asociación permiso-servicio está indicada con un número de versión que luego es utilizado cuando un usuario añade un servicio. Este es aceptado en una versión, por lo que si se modifica deberá volver a aceptarse. De esta manera se informa al usuario de cada cambio en las operaciones que requieran los servicios.

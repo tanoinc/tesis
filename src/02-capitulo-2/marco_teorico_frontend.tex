@@ -213,6 +213,14 @@ Existe un repositorio de \eng{plugins}\footnote{Disponible en \url{https://cordo
 
 \textit{Ionic} es un \gls{framework} \gls{open source} que permite a los desarrolladores crear aplicaciones híbridas, con buena \eng{performance}, utilizando Apache Cordova y las principales tecnologías Web (\gls{javascript}, \gls{html}5, \gls{css}3, sass). En particular a partir de su versión 2, incorpora Angular (versión 2.0 y superiores) con \gls{typescript}. Una de sus fortalezas es el \eng{look and feel} de sus interfaces ya que se adaptan al diseño de las principales plataformas\cite{ionic2017concepts}. Su rapidez se debe a la utilización de animaciones y transiciones de \gls{css}3, así como también el uso de Angular, lo que hacen que se utilice la aceleración por hardware del dispositivo\cite{hartington2017animationsIonic}.
 
+Se destacan las siguientes ventajas de Ionic frente a la utilización solamente de Cordova\cite{noupe2016ionicvscordova}:
+\begin{itemize}
+\item Interfaz de usuario y usabilidad: existen decenas de plantillas, más de 700 íconos, componentes de interfaz como encabezados, botones, etcétera, disponibles en varios estilos dependiendo de la plataforma y simulando su comportamiento. La codificación de la funcionalidad de estos componentes es simple y sencilla. En cambio en Cordova, se comienza desde cero con una página en blanco.
+\item Proceso de desarrollo más conveniente ya que permite probar la mayoría de las modificaciones \comillas{en vivo} desde el navegador, sin la necesidad de recompilar la aplicación y ejecutarla en un emulador o dispositivo.
+\item Mayor \eng{performance}: debido a una versión liviana de jQuery se reduce la manipulación de DOM. Además delega a la GPU el procesamiente de las animaciones y transiciones debido a \gls{css}3.
+\item Angular (versión 2 y superiores) con \gls{typescript}.
+\end{itemize}
+
 Como segundo aspecto, posee una interfaz de línea de comandos para generar componentes, compilar la aplicación en distintas plataformas, probar el desarrollo en un navegador (con un servidor web integrado). Además permite programáticamente interactuar con los servicios de la nube que ofrece \textit{Ionic}, entre ellos la publicación de aplicaciones en las distintas tiendas de manera centralizada.
 
 El proyecto posee una amplia comunidad de desarrolladores, con más de 31.000 estrellas en \gls{github}\footnote{\url{https://github.com/ionic-team/ionic}} y 26.000 preguntas en \gls{stackoverflow}\footnote{\url{https://stackoverflow.com/questions/tagged/ionic-framework}}. En 2015 se crearon mas de 1,3 millones de aplicaciones con \textit{Ionic}\cite{ionic2017concepts}. Además tiene una gran variedad de \eng{plugins} para acceder a funcionalidades nativas del teléfono, entre otras cuestiones.
@@ -220,6 +228,8 @@ El proyecto posee una amplia comunidad de desarrolladores, con más de 31.000 es
 Por último, \textit{Ionic} tiene una estructura que favorece al desarrollo de \gls{pwa}. Desde hace un año, los desarrolladores están realizando actualizaciones para que además de funcionar en múltiples plataformas móviles, las aplicaciones realizadas con este \gls{framework}, también sean \gls{pwa}\cite{lynch2016pwa}.
 
 Debido a las característica anteriormente mencionadas, se considera a \textit{Ionic} como marco de desarrollo para la aplicación híbrida.
+
+
 
 \paragraph{Otros \eng{frameworks} híbridos}
 \label{otros_frameworks_hibridos}
