@@ -113,7 +113,7 @@ Es útil para mostrar contenidos informativos, relativamente estáticos, que con
 \subsubsection{Notificaciones}
 \label{funcionalidad_notificaciones}
 
-Las notificaciones refieren a la acciones que realiza el dispositivo móvil para llamar la atención del usuario ante la ocurrencia de un nuevo evento. En particular para la aplicación móvil \nombreApp{}, se utilizan notificaciones \eng{push} y estas se dan con nuevas noticias o elementos en el calendario.
+Las notificaciones refieren a la acciones que realiza el dispositivo móvil para llamar la atención del usuario ante la ocurrencia de un nuevo evento. En particular para la aplicación móvil \nombreApp{}, se utilizan notificaciones \eng{push} y estas se dan con nuevas noticias o eventos del calendario. Para enviar enviarlas se utiliza un servicio externo proveído por Ionic\footnote{Ionic \eng{services}: \url{https://docs.ionic.io/services/}}. Este se encarga de abstraer la implementación de las \glspl{api} de cada plataforma móvil. Estas son las que se encargan de conectar con el dispositivo móvil.
 
 Si bien se destaca a esta característica como una funcionalidad importante, no se considera un \textit{punto de integración} ya que no tiene entidad por sí sola y siempre depende de otros \textit{puntos}, como las novedades o el calendario.
 
@@ -138,7 +138,7 @@ Puesto que el objetivo de enviar una notificación es el de destacar un cierto c
 
 \figura{03-capitulo-3/app_notificaciones.png}{Notificaciones: Pantalla de notificaciones del usuario }{app_notificaciones}{0.4}
 
-La pantalla de notificaciones (figura \ref{app_notificaciones}), tiene una navegación secundaria de tipo \textit{lista} con información de cada notificación. También posee un ícono que indica su tipo, como metáfora para novedades y calendario de eventos. Al tocar sobre un ítem de la lista, este se marca como leído (tornándose gris) y se accede al detalle del mismo.
+La pantalla de notificaciones (figura \ref{fig:app_notificaciones}), tiene una navegación secundaria de tipo \textit{lista} con información de cada notificación. También posee un ícono que indica su tipo, como metáfora para novedades y calendario de eventos. Al tocar sobre un ítem de la lista, este se marca como leído (tornándose gris) y se accede al detalle del mismo.
 
 \subsubsection{Suscripciones}
 \label{funcionalidad_suscripciones}
@@ -155,7 +155,7 @@ Al requerir autenticación se produce un intercambio de identificadores de usuar
 
 Siempre que se necesite hacer una referencia a un usuario (por ejemplo para enviar una novedad personal) se utilizará el \textit{identificador externo}.
 
-Otro aspecto a destacar es que el usuario puede acceder al listado de contextos (o temas) de cada servicio y realizar la suscripción a los que sean de su interés (sin necesidad de añadir el servicio). Desde esta pantalla también puede cancelarlas (figura \ref{app_calendario}). Esto es útil para indicar el interés sobre una temática y recibir las novedades y eventos asociados a ella.
+Otro aspecto a destacar es que el usuario puede acceder al listado de contextos (o temas) de cada servicio y realizar la suscripción a los que sean de su interés (sin necesidad de añadir el servicio). Desde esta pantalla también puede cancelarlas (figura \ref{fig:app_calendario}). Esto es útil para indicar el interés sobre una temática y recibir las novedades y eventos asociados a ella.
 
 \figura{03-capitulo-3/app_contextos.png}{Pantalla de suscripción a temas}{app_calendario}{0.5}
 
@@ -174,6 +174,8 @@ Existen otras funcionalidades que no tienen tanta entidad como las anteriormente
 \item Con la cuenta de Facebook, enlazando su perfil con \nombreApp.
 \end{itemize}
 
+\figura{03-capitulo-3/app_login_registro.png}{Pantalla de login y registro}{app_login_registro}{0.5}
+
 \item \textbf{\gls{i18n}}: La aplicación soporta múltiples lenguajes que toma de la configuración del dispositivo. Para el alcance de esta tesis, solo hay definidos dos: Español e Inglés\footnote{Algunos términos todavía no están traducidos}. 
 
 \item \textbf{Estilos personalizables}: Mediante Sass (soportado por Ionic) se permiten personalizar los estilos y sus variables en archivos separados. Esto facilita la edición del diseño para otras Universidades. Por otro lado, si se necesitan realizar modificaciones, se puede aprovechar del mecanismo de versionado de GitHub para hacer un \eng{fork} del proyecto y realizar los cambios necesarios. Por ejemplo, en el repositorio existen dos ramas, la \textit{master} con el código genérico, y una rama \textit{unlp} con estilos personalizados para la \unlp{}.
@@ -181,4 +183,3 @@ Existen otras funcionalidades que no tienen tanta entidad como las anteriormente
 \item \textbf{Introducción configurable}: La primera vez que se abre la aplicación aparecen una serie de diapositivas (\eng{slides}) que hacen de tutorial para mostrar las funcionalidades del sistema. Estas son configurables.
 
 \end{itemize}
-

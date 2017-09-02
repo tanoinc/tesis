@@ -27,19 +27,23 @@ En base a lo establecido con \gls{rest} en el marco teórico (sección \ref{cara
 \end{itemize}
 \end{itemize}
 
-Las solicitudes no mantienen ningún estado entre sucesivas peticiones y la autenticación (explicada en la siguiente sección) se realiza en cada \eng{request}. La respuesta es devuelta con su código en formato \gls{json} debido a sus ventajas (sección \ref{rest}).
+Las solicitudes no mantienen ningún estado entre sucesivas peticiones y la autenticación (explicada en la siguiente sección) se realiza en cada \eng{request}. La respuesta es devuelta con su código en formato \gls{json} debido a las ventajas mencionadas en \ref{rest}.
 
-En el siguiente ejemplo se ve el \eng{request} \gls{http} para la creación de una novedad:
+En base a lo analizado en la sección \ref{autorizacion_autenticacion}, la autenticación con los dispositivos móviles se realiza con OAuth2, y los servicios externos utilizan su API key y firma (generada con la clave secreta). La figura \ref{fig:mi_universidad_api_diagrama} muestra un diagrama simplificado de la interacción y conexión de los \textit{servicios externos} y los dispositivos móviles, con la \gls{api} de \nombreApp{}. 
+
+\figura{03-capitulo-3/mi_universidad_api_diagrama.png}{Diagrama de componentes de la API de \nombreApp{}}{mi_universidad_api_diagrama}{1}
+
+En el siguiente ejemplo se ve un \eng{request} \gls{http} para la creación de una novedad. Esto sería lo que envía un servicio externo a \nombreApp{}.
 \begin{itemize}
 \item \textbf{POST /api/v1/newsfeed}\footnote{Esto es solo demostrativo. La especificación completa en Swagger puede consultarse en \url{https://app.swaggerhub.com/apis/tanoinc/mi-universidad/1.0.0}}.
 \begin{itemize}
-\item Ejemplo del cuerpo de una solicitud \gls{http} para enviar una noticia con notificación a los usuarios con identificación id\_externo 1, 2 y 3:
+\item El cuerpo de la solicitud \gls{http} está armado para enviar una noticia con notificación \eng{push} para los usuarios con \textit{id} \comillas{id\_externo\_1}, \comillas{id\_externo\_2} y \comillas{id\_externo\_3}:
 \begingroup
   \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_solicitud.json}
   \captionof{listing}{Ejemplo de cuerpo JSON en solicitud de POST /newsfeed}.\label{codigo_post_newsfeed_solicitud}
 \endgroup
 
-\item Ejemplo de respuesta (con código \gls{http} 200):
+\item La respuesta obtenida, considerando que todo funcionó correctamente, sería (con código \gls{http} 200):
 \begingroup
   \jsonfile{src/codigo/03-capitulo-3/post_newsfeed_respuesta.json}
   \captionof{listing}{Ejemplo de respuesta JSON de POST /newsfeed}.\label{codigo_post_newsfeed_respuesta}
@@ -47,7 +51,7 @@ En el siguiente ejemplo se ve el \eng{request} \gls{http} para la creación de u
 \end{itemize}
 \end{itemize}
 
-Otros posibles códigos que puede devolver son:
+Otros posibles códigos \gls{http} de respuesta, dependiendo del resultado de la transacción, son:
 \begin{itemize}
 \item 200:
 Procesado correctamente
@@ -61,7 +65,7 @@ Error de validación
 Errores en el servidor. Ver detalle en respuesta
 \end{itemize}
 
-En la siguiente sección se detalla la autenticación necesaria para el llamado a estos servicios.
+En la siguiente sección se detalla la autenticación necesaria para el llamado a estos servicios desde sistemas externos. Luego especifica este aspecto, pero para los clientes móviles.
 
 \subsubsection{Autenticación de servicios externos}
 \label{autenticacion_servicios_externos}
@@ -108,9 +112,24 @@ La solicitud \gls{http} enviada quedaría de la siguiente manera\footnote{La API
 
 De esta manera el servidor realiza el proceso inverso y si las firmas son iguales, entonces la solicitud es válida: es de quien dice ser y no fue alterada.
 
-\subsubsection{Permisos}
+En la figura \ref{fig:mi_universidad_api_diagrama} este mecanismo se realiza entre los servicios externos y la interfaz con \textit{API key y secret}.
+
+\paragraph{Permisos}
 \label{autenticacion_permisos}
 
 Los permisos indican qué operaciones pueden ser utilizadas por cada servicio. Existe un permiso por cada entrada de la \gls{api} (\gls{url} y método \gls{http}).
 
 La aplicación \nombreApp{} maneja un sistema que controla qué operaciones están habilitadas para cada servicio. Esta asociación permiso-servicio está indicada con un número de versión que luego es utilizado cuando un usuario añade un servicio. Este es aceptado en una versión, por lo que si se modifica deberá volver a aceptarse. De esta manera se informa al usuario de cada cambio en las operaciones que requieran los servicios.
+
+\subsubsection{Autenticación con aplicación móvil}
+\label{autenticacion_con_app}
+
+La autenticación con el cliente móvil se realiza mediante OAuth2 (según lo definido en el marco teórico de la sección \ref{autorizacion_autenticacion}) con el tipo de accedo \textit{password grant}. De su utilización se destacan cuatro pasos:
+\begin{itemize}
+\item La solicitud del token de acceso: mediante un \textit{POST} a la \gls{api} en \textit{/oauth/token} con las credenciales. Esta devuelve un token de acceso y refresco en formato \gls{jwt}, que serán utilizados en todos los request subsiguientes como mecanismo de autenticación.
+\item La utilización del token en los llamados: En cada solicitud para el acceso a un recurso, se debe enviar en el encabezado \gls{http} \lstinline{Authorization}, el tipo de token (en este caso \textit{Bearer}) y el token de acceso.
+\item La actualización del token vencido: Cuando pierda validez el token de acceso, se utiliza el token de refresco para solicitar uno nuevo de acceso.
+\item Salir del sistema: Se envía una solicitud \textit{DELETE} con el token y se invalidan los tokens evitando ser utilizados en futuros accesos.
+\end{itemize}
+
+En la figura \ref{fig:mi_universidad_api_diagrama} este mecanismo se refleja entre los clientes móviles y la interfaz con Oauth2.

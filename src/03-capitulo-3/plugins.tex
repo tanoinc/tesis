@@ -26,4 +26,16 @@ Esta personalización estará disponible para otras Universidades que deseen imp
 \subsubsection{Plugin Moodle}
 \label{desarrollo_plugins_moodle}
 
+Otra de las extensiones propuestas en los objetivos de esta tesina es la de Moodle. Se trabajó con la última versión 3.3.1 pudiendo ser portada a versiones anteriores.
 
+El tipo de extensión de Moodle utilizada es la de \textit{messaging consumers}\footnote{Se puede ver en \url{https://docs.moodle.org/dev/Messaging_consumers}}. Esta permite conectar un componente a ciertos tipos de eventos, y es configurable desde Moodle por el administrador y personalizable por los usuarios.
+
+Para Moodle se define que los contextos serán los cursos.
+
+El \textit{plugin} implementa, en principio, dos funcionalidades:
+\begin{itemize}
+\item Mensajería: Los mensajes personales que se reciban dentro de la plataforma, se envían como novedades personales con notificación a \nombreApp{}. De esta manera un alumno podrá saber con una notificación cuando le envían un mensaje privado. Esta característica se puede deshabilitar y es configurable por el usuario desde Moodle.
+\item Foro de novedades y consultas: Los anuncios que se realicen en el foro de novedades, serán enviados a través de \nombreApp{} a los alumnos del curso y además quedarán asociados a su contexto. De esta manera los alumnos que no pertenezcan al curso pero quieran estar al tanto de las novedades, puedan hacerlo, suscribiéndose.
+\end{itemize}
+
+La extensión queda disponible con licencia \gls{gnugpl} versión 3 en \url{https://github.com/tanoinc/moodle-message_miuniversidad}.
