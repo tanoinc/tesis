@@ -28,61 +28,38 @@ De estos hechos se desprende la necesidad de considerar un desarrollo que permit
 \subsubsection{Android: Versiones utilizadas en la UNLP}
 \label{sistemas_operativos_versiones}
 
-Sobre los usuarios del sistema \gls{guarani} se analizaron los datos captados mediante la herramienta \eng{Google Analytics}. Esta permite discriminar, en los accesos a su interfaz Web, por Sistema Operativo y versión. En particular para Android, la inforamción extraída sirve como un indicador de las versiones que tienen instaladas los estudiantes.
+ Se analizaron los datos captados mediante la utilidad \eng{Google Analytics} sobre los usuarios del sistema \gls{guarani} en la \unlp{}\footnote{Estos datos fueron obtenidos desde el \gls{cespi}, lugar en donde trabajo.}. Esta herramienta permite discriminar, en los accesos a su interfaz Web, por Sistema Operativo y versión. En particular para Android, la información extraída sirve como un indicador de las versiones que tienen instaladas los estudiantes.
 
-Los datos se obtuvieron desde el 1 de Enero de 2017 hasta el 1 de Septiembre de 2017, y comprenden las \comillas{fechas pico} del uso del sistema: las inscripciones a cursadas. Se analizaron 22 instalaciones correspondientes a todas las Facultades de la \unlp{} y otras dependencias (como postgrados).
-Las cantidades cuentan lo que google denomina como \textit{sesiones}: \comillas{una sesión es el elemento que engloba las acciones del usuario en su sitio web}, y como \textit{acciones} a \comillas{un conjunto de interacciones que tienen lugar en su sitio web en un periodo determinado}\cite{google2017analyticsSesion}.
-Cabe destacar que bajo estos conceptos, un usuario podría ingresar dos veces al sitio en diferentes momentos y se contaría como dos sesiones\footnote{Inclusive las sesiones pueden ser con dos sistemas operativos distintos (o distintas versiones).}.
+Los datos se obtuvieron desde el 1 de Enero de 2017 hasta el 6 de Septiembre de 2017, y comprenden las \comillas{fechas pico} del uso del sistema: las inscripciones a cursadas. Se analizaron 22 instalaciones correspondientes a todas las Facultades de la \unlp{} y otras dependencias (como postgrados).
+Las cantidades cuentan lo que Google denomina como \textit{sesiones}: \comillas{una sesión es el elemento que engloba las acciones del usuario en su sitio web}, y como \textit{acciones} a \comillas{un conjunto de interacciones que tienen lugar en su sitio web en un periodo determinado}\cite{google2017analyticsSesion}.
+Cabe destacar que bajo estos conceptos, un usuario podría ingresar dos veces al sitio en diferentes momentos y se contaría como dos sesiones\footnote{Inclusive las sesiones pueden ser con dos sistemas operativos distintos (o distintas versiones).}. 
+
+En el cuadro \ref{android_versiones_cantidad} se pueden ver las cantidades por versión de Android.
 
 \begin{table}[htbp]
-\caption{}
+\centering
+\caption{Cantidad de sesiones en Guaraní desde Android, por versión (Enero a Septiembre 2017)}
+\label{android_versiones_cantidad}
 \begin{tabular}{|l|r|}
 \hline
- & \multicolumn{1}{l|}{\textbf{Cantidad de sesiones}} \\ \hline
-\textbf{8.0.0} & 84 \\ \hline
-\textbf{7.1.2} & 1643 \\ \hline
-\textbf{7.1.1} & 3670 \\ \hline
-\textbf{7.1} & 40 \\ \hline
-\textbf{7.0.99} & 2 \\ \hline
-\textbf{7.0} & 70531 \\ \hline
-\textbf{6.1} & 2 \\ \hline
-\textbf{6.0.99} & 1 \\ \hline
-\textbf{6.0.1} & 279573 \\ \hline
-\textbf{6.0} & 171329 \\ \hline
-\textbf{5.1.2} & 9 \\ \hline
-\textbf{5.1.1} & 186556 \\ \hline
-\textbf{5.1} & 67908 \\ \hline
-\textbf{5.0.2} & 78313 \\ \hline
-\textbf{5.0.1} & 69320 \\ \hline
-\textbf{5.0} & 15830 \\ \hline
-\textbf{5} & 2 \\ \hline
-\textbf{4.4.4} & 90690 \\ \hline
-\textbf{4.4.3} & 381 \\ \hline
-\textbf{4.4.2} & 74750 \\ \hline
-\textbf{4.4} & 117 \\ \hline
-\textbf{4.3.1} & 1 \\ \hline
-\textbf{4.3} & 12857 \\ \hline
-\textbf{4.2.2} & 17197 \\ \hline
-\textbf{4.2.1} & 374 \\ \hline
-\textbf{4.1.2} & 26885 \\ \hline
-\textbf{4.1.1} & 632 \\ \hline
-\textbf{4.0.4} & 3593 \\ \hline
-\textbf{4.0.3} & 645 \\ \hline
-\textbf{4.0} & 1 \\ \hline
-\textbf{3.2.1} & 12 \\ \hline
-\textbf{3.2} & 23 \\ \hline
-\textbf{3.1} & 2 \\ \hline
-\textbf{2.3.7} & 14 \\ \hline
-\textbf{2.3.6} & 342 \\ \hline
-\textbf{2.3.5} & 26 \\ \hline
-\textbf{2.3.4} & 151 \\ \hline
-\textbf{2.3.3} & 1 \\ \hline
-\textbf{2.2.2} & 7 \\ \hline
-\textbf{2.2.1} & 52 \\ \hline
-\textbf{2.2} & 11 \\ \hline
-\textbf{2.1-update1} & 18 \\ \hline
-\textbf{1.6} & 1 \\ \hline
+\textbf{Versión de Android} & \multicolumn{1}{l|}{\textbf{Cantidad de sesiones}} \\ \hline
+8   & 84     \\ \hline
+7   & 75886  \\ \hline
+6   & 450905 \\ \hline
+5   & 417938 \\ \hline
+4.4 & 165938 \\ \hline
+4.3 & 12858  \\ \hline
+4.2 & 17571  \\ \hline
+4.1 & 27517  \\ \hline
+4.0 & 4239   \\ \hline
+3   & 37     \\ \hline
+2   & 622    \\ \hline
+1   & 1     \\ \hline
 \end{tabular}
-\label{}
 \end{table}
 
+Del cuadro \ref{android_versiones_cantidad} se desprenden los porcentajes de la figura \ref{fig:android_porcentaje_versiones}. En el gráfico se puede ver que mas del 94\% utilizan la versión 4.4 o superiores.
+
+\figura{01-capitulo-1/android_versiones.png}{Porcentaje de uso en versiones de Android en accesos a Guaraní Web}{android_porcentaje_versiones}{1}
+
+En el anexo \ref{detalle_versiones_android} se detallan los valores por Unidad Académica.
