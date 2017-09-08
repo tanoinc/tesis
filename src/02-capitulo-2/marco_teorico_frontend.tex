@@ -211,7 +211,7 @@ Existe un repositorio de \eng{plugins}\footnote{Disponible en \url{https://cordo
 
 \textit{Ionic} es creado por \textit{Drifty Co.} en 2012. Esta empresa se dedicaba a desarrollar herramientas para la creación de interfaces móviles con \gls{jquery} Mobile y \gls{bootstrap}. Decidieron crear su propio \gls{framework} de aplicaciones híbridas basado en las últimas tecnologías Web y centrado en la \eng{performance}.
 
-\textit{Ionic} es un \gls{framework} \gls{open source} que permite a los desarrolladores crear aplicaciones híbridas, con buena \eng{performance}, utilizando Apache Cordova y las principales tecnologías Web (\gls{javascript}, \gls{html}5, \gls{css}3, sass). En particular a partir de su versión 2, incorpora Angular (versión 2.0 y superiores) con \gls{typescript}. Una de sus fortalezas es el \eng{look and feel} de sus interfaces ya que se adaptan al diseño de las principales plataformas\cite{ionic2017concepts}. Su rapidez se debe a la utilización de animaciones y transiciones de \gls{css}3, así como también el uso de Angular, lo que hacen que se utilice la aceleración por hardware del dispositivo\cite{hartington2017animationsIonic}.
+\textit{Ionic} es un \gls{framework} \gls{open source} (licencia MIT) que permite a los desarrolladores crear aplicaciones híbridas, con buena \eng{performance}, utilizando Apache Cordova y las principales tecnologías Web (\gls{javascript}, \gls{html}5, \gls{css}3, sass). En particular a partir de su versión 2, incorpora Angular (versión 2.0 y superiores) con \gls{typescript}. Una de sus fortalezas es el \eng{look and feel} de sus interfaces ya que se adaptan al diseño de las principales plataformas\cite{ionic2017concepts}. Su rapidez se debe a la utilización de animaciones y transiciones de \gls{css}3, así como también el uso de Angular, lo que hacen que se utilice la aceleración por hardware del dispositivo\cite{hartington2017animationsIonic}.
 
 Se destacan las siguientes ventajas de Ionic frente a la utilización solamente de Cordova\cite{noupe2016ionicvscordova}:
 \begin{itemize}
@@ -227,9 +227,21 @@ El proyecto posee una amplia comunidad de desarrolladores, con más de 31.000 es
 
 Por último, \textit{Ionic} tiene una estructura que favorece al desarrollo de \gls{pwa}. Desde hace un año, los desarrolladores están realizando actualizaciones para que además de funcionar en múltiples plataformas móviles, las aplicaciones realizadas con este \gls{framework}, también sean \gls{pwa}\cite{lynch2016pwa}.
 
-Debido a las característica anteriormente mencionadas, se considera a \textit{Ionic} como marco de desarrollo para la aplicación híbrida.
+Debido a las característica anteriormente mencionadas, se considera a \textit{Ionic} como marco de desarrollo para la aplicación híbrida. La versión del \gls{framework} utilizada es la 3.4.2.
 
+\paragraph{Ionic y versiones de los Sistemas Operativos}
+\label{ionic_android}
 
+El requerimiento mínimo de Ionic sobre el sistema operativo de los dispositivos móviles es\cite{ionicframework2017support}:
+\begin{itemize}
+\item Para la versión 1: iOS 7 o superior, Android 4.1 o superior.
+\item Para la versión 2: iOS 8 o superior, Windows 10 Universal App, Android 4.4 o superior\footnote{Es soportado por Android 4.1 mediante la instalación de Crosswalk}.
+\end{itemize}
+
+En base a lo analizado en la sección \ref{sistemas_operativos_versiones}, se determina la utilización de Ionic 2 puesto que es soportado por más del 94\% de los usuarios de Android de la \unlp{}.
+A partir de la figura \ref{fig:android_porcentaje_versiones} se desprende el porcentaje de uso de versiones de Android (en alumnos de la UNLP) compatibles con el \gls{framework} utilizado (ver figura \ref{fig:android_porcentaje_versiones_compatibles}).
+
+\figura{02-capitulo-2/ionic_compatibilidad_android.png}{Porcentaje de uso en versiones de Android compatibles con Ionic2 (igual o mayor a 4.4)}{android_porcentaje_versiones_compatibles}{0.7}
 
 \paragraph{Otros \eng{frameworks} híbridos}
 \label{otros_frameworks_hibridos}
