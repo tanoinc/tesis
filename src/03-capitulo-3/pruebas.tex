@@ -1,0 +1,59 @@
+\subsection{Pruebas de Usabilidad}
+\label{desarrollo_pruebas_usabilidad}
+
+Se hicieron pruebas de usabilidad sobre la aplicación móvil en base a las recomendaciones de estudio de \gls{nng}\cite{nng2017usabilityTest}\footnote{El grupo es liderado por Jackob Nielsen y Don Norman}. Para ello se orientó el estudio a obtener datos de los \eng{tests} cualitativos y a resolver cuestiones relacionadas con el diseño. 
+
+Se realizaron reuniones con grupos de usuarios\footnote{Coordinadas y guiadas con la ayuda Ivana Harari y Paola Amadeo} e individualmente a cada uno se le asignó una lista de tareas a realizar. Estos encuentros se llevaron a cabo en el \gls{cespi}, fueron en persona y moderados. Los participantes pertenecían a diversos ámbitos relacionados con la Universidad (alumnos, egresados, docentes y no docentes).
+
+El grupo de personas consistía en: 
+\begin{itemize}
+\item Un estudiante de Periodismo.
+\item Un estudiante de Ingeniería en Sistemas.
+\item Un estudiante de Licenciatura en Sistemas y Locución.
+\item Una egresada de Bellas Artes.
+\item Una empleada no docente.
+\item Un docente.
+\end{itemize}
+
+La lista de tareas a realizar era:
+\begin{itemize}
+\item Crear una cuenta de usuario.
+\item Ingresar al sistema con una cuenta del sistema.
+\item Ingresar al sistema con una cuenta de Facebook.
+\item Suscribirse a un servicio de la universidad: Guaraní de su facultad.
+\item Suscribirse a un tema: Alguna materia de interés.
+\item Revisar las últimas novedades.
+\item Revisar las notificaciones.
+\item Revisar el calendario visualizando por día, el día siguiente.
+\item Revisar el calendario visualizando por semana, la semana siguiente.
+\item Revisar el calendario visualizando por mes, el mes siguiente.
+\item Guardar un evento en el calendario del teléfono.
+\item Visualizar la ubicación de los comedores de la Universidad en el mapa.
+\item Visualizar el recorrido de la línea universitaria en el mapa.
+\item Visualizar otra información del servicio de la universidad al cual está suscrito.
+\item Cerrar la aplicación: al recibir una notificación, acceder a su contenido.
+\item Con la aplicación abierta: al recibir una notificación, acceder a su contenido.
+\item Desuscribirse a un servicio de la universidad (puede suscribirse a uno para luego poder cancelarlo).
+\item Desuscribirse a un tema (puede suscribirse a uno para luego poder cancelarlo).
+\item Desloguearse de la aplicación.
+\end{itemize}
+
+En base a lo hablado con los usuarios se determinaron las siguientes mejoras en el diseño\footnote{Si bien todas son tenidas en cuenta, solo algunas se implementan dentro del alcance de esta tesis}:
+\begin{itemize}
+\item Agregar aclaración del tamaño de clave al registrar un nuevo usuario. 
+\item Resaltar el proceso inicial de suscripciones.
+\item Establecer ayudas para aclarar qué realiza cada botón.
+\item En Android: modificar el gesto para eliminar un servicio. No es con \comillas{swipe} sino manteniendo apretada la opción.
+\item Agregar un mensaje de bienvenida al abrir la aplicación mostrando un resumen de sus funcionalidades. Considerar la posibilidad de volver a reproducir y cancelar.
+\item En cuanto a la accesibilidad:
+\begin{itemize}
+\item Completar información extra de los campos en el formulario de registro ya que el lector de pantalla solo muestra e-mail.
+\item Mejorar los listados vacíos: el lector de pantalla no indica cuando el resultado de un listado es vacío.
+\item Agregar indicación en el botón de borrar texto para el campo de búsqueda. 
+\end{itemize}
+\item Mostrar un mensaje al agregar un nuevo servicio (que requiere autenticación), indicando que las credenciales son las del servicio externo. Además es conveniente dar un indicador visual que la pantalla de  \eng{login} está fuera del contexto de la aplicación.
+\item Cambiar el término de \comillas{servicio} por \comillas{aplicaciones}.
+\item Agregar la posibilidad de ver un resumen de suscripciones a temas.
+\item Cambiar término de \comillas{suscripción a temas} a \comillas{suscripcion a categorías}.
+\end{itemize}
+
