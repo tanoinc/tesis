@@ -148,7 +148,8 @@ Google Android      & Java (Harmony flavored, Dalvik VM) \\ \hline
 RIM BlackBerry      & Java ( J2ME flavored)              \\ \hline
 Symbian             & C, C++, Python, HTML/CSS/JS        \\ \hline
 Windows Mobile      & .NET                               \\ \hline
-Window 7 Phone      & .NET                               \\ \hline
+Windows 7 Phone      & .NET                               \\ \hline
+Windows 10 Movile      & C\#, Visual Basic, JavaScript, C++ (plataforma UWP)\\ \hline
 HP Palm webOS       & HTML/CSS/JS                        \\ \hline
 MeeGo               & C, C++, HTML/CSS/JS                \\ \hline
 Samsung bada        & C++                                \\ \hline
@@ -195,7 +196,7 @@ A principios de 2012, Apache decide renombrar el proyecto para diferenciarlo de 
 
 En la actualidad, Cordova se define como un \gls{framework} móvil \gls{open source} que permite utilizar las tecnologías estándar de la Web como \gls{html}5, \gls{javascript} y \gls{css}3 para el desarrollo multiplataforma, evitando el lenguaje nativo de cada plataforma móvil. La aplicaciones se ejecutan dentro de contenedores especiales orientados a cada plataforma y dependen de \glspl{api} estándares para acceder a las capacidades de cada dispositivo como sensores, datos, estado de la red, etcétera.\cite{apache2017cordovaOverview}
 
-Como se indica en la figura \ref{cordova_arquitectura}, la arquitectura de Cordova, consta de tres componentes:
+Como se indica en la figura \ref{fig:cordova_arquitectura}, la arquitectura de Cordova, consta de tres componentes:
 \figura{02-capitulo-2/cordova_arquitectura.png}{Arquitectura de Cordova. Fuente: Apache Cordova\cite{apache2017cordovaOverview}}{cordova_arquitectura}{0.7}
 \begin{itemize}
 \item \textbf{\eng{Web App}}: Es el lugar donde reside la aplicación desarrollada. Esta es implementada como una página \gls{html}, por lo que permite utilizar todos los recursos Web (imágenes, estilos, código \gls{javascript}). Esta página es renderizada y ejecutada dentro un contenedor, por un componente denominado \textit{WebView}.
