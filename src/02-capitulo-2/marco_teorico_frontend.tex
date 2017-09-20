@@ -80,7 +80,7 @@ No obstante, el uso de técnicas de interacción que no son basadas en un punter
 \paragraph{Patrones de navegación secundaria}
 \label{navegacion_secundaria}
 
-La navegación secundaria se centra en el movimiento dentro del módulo seleccionado (por la navegación primaria). Todos los patrones primarios también se pueden utilizar como secundarios, inclusive combinarse, por ejemplo, \textit{pestañas} con textit{galería}. 
+La navegación secundaria se centra en el movimiento dentro del módulo seleccionado (por la navegación primaria). Todos los patrones primarios también se pueden utilizar como secundarios, inclusive combinarse, por ejemplo, \textit{pestañas} con \textit{galería}. 
 
 Además existen otros tres patrones secundarios más\cite{neil2014mobile}:
 
@@ -171,7 +171,7 @@ Las ventajas que tienen las aplicaciones híbridas son:
 Como desventajas podemos destacar:
 \begin{itemize}
 \item Menor diseño: ya que a veces no logra simular completamente el \eng{look and feel} de los componentes nativos, además de unificar comportamientos y estilos de interfaz que son diferentes para cada plataforma.
-\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de parseo, interpretación y ejecución de scripts en \gls{javascript}.
+\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de parseo, interpretación y ejecución de \eng{scripts} en \gls{javascript}.
 \end{itemize}
 
 De acuerdo a los requerimientos establecidos al inicio de esta sección (apartado \ref{aplicacion_movil}), se determina que la aplicación a desarrollar sea híbrida. Las razones de esta elección son: 
@@ -200,7 +200,7 @@ Como se indica en la figura \ref{fig:cordova_arquitectura}, la arquitectura de C
 \figura{02-capitulo-2/cordova_arquitectura.png}{Arquitectura de Cordova. Fuente: Apache Cordova\cite{apache2017cordovaOverview}}{cordova_arquitectura}{0.7}
 \begin{itemize}
 \item \textbf{\eng{Web App}}: Es el lugar donde reside la aplicación desarrollada. Esta es implementada como una página \gls{html}, por lo que permite utilizar todos los recursos Web (imágenes, estilos, código \gls{javascript}). Esta página es renderizada y ejecutada dentro un contenedor, por un componente denominado \textit{WebView}.
-\item \textbf{\eng{WebView}}: Su tarea es la de proveer de interfaz a la aplicación (ejecutando el código de la \textit{WebApp}). También se encarga de ser la capa intermedia que conecta el código creado con el resto de los componentes (Sistema Operativo y esxtensiones de Cordova para el acceso a las capacidades del dispositivo).
+\item \textbf{\eng{WebView}}: Su tarea es la de proveer de interfaz a la aplicación (ejecutando el código de la \textit{WebApp}). También se encarga de ser la capa intermedia que conecta el código creado con el resto de los componentes (Sistema Operativo y extensiones de Cordova para el acceso a las capacidades del dispositivo).
 \item \textbf{Extensiones Cordova}: Proveen una interfaz entre los componentes de Cordova, los nativos del dispositivo, sus \glspl{api}. Esto permite hacer llamados nativos desde código \gls{javascript}. Estas extensiones se dividen en dos: las del núcleo (disponibles para todos los dispositivos) y las creadas por terceros (agregan funcionalidades que no necesariamente están para todos).
 
 Existe un repositorio de \eng{plugins}\footnote{Disponible en \url{https://cordova.apache.org/plugins/}. Para npm:  \url{https://www.npmjs.com/search?q=ecosystem\%3Acordova}} donde se pueden buscar y descargar las extensiones.
@@ -218,7 +218,7 @@ Se destacan las siguientes ventajas de Ionic frente a la utilización solamente 
 \begin{itemize}
 \item Interfaz de usuario y usabilidad: existen decenas de plantillas, más de 700 íconos, componentes de interfaz como encabezados, botones, etcétera, disponibles en varios estilos dependiendo de la plataforma y simulando su comportamiento. La codificación de la funcionalidad de estos componentes es simple y sencilla. En cambio en Cordova, se comienza desde cero con una página en blanco.
 \item Proceso de desarrollo más conveniente ya que permite probar la mayoría de las modificaciones \comillas{en vivo} desde el navegador, sin la necesidad de recompilar la aplicación y ejecutarla en un emulador o dispositivo.
-\item Mayor \eng{performance}: debido a una versión liviana de jQuery se reduce la manipulación de DOM. Además delega a la GPU el procesamiente de las animaciones y transiciones debido a \gls{css}3.
+\item Mayor \eng{performance}: debido a una versión liviana de jQuery se reduce la manipulación de DOM. Además delega a la GPU el procesamiento de las animaciones y transiciones debido a \gls{css}3.
 \item Angular (versión 2 y superiores) con \gls{typescript}.
 \end{itemize}
 
@@ -249,6 +249,31 @@ A partir de la figura \ref{fig:android_porcentaje_versiones} se desprende el por
 
 Vale la pena mencionar que existen otros \glspl{framework} para el desarrollo de aplicaciones híbridas que han sido revisados para el presente desarrollo pero que no fueron utilizados. A continuación se listan y mencionan algunas de sus principales características:
 \begin{itemize}
-\item \textbf{React Native}: Creado por Facebook, este \gls{framework} se basa en React (\gls{javascript}) y se caracteriza por definir una interfaces con \gls{XML} que traducen a componentes nativos. También permite utilizar código nativo cuando se necesita optimizar algún aspecto de la aplicación. Sólo funciona con Androir e \gls{ios}.
+\item \textbf{React Native}: Creado por Facebook, este \gls{framework} se basa en React (\gls{javascript}) y se caracteriza por definir una interfaces con \gls{XML} que traducen a componentes nativos. También permite utilizar código nativo cuando se necesita optimizar algún aspecto de la aplicación. Sólo funciona con Android e \gls{ios}.
 \item \textbf{NativeScript}: Es \gls{open source} y en la actualidad permite desarrollar solo para \gls{android} e \gls{ios}. Se caracteriza por utilizar lenguajes independientes a la plataforma que ejecuta, como \gls{javascript} y \gls{typescript} (con Angular). A diferencia de otras soluciones, no utiliza un \textit{WebView} y \glspl{api} simuladas, sino que a través de \gls{XML}, implementa una abstracción entre plataformas que es capaz de traducir las características comunes a llamados nativos\cite{nativescript2017basics}. Además sus interfaces utilizan componentes nativos de la plataforma.
 \end{itemize}
+
+En la tabla \ref{comparacion_hibridos} se comparan algunos aspectos de los principales \glspl{framework} híbridos.
+
+\begin{table}[]
+\centering
+\caption{Tabla comparativa de \glspl{framework} híbridos\cite{zia2017i2vsRnvsNs}: Ionic, ReactNative, Nativescript}
+\label{comparacion_hibridos}
+\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+ & Ionic & React Native & Nativescript \\ \hline
+Interfaz Web & Sí & No & No \\ \hline
+\gls{pwa} & Sí & No & No \\ \hline
+Componentes nativos & No & Sí & Sí \\ \hline
+Acceso a \gls{api} nativa & No & No & Sí \\ \hline
+Entornos soportados & Android, iOS, Windows, Web, Escritorio, PWA & Android, iOS & Android, iOS, Windows \\ \hline
+Código híbirido & 100\% & 85\% & 100\% \\ \hline
+\gls{open source} & Sí & Sí & Sí \\ \hline
+Testing & Rápido (navegador, emulador y dispositivo) & Intermedio (emulador y dispositivo) & Intermedio (emulador y dispositivo) \\ \hline
+Performance & Buena & Muy buena & Excelente \\ \hline
+Basado en & Angular (Google) con Typescript & React (Facebook) con JSX & Angular (Google) opcional  con Typescript (opcional) \\ \hline
+Cantidad de extensiones, \eng{plugins} y \eng{addons} & Amplios (gratis) &  & Media (varios son pagos) \\ \hline
+Documentación & Muy buena & Buena & Buena (provee soporte pago) \\ \hline
+\end{tabular}
+\end{table}
+

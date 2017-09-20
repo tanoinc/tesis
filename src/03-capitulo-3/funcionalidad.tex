@@ -96,9 +96,9 @@ Este contenido muestra un mapa (de \textit{Google Maps}) sobre el cual dibujar i
 
 Este mecanismo permite de generar mapas dinámicos en base a una solicitud externa\footnote{El formato de estos datos se especifica en la documentación}. Opcionalmente (actualmente no implementado) se proveerán mecanismos para cachear la información de los mapas.
 
-\figura{03-capitulo-3/app_mapa.png}{Contenidos Mapa de Google: Ejemplo de dibujo del recorrido del colectivo Universitario. Se utilizan polígonos y marcadores.}{app_mapa}{0.4}
+\figura{03-capitulo-3/app_mapa.png}{Contenidos Mapa de Google: Ejemplo de dibujo del recorrido del colectivo Universitario. Se utilizan polígonos y marcadores. El indicador verde muestra la posición actual del usuario}{app_mapa}{0.4}
 
-Una funcionalidad interesante es que permite enviar información del usuario que accede al mapa: Cuando este lo abre, se envían los datos de \textins{id externo} y posición geográfica a la \gls{url} especificada por el servicio. Este la procesa y genera los datos de marcadores, centro y polígonos. De esta manera se pueden realizar operaciones en base a la posición de la persona que consulta el mapa.
+Una funcionalidad interesante es que permite enviar información del usuario que accede al mapa: Cuando este lo abre, se envían los datos de \textit{id externo} y posición geográfica a la \gls{url} especificada por el servicio. Este la procesa y genera los datos de marcadores, centro y polígonos. De esta manera se pueden realizar operaciones en base a la posición de la persona que consulta el mapa.
 
 Por otra parte, la \gls{api} provee métodos para consultar las posiciones geográficas de otros usuarios. Todo ello se puede integrar para generar un mapa dinámico y personalizado al usuario.
 
@@ -151,9 +151,11 @@ El proceso de agregar un nuevo servicio depende de los requisitos del mismo. Act
 \item Requiere autenticación: Solo usuarios que puedan autenticarse ante el servicio pueden añadirlo. Al añadirlo se abrirá una pantalla de \eng{login} con el sistema externo. Luego de ingresar (si sus credenciales son correctas) este sistema debería mostrar una pantalla con los permisos que utiliza y, si estos son aceptados, enviar a la \gls{api} de \nombreApp{} los datos del \textit{id externo}. De esta forma quedará asociada la cuenta del sistema externo con \nombreApp{}. 
 \end{itemize}
 
-Al requerir autenticación se produce un intercambio de identificadores de usuario entre \nombreApp{} y el servicio externo. Cuando se inicia la solicitud, la aplicación genera un \eng{hash} único y se lo envía al servicio externo. Al identificarse el usuario, el servicio envía este dato a \nombreApp{} junto con el identificador de su usuario. De esta manera, \nombreApp enlaza sus datos con el \textit{id externo}, ocultando la identificación interna.
+Al requerir autenticación se produce un intercambio de identificadores de usuario entre \nombreApp{} y el servicio externo (ver figura \ref{fig:secuencia_anadir_servicio}). Cuando se inicia la solicitud, la aplicación genera un \eng{token} único y se lo envía al sistema externo mediante una redirección. Al identificarse el usuario, el servicio envía este dato a \nombreApp{} junto con el identificador de su usuario. De esta manera, \nombreApp{} enlaza sus datos con el \textit{id externo}, pudiendo referenciarse a la persona directamente con la identificación del servicio. 
 
-Siempre que se necesite hacer una referencia a un usuario (por ejemplo para enviar una novedad personal) se utilizará el \textit{identificador externo}.
+\figura{03-capitulo-3/secuencia_anadir_servicio.png}{Interacción de \nombreApp{} al añadir un servicio con autenticación}{secuencia_anadir_servicio}{1}
+
+Siempre que se necesite hacer una referencia a un usuario se utilizará el \textit{identificador externo}. Por ejemplo al enviar desde \gls{guarani} una novedad personal a un usuario, solo hay que indicar su número de inscripción (clave primaria de las personas) y el mensaje\footnote{Existen otros atributos irrelevantes para el ejemplo}.
 
 Otro aspecto a destacar es que el usuario puede acceder al listado de contextos (o temas) de cada servicio y realizar la suscripción a los que sean de su interés (sin necesidad de añadir el servicio). Desde esta pantalla también puede cancelarlas (figura \ref{fig:app_calendario}). Esto es útil para indicar el interés sobre una temática y recibir las novedades y eventos asociados a ella.
 
