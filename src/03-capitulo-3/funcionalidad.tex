@@ -153,6 +153,20 @@ El proceso de agregar un nuevo servicio depende de los requisitos del mismo. Act
 
 Al requerir autenticación se produce un intercambio de identificadores de usuario entre \nombreApp{} y el servicio externo (ver figura \ref{fig:secuencia_anadir_servicio}). Cuando se inicia la solicitud, la aplicación genera un \eng{token} único y se lo envía al sistema externo mediante una redirección. Al identificarse el usuario, el servicio envía este dato a \nombreApp{} junto con el identificador de su usuario. De esta manera, \nombreApp{} enlaza sus datos con el \textit{id externo}, pudiendo referenciarse a la persona directamente con la identificación del servicio. 
 
+% Diagrama creado con www.websequencediagrams.com :
+%title Intereacción: Aplicación móvil al añadir servicio con autenticación
+%Aplicación móvil->Backend: POST application/subscription
+%note right of Backend: Se genera el token (x) de la transacción.
+%Backend->Aplicación móvil: 302 URL_SERVICIO?token=x
+%Aplicación móvil->Servicio externo: GET URL_SERVICIO?token={x}&userid={id}
+%Servicio externo->Aplicación móvil: 200 (muestra login del servicio, si no está logueado)
+%note right of Servicio externo: El usuario se loguea al servicio externo
+%note right of Servicio externo: El usuario acepta añadir el servicio
+%Servicio externo->Backend: PUT application/subscription/{id}/{x}, Cuerpo: {id_externo}
+%note right of Backend: Se asocia el id de Mi Universidad con el del servicio
+%Backend->Servicio externo: 200
+%Servicio externo->Aplicación móvil: Se indica mediante el WebStorage que la transacción se completó
+
 \figura{03-capitulo-3/secuencia_anadir_servicio.png}{Interacción de \nombreApp{} al añadir un servicio con autenticación}{secuencia_anadir_servicio}{1}
 
 Siempre que se necesite hacer una referencia a un usuario se utilizará el \textit{identificador externo}. Por ejemplo al enviar desde \gls{guarani} una novedad personal a un usuario, solo hay que indicar su número de inscripción (clave primaria de las personas) y el mensaje\footnote{Existen otros atributos irrelevantes para el ejemplo}.
@@ -172,7 +186,7 @@ Existen otras funcionalidades que no tienen tanta entidad como las anteriormente
 
 \item \textbf{\eng{Login}}:Respecto al ingreso del usuario a la aplicación, el sistema permite hacerlo de dos maneras:
 \begin{itemize}
-\item Con el login de \nombreApp, mediante un usuario registrado desde un formulario en la aplicación.
+\item Con el login de \nombreApp, mediante un usuario registrado desde un formulario en la aplicación. Existe la posibilidad de restablecer su contraseña, enviando un código al correo electrónico del usuario. Este es usado para validar que la persona sea la dueña de la casilla de correo (y por ende del usuario registrado a ella).
 \item Con la cuenta de Facebook, enlazando su perfil con \nombreApp.
 \end{itemize}
 

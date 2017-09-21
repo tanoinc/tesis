@@ -1,11 +1,31 @@
 \subsection{Pruebas de Usabilidad}
 \label{desarrollo_pruebas_usabilidad}
 
-Se hicieron pruebas de usabilidad sobre la aplicación móvil en base a las recomendaciones de estudio de \gls{nng}\cite{nng2017usabilityTest}\footnote{El grupo es liderado por Jackob Nielsen y Don Norman}. Para ello se orientó el estudio a obtener datos de los \eng{tests} cualitativos y a resolver cuestiones relacionadas con el diseño. 
+Se hicieron pruebas de usabilidad sobre la aplicación móvil en base a las recomendaciones de estudio de \gls{nng}\cite{nng2017usabilityTest}\footnote{El grupo es liderado por Jackob Nielsen y Don Norman}. Para ello se orientó el estudio a obtener datos de una investigación cualitativa (con participación de usuarios) y a resolver cuestiones relacionadas con el diseño. 
+Dentro de estas pruebas, se destacan por su popularidad y sus múltiples
+áreas de aplicación, los llamados \eng{focus group} (o \comillas{grupos de discusión}).
+Estos son una forma de entrevista grupal que se centra en la comunicación entre los participantes de la investigación para generar nueva información (datos, ideas, correcciones, etcétera)\cite{kitzinger1995qualitative}.
 
-Se realizaron dos reuniones con grupos de usuarios\footnote{Coordinadas y guiadas con la ayuda Ivana Harari y Paola Amadeo} e individualmente a cada uno se le asignó una lista de tareas a realizar. Estos encuentros se llevaron a cabo en el \gls{cespi}, fueron en persona y moderados. Los participantes pertenecían a diversos ámbitos relacionados con la Universidad (alumnos, egresados, docentes y no docentes).
+Se realizaron dos reuniones con grupos de usuarios\footnote{Coordinadas y guiadas con la ayuda Ivana Harari y Paola Amadeo}: el 18 de agosto y 13 de septiembre de 2017. A cada participante individualmente se le asignó una lista de tareas y a medida que se realizaban se tomaba nota de las dificultades, ideas y aclaraciones que surgían. La charla grupal favoreció a la prueba. La interacción entre los participantes permitió explorar el conocimiento y experiencia de las personas. De esta manera se pudo explorar no sólo lo que pensaban, sino también cómo lo hacían y por qué.
 
-El grupo de personas consistía en: 
+Los encuentros se llevaron a cabo en el \gls{cespi}, fueron en persona y moderados. Los participantes pertenecían a diversos ámbitos relacionados con la Universidad (alumnos, egresados, docentes y no docentes).
+
+\subsubsection{Preparativos previos}
+\label{desarrollo_pruebas_usabilidad_preparativos}
+
+Esta etapa consistió en preparar lo indicado en las siguientes secciones.
+
+\paragraph{Producto}
+\label{desarrollo_pruebas_usabilidad_preparativos_producto}
+
+Se configuró un servidor de prueba con la \gls{api}, apuntando a servicios externos de desarrollo (\gls{guarani} y Moodle). Además se crearon aplicaciones de \eng{testing} en Facebook (para relacionar las cuentas de usuario), en Google (para los mapas) y en los servicios de Ionic (para enviar notificaciones).
+
+Para las pruebas de ingreso con Facebook fue necesario agregar a las personas como participantes de la aplicación de prueba (en Facebook). Esto es necesario ya que la utilizada para el \eng{test} no es pública.
+
+\paragraph{Participantes}
+\label{desarrollo_pruebas_usabilidad_preparativos_participantes}
+
+El grupo de personas y sus perfiles consistió en las indicadas en el cuadro \ref{perfiles_usabilidad}.
 
 \begin{table}[htbp]
 \centering
@@ -15,12 +35,13 @@ El grupo de personas consistía en:
 \hline
    & \multicolumn{1}{c|}{\textbf{Nombre}} & \multicolumn{1}{c|}{\textbf{Ocupación}} & \multicolumn{1}{c|}{\textbf{Estudios}} & \textbf{Docente UNLP} & \textbf{Egresado} \\ \hline
 U1 & Tomás                                & Estudiante, Empleado                    & Periodismo (UNLP)                      & No                    & No                \\ \hline
-U2 & Maximiliano                          & Estudiante                              & Informática (UNLP), Locución           & No                    & No                \\ \hline
-U3 &                                      & Estudiante                              & Ingeniería/Informática (UNLP)          & No                    & No                \\ \hline
+U2 & Maximiliano\footnotemark{}                          & Estudiante                              & Informática (UNLP), Locución           & No                    & No                \\ \hline
+U3 & Francisco                                     & Estudiante                              & Ingeniería/Informática (UNLP)          & No                    & No                \\ \hline
 U4 & Graciela                             & Empleada                                & Informática (UNLP)                     & No                    & Si                \\ \hline
 U5 & Quimey                               & Docente                                 & Bellas Artes (UNLP)                    & Si                    & Si                \\ \hline
 \end{tabular}
 \end{table}
+\footnotetext{Maxi es no vidente, miembro activo en temas de accesibilidad en la Universidad y ha colaborado en pruebas para varios desarrollos del \gls{cespi}}
 
 La lista de tareas a realizar era:
 \begin{itemize}
