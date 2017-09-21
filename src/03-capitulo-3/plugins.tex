@@ -19,6 +19,8 @@ La personalización se denomina \comillas{mi\_universidad} e implementa (en prin
 \item Fechas de parciales. Guaraní permite, desde su módulo \textit{Docente}, definir los parciales en cada comisión. La personalización envía a \nombreApp{} la fecha de los mismos, asociados al contexto de la materia y a todos sus inscriptos. 
 \end{itemize}
 
+\figura{03-capitulo-3/plugin_guarani_envio_mensaje.png}{Guaraní: Pantalla de envío de mensajes que se verán en la \eng{app}}{plugin_guarani_envio_mensaje}{0.7}
+
 Se planifica incorporar más novedades y eventos del calendario, como por ejemplo, fechas de inscripción a cursadas, mesas de examen, horarios y aulas de materias y notificación de carga de notas, entre otras.
 
 Esta personalización estará disponible para otras Universidades que deseen implementar \nombreApp{}.
@@ -37,5 +39,8 @@ El \textit{plugin} implementa, en principio, dos funcionalidades:
 \item Mensajería: Los mensajes personales que se reciban dentro de la plataforma, se envían como novedades personales con notificación a \nombreApp{}. De esta manera un alumno podrá saber con una notificación cuando le envían un mensaje privado. Esta característica se puede deshabilitar y es configurable por el usuario desde Moodle.
 \item Foro de novedades y consultas: Los anuncios que se realicen en el foro de novedades, serán enviados a través de \nombreApp{} a los alumnos del curso y además quedarán asociados a su contexto. De esta manera los alumnos que no pertenezcan al curso pero quieran estar al tanto de las novedades, puedan hacerlo, suscribiéndose.
 \end{itemize}
+
+\figura{03-capitulo-3/plugin_moodle_config.png}{Moodle: Pantalla de configuración de parámetros de \nombreApp{}.}{plugin_moodle_config}{0.7}
+\figura{03-capitulo-3/plugin_moodle_config_notificaciones.png}{Moodle: Pantalla de configuración de qué notificará la aplicación}{plugin_moodle_config_notificaciones}{0.7}
 
 La extensión queda disponible con licencia \gls{gnugpl} versión 3 en \url{https://github.com/tanoinc/moodle-message_miuniversidad}.

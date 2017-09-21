@@ -96,7 +96,9 @@ Este contenido muestra un mapa (de \textit{Google Maps}) sobre el cual dibujar i
 
 Este mecanismo permite de generar mapas dinámicos en base a una solicitud externa\footnote{El formato de estos datos se especifica en la documentación}. Opcionalmente (actualmente no implementado) se proveerán mecanismos para cachear la información de los mapas.
 
-\figura{03-capitulo-3/app_mapa.png}{Contenidos Mapa de Google: Ejemplo de dibujo del recorrido del colectivo Universitario. Se utilizan polígonos y marcadores. El indicador verde muestra la posición actual del usuario}{app_mapa}{0.4}
+En la figura \ref{fig:app_mapa} se ve un ejemplo de mapa con el dibujo del recorrido del colectivo Universitario. Se utilizan polígonos y marcadores. El indicador verde muestra la posición actual del usuario ayudando a visualizar la parada más cercana.
+
+\figura{03-capitulo-3/app_mapa.png}{Contenidos Mapa de Google: Ejemplo}{app_mapa}{0.4}
 
 Una funcionalidad interesante es que permite enviar información del usuario que accede al mapa: Cuando este lo abre, se envían los datos de \textit{id externo} y posición geográfica a la \gls{url} especificada por el servicio. Este la procesa y genera los datos de marcadores, centro y polígonos. De esta manera se pueden realizar operaciones en base a la posición de la persona que consulta el mapa.
 
