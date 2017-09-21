@@ -10,40 +10,50 @@ Se realizaron dos reuniones con grupos de usuarios\footnote{Coordinadas y guiada
 
 Los encuentros se llevaron a cabo en el \gls{cespi}, fueron en persona y moderados. Los participantes pertenecían a diversos ámbitos relacionados con la Universidad (alumnos, egresados, docentes y no docentes).
 
-\subsubsection{Preparativos}
+\subsubsection{Etapa preliminar}
 \label{desarrollo_pruebas_usabilidad_preparativos}
 
-Esta etapa consistió en preparar lo indicado en las siguientes secciones.
+Esta etapa consistió el la preparación de los elementos necesarios para las reuniones. Estos son indicados en las siguientes secciones.
 
-\paragraph{Producto}
+\paragraph{Preparación del producto}
 \label{desarrollo_pruebas_usabilidad_preparativos_producto}
 
 Se configuró un servidor de prueba con la \gls{api}, apuntando a servicios externos de desarrollo (\gls{guarani} y Moodle). Además se crearon aplicaciones de \eng{testing} en Facebook (para relacionar las cuentas de usuario), en Google (para los mapas) y en los servicios de Ionic (para enviar notificaciones).
 
 Para las pruebas de ingreso con Facebook fue necesario agregar a las personas como participantes de la aplicación de prueba (en Facebook). Esto es necesario ya que la utilizada para el \eng{test} no es pública.
 
-\paragraph{Participantes}
+\paragraph{Selección de participantes}
 \label{desarrollo_pruebas_usabilidad_preparativos_participantes}
 
-El grupo de personas y sus perfiles consistió en las indicadas en el cuadro \ref{perfiles_usabilidad}.
+El grupo de personas y sus perfiles consistió en las indicados en el cuadro \ref{perfiles_usabilidad}.
 
 \begin{table}[htbp]
 \centering
 \caption{Perfiles de usuarios para pruebas de Usabilidad}
 \label{perfiles_usabilidad}
-\begin{tabular}{|l|l|p{2.5cm}|p{2.5cm}|p{2cm}|l|}
+\begin{tabular}{|l|l|p{2.5cm}|p{2.5cm}|l|l|}
 \hline
-   & \multicolumn{1}{c|}{\textbf{Nombre}} & \multicolumn{1}{c|}{\textbf{Ocupación}} & \multicolumn{1}{c|}{\textbf{Estudios}} & \textbf{Docente UNLP} & \textbf{Egresado} \\ \hline
-U1 & Tomás                                & Estudiante, Empleado                    & Periodismo (UNLP)                      & No                    & No                \\ \hline
-U2 & Maximiliano\footnotemark{}                          & Estudiante                              & Informática (UNLP), Locución           & No                    & No                \\ \hline
-U3 & Francisco                                     & Estudiante                              & Ingeniería/Informática (UNLP)          & No                    & No                \\ \hline
-U4 & Graciela                             & Empleada                                & Informática (UNLP)                     & No                    & Si                \\ \hline
-U5 & Quimey                               & Docente                                 & Bellas Artes (UNLP)                    & Si                    & Si                \\ \hline
+   & \multicolumn{1}{c|}{\textbf{Nombre}} & \multicolumn{1}{c|}{\textbf{Ocupación}} & \multicolumn{1}{c|}{\textbf{Estudios}} & \textbf{Edad} & \textbf{Egresado} \\ \hline
+U1 & Tomás                                & Estudiante, Empleado                    & Periodismo (UNLP)                      & 29                    & No                \\ \hline
+U2 & Maximiliano\footnotemark{}                          & Estudiante                              & Informática (UNLP), Locución           & 31                    & No                \\ \hline
+U3 & Francisco                                     & Estudiante                              & Ingeniería/Informática (UNLP)          & 22                    & No                \\ \hline
+U4 & Graciela                             & Empleada                                & Informática (UNLP)                     & 51                    & Si                \\ \hline
+U5 & Quimey                               & Docente (UNLP)                                 & Bellas Artes (UNLP)                    & 28                    & Si                \\ \hline
 \end{tabular}
 \end{table}
 \footnotetext{Maxi es no vidente, miembro activo en temas de accesibilidad en la Universidad y ha colaborado en pruebas para varios desarrollos del \gls{cespi}}
 
-La lista de tareas a realizar era:
+\paragraph{Selección de coordinación}
+\label{desarrollo_pruebas_usabilidad_preparativos_coordinacion}
+
+El \eng{focus group} se llevó a cabo bajo la guía de Paola Amadeo e Ivana Harari (además de mí).
+
+\subsubsection{Etapa de diseño}
+\label{desarrollo_pruebas_usabilidad_diseno}
+
+El propósito de la prueba fue determinar el grado de aceptación y satisfacción de los usuarios con el diseño de la interfaz y la terminología elegida. Además se observó el comportamiento del grupo, y se les solicitó su opinión e ideas para determinar nuevas mejoras. 
+
+Para relevar esta inforamción se requirió que cada integrante intente completar con la aplicación la siguiente lista de tareas: 
 \begin{itemize}
 \item Crear una cuenta de usuario.
 \item Ingresar al sistema con una cuenta del sistema.
@@ -66,6 +76,22 @@ La lista de tareas a realizar era:
 \item Desloguearse de la aplicación.
 \end{itemize}
 
+Por último se preguntó a cada persona si el diseño le resultaba agradable y claro y si era fácil y cómodo de utilizar.
+
+\subsubsection{Desarrollo}
+\label{desarrollo_pruebas_usabilidad_desarrollo}
+
+Se realizaron dose encuentros, cada uno tuvo una duración de una hora y media. En el segundo se incorporaron algunas mejoras que surgieron del primero.
+A cada participante se le indicó de dónde descargar la aplicación y cómo configurar el modo de desarrollador para poder instalarla.
+Se requirió que todos utilicen Android 4.4 o superior.
+
+Durante la segunda reunión surgieron algunos inconvenientes por un problema en la configuración del servidor respecto de las notificaciones \eng{push}. Igualmente se completó la prueba haciendo las salvedades necesarias.
+
+\figura{03-capitulo-3/focus_group.png}{Algunas fotos del \eng{focus group}}{focus_group}{0.9}
+
+\subsubsection{Resultados}
+\label{desarrollo_pruebas_usabilidad_resultados}
+
 En base a lo hablado con los usuarios se determinaron las siguientes mejoras en el diseño\footnote{Si bien todas son tenidas en cuenta, solo algunas se implementan dentro del alcance de esta tesis}:
 \begin{itemize}
 \item Agregar aclaración del tamaño de clave al registrar un nuevo usuario. 
@@ -85,3 +111,4 @@ En base a lo hablado con los usuarios se determinaron las siguientes mejoras en 
 \item Cambiar término de \comillas{suscripción a temas} a \comillas{suscripcion a categorías}.
 \end{itemize}
 
+Además de las mejoras, los resultados fueron satisfactorios ya que los usuarios comentaron que la interfaz les resultó cómoda, agradable y fácil de utilizar.
