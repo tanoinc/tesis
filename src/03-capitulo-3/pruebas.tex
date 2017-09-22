@@ -54,7 +54,7 @@ El \eng{focus group} se llevó a cabo bajo la guía de Paola Amadeo e Ivana Hara
 El propósito de la prueba fue determinar el grado de aceptación y satisfacción de los usuarios con el diseño de la interfaz y la terminología elegida. Además se observó el comportamiento del grupo, y se les solicitó su opinión e ideas para determinar nuevas mejoras. 
 
 Para relevar esta inforamción se requirió que cada integrante intente completar con la aplicación la siguiente lista de tareas: 
-\begin{itemize}
+\begin{enumerate}
 \item Crear una cuenta de usuario.
 \item Ingresar al sistema con una cuenta del sistema.
 \item Ingresar al sistema con una cuenta de Facebook.
@@ -74,14 +74,14 @@ Para relevar esta inforamción se requirió que cada integrante intente completa
 \item Desuscribirse a un servicio de la universidad (puede suscribirse a uno para luego poder cancelarlo).
 \item Desuscribirse a un tema (puede suscribirse a uno para luego poder cancelarlo).
 \item Desloguearse de la aplicación.
-\end{itemize}
+\end{enumerate}
 
 Por último se preguntó a cada persona si el diseño le resultaba agradable y claro y si era fácil y cómodo de utilizar.
 
 \subsubsection{Desarrollo}
 \label{desarrollo_pruebas_usabilidad_desarrollo}
 
-Se realizaron dose encuentros, cada uno tuvo una duración de una hora y media. En el segundo se incorporaron algunas mejoras que surgieron del primero.
+Se realizaron dos encuentros, cada uno tuvo una duración aproximada de una hora y media. En el segundo se incorporaron algunas mejoras que surgieron del primero.
 A cada participante se le indicó de dónde descargar la aplicación y cómo configurar el modo de desarrollador para poder instalarla.
 Se requirió que todos utilicen Android 4.4 o superior.
 
@@ -92,10 +92,48 @@ Durante la segunda reunión surgieron algunos inconvenientes por un problema en 
 \subsubsection{Resultados}
 \label{desarrollo_pruebas_usabilidad_resultados}
 
-En base a lo hablado con los usuarios se determinaron las siguientes mejoras en el diseño\footnote{Si bien todas son tenidas en cuenta, solo algunas se implementan dentro del alcance de esta tesis}:
+Para medir los resultados, en primera instancia, se analizó el comportamiento de los participantes al resolver cada una de las tareas. En base a ello se evaluó cuánto les costó llegar a completarlas. Para esta valoración se utilizó un puntaje de 1 a 5, siendo 1 \comillas{con mucha dificulad} y 5 \comillas{sin problemas}.
+
+En segunda instancia se habló con cada uno de los integrantes de manera individual y grupal para conocer sus opiniones.
+
+Los resultados de la valuación junto al promedio por tarea se muestran en el cuadro \ref{resultados_focus_group}.
+
+\begin{table}[h]
+\label{resultados_focus_group}
+\caption{Resultados de \eng{focus group} por usuario y tarea (con promedio)}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ & \textbf{U1} & \textbf{U2} & \textbf{U3} & \textbf{U4} & \textbf{U5} & \textbf{Promedio} \\ \hline
+\textbf{Tarea 1} & 4 & 4 & 5 & 5 & 5 & \textbf{4,6} \\ \hline
+\textbf{Tarea 2} & 5 & 5 & 5 & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 3} & N/A & N/A & N/A & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 4} & 3 & N/A & 4 & 4 & 3 & \textbf{3,5} \\ \hline
+\textbf{Tarea 5} & 4 & 4 & 5 & 5 & 5 & \textbf{4,6} \\ \hline
+\textbf{Tarea 6} & 5 & 5 & 5 & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 7} & 5 & 5 & 5 & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 8} & 4 & N/A & 5 & 4 & 5 & \textbf{4,5} \\ \hline
+\textbf{Tarea 9} & 4 & N/A & 5 & 5 & 5 & \textbf{4,75} \\ \hline
+\textbf{Tarea 10} & 5 & N/A & 5 & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 11} & 4 & N/A & 5 & 4 & 5 & \textbf{4,5} \\ \hline
+\textbf{Tarea 12} & 4 & N/A & 5 & 5 & 5 & \textbf{4,75} \\ \hline
+\textbf{Tarea 13} & 5 & N/A & 5 & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 14} & 5 & 5 & 5 & 5 & 5 & \textbf{5} \\ \hline
+\textbf{Tarea 15} & 4 & N/A & N/A & 5 & N/A & \textbf{4,5} \\ \hline
+\textbf{Tarea 16} & 5 & N/A & N/A & 5 & N/A & \textbf{5} \\ \hline
+\textbf{Tarea 17} & 3 & N/A & 4 & 3 & 4 & \textbf{3,5} \\ \hline
+\textbf{Tarea 18} & 4 & 5 & 5 & 5 & 5 & \textbf{4,8} \\ \hline
+\textbf{Tarea 19} & 5 & 5 & 5 & 5 & 5 & \textbf{5} \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+En base a los resultados y lo hablado con los usuarios se determinaron las siguientes mejoras en el diseño\footnote{Si bien todas son tenidas en cuenta, solo algunas se implementan dentro del alcance de esta tesis}:
 \begin{itemize}
 \item Agregar aclaración del tamaño de clave al registrar un nuevo usuario. 
-\item Resaltar el proceso inicial de suscripciones.
+\item Resaltar el proceso inicial de suscripciones (al iniciar por primera vez la aplicación).
 \item Establecer ayudas para aclarar qué realiza cada botón.
 \item En Android: modificar el gesto para eliminar un servicio. No es con \comillas{swipe} sino manteniendo apretada la opción.
 \item Agregar un mensaje de bienvenida al abrir la aplicación mostrando un resumen de sus funcionalidades. Considerar la posibilidad de volver a reproducir y cancelar.
