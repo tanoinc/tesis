@@ -17,7 +17,7 @@ Este repositorio contiene los fuentes de LaTeX del informe final para la tesina 
 
 ## Licencia
 
-Este proyecto se encuentra licenciado bajo una [Licencia Creative Commons
+Este informe se encuentra licenciado bajo una [Licencia Creative Commons
 Atribución-CompartirIgual 4.0 Internacional](http://creativecommons.org/licenses/by-sa/4.0/).
 
 "Este proyecto puede utilizarse como base para otros tesinistas que estén
