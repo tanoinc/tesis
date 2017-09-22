@@ -3,14 +3,25 @@ Las universidades de Argentina, y específicamente la Universidad Nacional de La
 
 De lo expuesto en la presente tesina se concluye que: se puede desarrollar una solución para facilitar el acceso a la información por parte de los alumnos, que sea:
 \begin{itemize}
-\item abierta (utilizando software \gls{open source}),
+\item abierta (utilizando software \gls{open source} y estándares abiertos),
 \item distribuida,
 \item extensible a otras Universidades,
 \item con una interfaz pública que pueda ser consultada y utilizada por otros servicios,
 \item que permita integrar aspectos claves de múltiples sistemas.
 \end{itemize}
-Estas características ayudan a mejorar su experiencia como usuarios de múltiples sistemas universitarios, manteniendo una comunicación inmediata con la casa de altos estudios.
+Estas características ayudan a mejorar la experiencia de usuario de múltiples sistemas universitarios, manteniendo una comunicación inmediata con la casa de altos estudios.
 
+Todo esto fue llevado a cabo mediante la implementación de: 
+\begin{itemize}
+\item una \gls{api} \gls{restful} que integra los servicios externos e interactúa con el cliente móvil y, 
+\item una aplicación móvil como cliente consumidor y fachada principal para los estudiantes de la Universidad en donde sus características son comunes entre las aplicaciones universitarias analizadas.
+\end{itemize}
+
+Por otro lado, debido a la posibilidad de acceso a sistemas administrados por el \gls{cespi}, se desarrollaron dos módulos para integrar con \nombreApp{}: en \gls{guarani} y en Moodle.
+
+Por último, los \eng{focus group} fueron claves como primera instancia real de análisis de uso. Produjeron muchas modificaciones que favorecieron la usabilidad e hicieron que la aplicación se vaya \comillas{puliendo} en cada reunión.
+
+Sin embargo, quedan muchas ideas por implementar y tareas por completar. Seguidamente se revisan las pendientes.
 
 \subsection{Trabajos futuros}
 \label{trabajos_futuros}
@@ -18,6 +29,7 @@ Estas características ayudan a mejorar su experiencia como usuarios de múltipl
 A continuación se destacan algunos trabajos futuros (muchos de ellos serán llevados a cabo en el marco de mi trabajo en el \gls{cespi}):
 
 \begin{itemize}
+\item Focalizar la implementación inicial de la aplicación a los alumnos internacionales de la \unlp{}.
 \item Mejorar contenidos existentes e incorporar nuevos:
 \begin{itemize}
 \item Nuevo contenido de tipo \comillas{Certificado}: que permita a los servicios asociar certificados, pudiendo ser estos accedidos desde la aplicación, generando un texto y un código QR de validación del mismo. Este código contendría una \gls{url} apuntando a un servicio externo que controla su validez. 
@@ -37,4 +49,9 @@ A continuación se destacan algunos trabajos futuros (muchos de ellos serán lle
 \subsection{Carrera, Tesis y experiencia}
 \label{conclusion_carrera}
 
+La formación académica brindada por la \unlp{} y la \facultad{}, me ha dotado de la base de conocimientos teóricos y prácticos necesarios para llevar a cabo todas las etapas del desarrollo. Los contenidos necesarios para este proyecto son transversales a gran parte (si no es que todas) de las asignaturas de la Licenciatura. Habiendo finalizado el desarrollo, recorrí año a año los temas vistos en cada una de las materias y encontré que hay algo de todas ellas en \nombreApp{}. 
+
+Por otra parte, como complemento a la formación académica, la experiencia ganada trabajando en el \gls{cespi} fue clave. Esta no se trata solamente en la especialización de tecnologías utilizadas en desarrollos actuales, sino también como resultante del incentivo a la investigación, el facilitamiento de acceso a nuevas tecnologías y el aporte de las herramientas necesarias. 
+
+Otro aspecto a destacar son las relaciones humanas, en donde se aprende a interactuar con otras personas: pares y de otras áreas, formando grupos interdisciplinarios. En la Facultad y el trabajo es donde ganan compañeros, colegas y amigos que lo acompañan en la formación académica, profesional y personal.
 
