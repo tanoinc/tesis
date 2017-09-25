@@ -36,16 +36,16 @@ Se considera que estos objetivos no deben estar orientados solo a la \unlp{}, si
 
 Este desarrollo se implementa utilizando la arquitectura cliente-servidor, por lo que consta de dos partes:
 \begin{itemize}
-	\item Del lado del servidor: una \gls{api} REST escalable implementada en PHP utilizando JSON como formato de representación de los datos y OAuth como protocolo de autorización. Dicha \gls{api} permitirá la comunicación con los clientes móviles y los servicios de la Universidad.
+	\item Del lado del servidor: una \gls{api} \gls{rest} escalable implementada en PHP utilizando JSON como formato de representación de los datos y OAuth como protocolo de autorización. Dicha \gls{api} permitirá la comunicación con los clientes móviles y los servicios de la Universidad.
 	\item Del lado del cliente: una aplicación móvil multiplataforma implementada para Android que se comunicará con la \gls{api} mencionada anteriormente. Utilizará la tecnología del teléfono para llevar a cabo las nuevas operaciones de notificación y acceso ala información.
 \end{itemize}
 
 Inicialmente, también será necesario implementar algunos servicios que interactúen con dicha \gls{api}. Para ello, se desarrollara la integración con:
 \begin{itemize}
-	\item SIU \gls{guarani}: Se va a implementar un conector utilizando el framework \gls{siu} \gls{chulupi} (creado por el \gls{siu} y utilizado en \gls{guarani} Web, versión 2.9 y 3) que permita comunicar e integrar los recursos de Guaraní.
-	\item Moodle: Se implementa un conector como plugin de Moodle que permite comunicar las novedades y acceder a otros recursos.
+	\item SIU \gls{guarani}: Se va a implementar un conector utilizando el \gls{framework} \gls{siu} \gls{chulupi} (creado por el \gls{siu} y utilizado en \gls{guarani} Web, versión 2.9 y 3) que permita comunicar e integrar los recursos de Guaraní.
+	\item Moodle: Se implementa un conector como \eng{plugin} de Moodle que permite comunicar las novedades y acceder a otros recursos.
 \end{itemize}
 
-Con la finalización de la Tesina se pretende desarrollar el servicio completo de una aplicación móvil para los alumnos de la Universidad Nacional de La Plata, para constibuir a la mejora en la comunicación con sus estudiantes, su sociabilización e integración de sus servicios Web.
+Con la finalización de la Tesina se pretende desarrollar el servicio completo de una aplicación móvil para los alumnos de la Universidad Nacional de La Plata, para contribuir a la mejora en la comunicación con sus estudiantes, su sociabilización e integración de sus servicios Web.
 
 Como análisis posterior, se aplican técnicas de usabilidad para verificar el impacto en el uso de la herramienta. Estas permiten obtener un \eng{feedback} de los potenciales usuarios.

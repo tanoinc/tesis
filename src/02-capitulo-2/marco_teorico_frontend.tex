@@ -149,7 +149,7 @@ RIM BlackBerry      & Java ( J2ME flavored)              \\ \hline
 Symbian             & C, C++, Python, HTML/CSS/JS        \\ \hline
 Windows Mobile      & .NET                               \\ \hline
 Windows 7 Phone      & .NET                               \\ \hline
-Windows 10 Movile      & C\#, Visual Basic, JavaScript, C++ (plataforma UWP)\\ \hline
+Windows 10 Mobile      & C\#, Visual Basic, JavaScript, C++ (plataforma UWP)\\ \hline
 HP Palm webOS       & HTML/CSS/JS                        \\ \hline
 MeeGo               & C, C++, HTML/CSS/JS                \\ \hline
 Samsung bada        & C++                                \\ \hline
@@ -171,7 +171,7 @@ Las ventajas que tienen las aplicaciones híbridas son:
 Como desventajas podemos destacar:
 \begin{itemize}
 \item Menor diseño: ya que a veces no logra simular completamente el \eng{look and feel} de los componentes nativos, además de unificar comportamientos y estilos de interfaz que son diferentes para cada plataforma.
-\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de parseo, interpretación y ejecución de \eng{scripts} en \gls{javascript}.
+\item Menor \eng{performance}: debido a que corren dentro de un contenedor lo que produce tiempos extra de \textit{parseo}, interpretación y ejecución de \eng{scripts} en \gls{javascript}.
 \end{itemize}
 
 De acuerdo a los requerimientos establecidos al inicio de esta sección (apartado \ref{aplicacion_movil}), se determina que la aplicación a desarrollar sea híbrida. Las razones de esta elección son: 
@@ -212,13 +212,13 @@ Existe un repositorio de \eng{plugins}\footnote{Disponible en \url{https://cordo
 
 \textit{Ionic} es creado por \textit{Drifty Co.} en 2012. Esta empresa se dedicaba a desarrollar herramientas para la creación de interfaces móviles con \gls{jquery} Mobile y \gls{bootstrap}. Decidieron crear su propio \gls{framework} de aplicaciones híbridas basado en las últimas tecnologías Web y centrado en la \eng{performance}.
 
-\textit{Ionic} es un \gls{framework} \gls{open source} (licencia MIT) que permite a los desarrolladores crear aplicaciones híbridas, con buena \eng{performance}, utilizando Apache Cordova y las principales tecnologías Web (\gls{javascript}, \gls{html}5, \gls{css}3, sass). En particular a partir de su versión 2, incorpora Angular (versión 2.0 y superiores) con \gls{typescript}. Una de sus fortalezas es el \eng{look and feel} de sus interfaces ya que se adaptan al diseño de las principales plataformas\cite{ionic2017concepts}. Su rapidez se debe a la utilización de animaciones y transiciones de \gls{css}3, así como también el uso de Angular, lo que hacen que se utilice la aceleración por hardware del dispositivo\cite{hartington2017animationsIonic}.
+\textit{Ionic} es un \gls{framework} \gls{open source} (licencia MIT) que permite a los desarrolladores crear aplicaciones híbridas, con buena \eng{performance}, utilizando Apache Cordova y las principales tecnologías Web (\gls{javascript}, \gls{html}5, \gls{css}3, sass). En particular a partir de su versión 2, incorpora Angular (versión 2.0 y superiores) con \gls{typescript}. Una de sus fortalezas es el \eng{look and feel} de sus interfaces ya que se adaptan al diseño de las principales plataformas\cite{ionic2017concepts}. Su rapidez se debe a la utilización de animaciones y transiciones de \gls{css}3, así como también el uso de Angular, lo que hacen que se utilice la aceleración por \eng{hardware} del dispositivo\cite{hartington2017animationsIonic}.
 
 Se destacan las siguientes ventajas de Ionic frente a la utilización solamente de Cordova\cite{noupe2016ionicvscordova}:
 \begin{itemize}
 \item Interfaz de usuario y usabilidad: existen decenas de plantillas, más de 700 íconos, componentes de interfaz como encabezados, botones, etcétera, disponibles en varios estilos dependiendo de la plataforma y simulando su comportamiento. La codificación de la funcionalidad de estos componentes es simple y sencilla. En cambio en Cordova, se comienza desde cero con una página en blanco.
 \item Proceso de desarrollo más conveniente ya que permite probar la mayoría de las modificaciones \comillas{en vivo} desde el navegador, sin la necesidad de recompilar la aplicación y ejecutarla en un emulador o dispositivo.
-\item Mayor \eng{performance}: debido a una versión liviana de jQuery se reduce la manipulación de DOM. Además delega a la GPU el procesamiento de las animaciones y transiciones debido a \gls{css}3.
+\item Mayor \eng{performance}: debido a una versión liviana de jQuery se reduce la manipulación de DOM. Además delega a la \gls{gpu} el procesamiento de las animaciones y transiciones debido a \gls{css}3.
 \item Angular (versión 2 y superiores) con \gls{typescript}.
 \end{itemize}
 

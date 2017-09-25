@@ -126,10 +126,10 @@ La aplicación \nombreApp{} maneja un sistema que controla qué operaciones est�
 
 La autenticación con el cliente móvil se realiza mediante OAuth2 (según lo definido en el marco teórico de la sección \ref{autorizacion_autenticacion}) con el tipo de accedo \textit{password grant}. De su utilización se destacan cuatro pasos:
 \begin{itemize}
-\item La solicitud del token de acceso: mediante un \textit{POST} a la \gls{api} en \textit{/oauth/token} con las credenciales. Esta devuelve un token de acceso y refresco en formato \gls{jwt}, que serán utilizados en todos los request subsiguientes como mecanismo de autenticación.
+\item La solicitud del token de acceso: mediante un \textit{POST} a la \gls{api} en \textit{/oauth/token} con las credenciales. Esta devuelve un token de acceso y refresco en formato \gls{jwt}, que serán utilizados en todos los \eng{request} subsiguientes como mecanismo de autenticación.
 \item La utilización del token en los llamados: En cada solicitud para el acceso a un recurso, se debe enviar en el encabezado \gls{http} \lstinline{Authorization}, el tipo de token (en este caso \textit{Bearer}) y el token de acceso.
 \item La actualización del token vencido: Cuando pierda validez el token de acceso, se utiliza el token de refresco para solicitar uno nuevo de acceso.
 \item Salir del sistema: Se envía una solicitud \textit{DELETE} con el token y se invalidan los tokens evitando ser utilizados en futuros accesos.
 \end{itemize}
 
-En la figura \ref{fig:mi_universidad_api_diagrama} este mecanismo se refleja entre los clientes móviles y la interfaz con Oauth2.
+En la figura \ref{fig:mi_universidad_api_diagrama} este mecanismo se refleja entre los clientes móviles y la interfaz con OAuth2.
