@@ -15,6 +15,10 @@ Este repositorio contiene los fuentes de LaTeX del informe final para la tesina 
 
 * [Moodle](https://github.com/tanoinc/moodle-message_miuniversidad)
 
+## Defensa
+
+* [Repositorio de la presentación utilizada en la defensa](https://github.com/tanoinc/tesis-presentacion)
+
 ## Licencia
 
 Este informe se encuentra licenciado bajo una [Licencia Creative Commons
